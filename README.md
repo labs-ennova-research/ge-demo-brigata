@@ -1,202 +1,99 @@
-# 🍽️ Brigata di Cucina — Demo Multi-Agente per Gemini Enterprise Agent Designer
+# 🍽️ Brigata di Cucina — Demo No-Code per Gemini Enterprise (Chat Agent & Workflow)
 
-Questa cartella **non contiene un agente già pronto**: contiene tutto il materiale (prompt, descrizioni, file di contesto) che ti serve per **costruire tu stesso, passo dopo passo, dentro Gemini Enterprise Agent Designer**, un sistema multi-agente ispirato alla brigata di cucina classica.
+Questo repository contiene tutto il materiale (prompt, descrizioni, file di Knowledge, esempi di test) per costruire **passo dopo passo, in modalità 100% No-Code dentro Gemini Enterprise Agent Designer**, due esperienze complementari basate sulla metafora della **brigata di cucina**:
 
-> ⚠️ **Nota sull'interfaccia**: questa guida usa le etichette esatte di Gemini Enterprise Agent Designer confermate al momento della stesura — **Nome**, **Descrizione**, **Istruzioni**, sezione **Knowledge** per i file di contesto, connettore **Google Search** per l'accesso a Internet. Posizione dei menu e dettagli minori dell'interfaccia possono comunque cambiare tra un rilascio e l'altro.
-
----
-
-## 1. Obiettivo della demo
-
-Mostrare, con un caso d'uso semplice da capire per chiunque, i tre concetti chiave della progettazione di un multi-agente enterprise:
-
-1. **Orchestrazione**: un agente "capo" che parla con l'utente, raccoglie i requisiti e delega il lavoro.
-2. **Specializzazione**: sotto-agenti con un compito ristretto e ben definito.
-3. **Grounding/Knowledge misto**: due modalità di grounding a confronto sullo stesso agente, ciascuna abbinata al connettore giusto.
-   - L'**agente principale** non ha il connettore **Google Search** abilitato: viene creato caricando **direttamente in fase di creazione** i propri file nella sezione **Knowledge**, così le regole di flusso, la struttura del menù e lo stile di comunicazione sono coerenti e verificabili invece che "inventate".
-   - Ogni **sotto-agente (chef)** non carica nulla in Knowledge: ha invece il connettore **Google Search** abilitato, e le sue Istruzioni indicano direttamente le pagine web specifiche da consultare (niente ricerca libera). Ogni nodo ha i propri riferimenti, distinti da quelli degli altri.
-
-Il risultato finale, una volta costruito, sarà un agente capace di guidare un utente nella creazione di un **menù completo** (antipasto, primo, secondo, contorno, dolce — e volendo l'abbinamento vini) tramite una conversazione guidata.
+1. 💬 **[`chatagent/`](./chatagent/README.md) — Modalità Chat Agent (Multi-Agente Conversazionale)**
+   L'utente dialoga con il **Responsabile di Brigata** (agente orchestratore) che raccoglie i requisiti dell'evento e delega dinamicamente la creazione delle portate ai singoli **Chef di Partita** (sotto-agenti specializzati) fino all'approvazione del menù.
+2. ⚙️ **[`workflow/`](./workflow/README.md) — Modalità Workflow No-Code (Pipeline Sequenziale & Automazione)**
+   Una volta che il menù è stato approvato, parte il **Workflow Operativo di Brigata**: una catena sequenziale deterministica di 5 step che trasforma il menù in **Lista della Spesa con scarti, Matrice dei 14 Allergeni, Calcolo del Food Cost & Semaforo Budget, Cronoprogramma di *Mise en Place* (`T-24h`, `T-4h`, `Pass`) e Bozza Briefing per Gmail / Google Docs**.
 
 ---
 
-## 2. Il caso d'uso: la brigata di cucina
+## 1. Perché due modalità nella stessa demo?
 
-La brigata di cucina classica è il sistema organizzativo delle cucine professionali: uno **chef responsabile** coordina più **chef di partita**, ognuno specializzato in una tipologia di piatto. È una metafora naturale per un'architettura multi-agente:
+Mostrare entrambi gli approcci sullo stesso caso d'uso permette di spiegare con estrema chiarezza la differenza architetturale tra **Agente Conversazionale** e **Workflow Sequenziale** in Gemini Enterprise:
 
 ```mermaid
-flowchart TD
-    U["👤 Utente"] --> O["👨‍🍳 Responsabile di Brigata\n(Agente principale)\n+ file in Knowledge, nessun connettore"]
-    O --> A["🥗 Chef Antipasti\n+ connettore Google Search"]
-    O --> P["🍝 Chef Primi\n+ connettore Google Search"]
-    O --> S["🥩 Chef Secondi\n+ connettore Google Search"]
-    O --> C["🥦 Chef Contorni\n+ connettore Google Search"]
-    O --> D["🍮 Chef Pasticceria\n+ connettore Google Search"]
-    O --> V["🍷 Sommelier (opzionale)\n+ connettore Google Search"]
+flowchart LR
+    subgraph P1["ATTO 1 — Ideazione Conversazionale (cartella chatagent/)"]
+        U["👤 Cliente"] <--> O["👨‍🍳 Responsabile di Brigata\n(Chat Agent Orchestratore)"]
+        O <--> C1["🥗🍝🥩🥦🍮🍷\nChef di Partita & Sommelier\n(Sotto-agenti dinamici)"]
+    end
+
+    subgraph P2["ATTO 2 — Esecuzione Operativa No-Code (cartella workflow/)"]
+        S1["1️⃣ Economo\nLista Spesa & Rese"] --> S2["2️⃣ Qualità & HACCP\n14 Allergeni & Stagione"]
+        S2 --> S3["3️⃣ Controller\nFood Cost & Budget"]
+        S3 --> S4["4️⃣ Sous-Chef\nTimeline Mise en Place"]
+        S4 --> S5["5️⃣ Briefing & Invio\nGoogle Docs / Gmail"]
+    end
+
+    P1 -- "Menù approvato" --> P2
 ```
 
-| Ruolo | Nella brigata reale | Nella demo |
+| Dimensione | 💬 Parte 1: `chatagent/` (Chat Agent) | ⚙️ Parte 2: `workflow/` (Workflow No-Code) |
 |---|---|---|
-| Executive Chef / Responsabile di Brigata | Coordina tutti, decide il menu finale | **Agente principale** |
-| Chef de Partie (Garde Manger) | Antipasti freddi | **Chef Antipasti** (sotto-agente) |
-| Chef de Partie (Primi) | Paste, risotti, zuppe | **Chef Primi** (sotto-agente) |
-| Chef de Partie (Rôtisseur) | Carni, pesci, secondi | **Chef Secondi** (sotto-agente) |
-| Chef de Partie (Entremetier) | Verdure, contorni | **Chef Contorni** (sotto-agente) |
-| Pâtissier | Dolci e dessert | **Chef Pasticceria** (sotto-agente) |
-| — | Abbinamento vini | **Sommelier** (sotto-agente bonus/opzionale) |
-
-> 🧩 **Punto chiave sull'architettura**: in Gemini Enterprise Agent Designer questa demo è **un solo agente** (il Responsabile di Brigata). Tutti i chef non sono agenti separati, ma **sotto-agenti creati all'interno dello stesso agente**: nella UI di Agent Designer li vedrai come card collegate con una linea tratteggiata sotto la card dell'agente principale (esattamente come nello screenshot di riferimento del progetto).
->
-> 📎 **Connettore giusto per ogni nodo**: quando crei l'agente principale, carica direttamente nella sezione **Knowledge** della sua configurazione tutti i file `.md` indicati nella cartella `orchestrator/` e **non** abilitare il connettore **Google Search**: deve rispondere solo in base a quei file. I chef e il sommelier, invece, **non caricano nulla in Knowledge**: vanno configurati abilitando il connettore **Google Search**, perché le loro Istruzioni indicano già le pagine web specifiche da consultare (nessuna ricerca libera). Questo permette di confrontare nella stessa demo entrambe le modalità di grounding.
+| **Quando usarla** | Quando serve **dialogo, esplorazione e co-creazione** con l'utente | Quando serve **esecuzione rigorosa, calcoli ripetibili e automazione** |
+| **Logica di controllo** | **Dinamica**: l'agente principale decide chi interpellare e fa domande all'utente | **Sequenziale / Deterministica (Flow)**: i 5 step girano sempre in ordine fisso senza interrompersi |
+| **Modalità di attivazione** | Conversazione in chat con l'utente | Invio di un menù strutturato o esecuzione pianificata (**Schedule**) |
+| **Grounding & Connettori** | File in **Knowledge** (orchestratore) + **Google Search** (sotto-agenti chef) | File di listino/protocollo in **Knowledge** + **Google Search** + **Gmail / Google Docs** |
 
 ---
 
-## 3. Struttura di questo pacchetto
+## 2. Struttura completa del repository
 
+```text
+ge-demo-brigata/
+├── README.md                                          <- sei qui: panoramica generale dei 2 moduli
+│
+├── chatagent/                                         <- PARTE 1: Demo Multi-Agente Conversazionale
+│   ├── README.md                                      <- Guida passo-passo per il Chat Agent
+│   ├── orchestrator/
+│   │   ├── README.md                                  <- Nome, Descrizione e Istruzioni dell'Orchestratore
+│   │   ├── regole-brigata-e-flusso-lavoro.md          <- File Knowledge
+│   │   ├── struttura-menu-italiano.md                 <- File Knowledge
+│   │   └── glossario-e-stile-comunicazione.md         <- File Knowledge
+│   ├── chef-antipasti/README.md                       <- Sotto-agente + Google Search
+│   ├── chef-primi/README.md                           <- Sotto-agente + Google Search
+│   ├── chef-secondi/README.md                         <- Sotto-agente + Google Search
+│   ├── chef-contorni/README.md                        <- Sotto-agente + Google Search
+│   ├── chef-dolci/README.md                           <- Sotto-agente + Google Search
+│   └── sommelier/README.md                            <- Sotto-agente opzionale + Google Search
+│
+└── workflow/                                          <- PARTE 2: Demo Workflow No-Code Sequenziale
+    ├── README.md                                      <- Guida passo-passo per il Workflow No-Code
+    ├── 01-analisi-fabbisogni/README.md                <- Step 1: Economo (grammature, scarti, lista spesa)
+    ├── 02-controllo-allergeni-e-mercato/README.md     <- Step 2: Qualità & 14 Allergeni (Google Search)
+    ├── 03-food-cost-e-preventivo/README.md            <- Step 3: Food Cost Controller & Semaforo Budget
+    ├── 04-piano-mise-en-place/README.md               <- Step 4: Sous-Chef (Timeline T-24h / T-4h / Pass)
+    ├── 05-briefing-e-notifica/README.md               <- Step 5: Dossier Evento + Connettori Gmail / Docs
+    ├── knowledge/
+    │   ├── listino-fornitori-e-rese.md                <- File Knowledge: prezzi €/kg, % scarto, grammature
+    │   ├── regole-food-cost-e-margini.md              <- File Knowledge: formule food cost e semafori budget
+    │   └── protocollo-servizio-e-tempi.md             <- File Knowledge: tempi e compiti delle partite
+    └── esempi-input/
+        └── menu-approvato-esempio.md                  <- 3 scenari pronti da incollare per testare il workflow
 ```
-brigata-cucina-multiagent-demo/
-├── README.md                     <- sei qui: guida generale + passo-passo
-├── orchestrator/
-│   ├── README.md                 <- Istruzioni + Descrizione per l'agente principale
-│   ├── regole-brigata-e-flusso-lavoro.md
-│   ├── struttura-menu-italiano.md
-│   └── glossario-e-stile-comunicazione.md
-├── chef-antipasti/
-│   └── README.md                 <- Istruzioni (con i riferimenti web) + Descrizione + connettore Google Search
-├── chef-primi/
-│   └── README.md                 <- Istruzioni (con i riferimenti web) + Descrizione + connettore Google Search
-├── chef-secondi/
-│   └── README.md                 <- Istruzioni (con i riferimenti web) + Descrizione + connettore Google Search
-├── chef-contorni/
-│   └── README.md                 <- Istruzioni (con i riferimenti web) + Descrizione + connettore Google Search
-├── chef-dolci/
-│   └── README.md                 <- Istruzioni (con i riferimenti web) + Descrizione + connettore Google Search
-└── sommelier/                     <- sotto-agente opzionale (facoltativo per la demo base)
-    └── README.md                 <- Istruzioni (con i riferimenti web) + Descrizione + connettore Google Search
-```
-
-Ogni cartella corrisponde a un "nodo" della gerarchia da ricreare in Agent Designer:
-- **`orchestrator/`** → l'**unico agente di primo livello** da creare (il Responsabile di Brigata).
-- **`chef-*/` e `sommelier/`** → i **sotto-agenti da aggiungere dentro** l'agente `orchestrator`, non agenti a sé stanti.
-
-Regola generale per ogni cartella:
-- **`README.md`** → cosa incollare in Agent Designer per quel nodo (Nome, Descrizione, Istruzioni) e quale connettore abilitargli.
-- **`orchestrator/`** è l'unica cartella con altri file `.md`: sono i file da caricare nella sezione **Knowledge** dell'agente principale. Il connettore **Google Search** non va abilitato su questo agente.
-- **`chef-*/` e `sommelier/`** non hanno altri file: le pagine web da usare come fonte sono già scritte nel blocco Istruzioni del README. Per questi nodi va invece abilitato il connettore **Google Search**. Vedi sezione 2 e Fase 2 più sotto.
 
 ---
 
-## 4. Prerequisiti
+## 3. Come eseguire la demo completa (Percorso Consigliato)
 
-- Un account con accesso a **Gemini Enterprise** e permessi per creare Agenti, sotto-agenti, caricare file nella sezione Knowledge e abilitare il connettore Google Search per un sotto-agente.
-- Aver scaricato/estratto questa cartella così com'è.
-- ~30-45 minuti per completare tutta la demo (agente principale + 5 chef); +10 minuti se aggiungi anche il Sommelier.
+### Passo 1 — Costruisci e prova il Chat Agent (`chatagent/`)
+Segui la guida [`chatagent/README.md`](./chatagent/README.md) per configurare il **Responsabile di Brigata** e i suoi **Chef di Partita**.
+Avvia una conversazione di prova, ad esempio:
+> *"Ciao! Devo organizzare una cena per 6 persone, stagione autunnale, una persona è vegetariana e un'altra ha un'intolleranza ai crostacei. Vorrei un menù elegante ma non troppo formale."*
 
----
+Quando il Responsabile di Brigata ti presenta il menù completo approvato, **copia il testo del menù**.
 
-## 5. Percorso guidato passo-passo
-
-### Fase 0 — Leggi prima tutto
-Sfoglia rapidamente tutte le sottocartelle prima di iniziare, così hai chiaro il quadro d'insieme. Decidi se includere anche il **Sommelier** (opzionale) o fermarti ai 5 chef "core".
-
-### Fase 1 — Crea l'agente principale: Responsabile di Brigata
-
-In Gemini Enterprise Agent Designer crea **un solo agente**, seguendo `orchestrator/README.md`:
-1. Nuovo agente → assegna il **Nome** indicato nel README.
-2. Incolla la **Descrizione**.
-3. Incolla il blocco **Istruzioni**.
-4. Nella sezione **Knowledge** della configurazione dell'agente, **carica direttamente tutti i file `.md` della cartella `orchestrator/` tranne il `README.md`** (il README non va caricato: contiene le istruzioni per te, non contesto per l'agente).
-5. Non abilitare il connettore **Google Search** su questo agente: deve basarsi solo sui file caricati e sulle proposte dei chef.
-
-Questo sarà **l'unico agente di primo livello** di tutta la demo: tutti i chef verranno aggiunti più avanti come sotto-agenti *al suo interno* (Fase 2), non come agenti separati.
-
-### Fase 2 — Aggiungi i sotto-agenti (i chef) dentro lo stesso agente
-
-Per **ciascun** chef (in qualsiasi ordine, ma consigliato: antipasti → primi → secondi → contorni → dolci → sommelier):
-
-1. Dentro l'agente **Responsabile di Brigata**, usa la funzione per **aggiungere un sotto-agente** (nella UI compare come una nuova card collegata con linea tratteggiata sotto l'agente principale — vedi screenshot di riferimento). Non creare un nuovo agente indipendente: il sotto-agente nasce e resta dentro l'agente principale.
-2. Apri il `README.md` della cartella corrispondente (es. `chef-primi/README.md`).
-3. Copia il campo **Nome** e il campo **Descrizione** così come indicati: la descrizione è ciò che l'agente principale userà per capire *quando* invocare quel sotto-agente, quindi non modificarla in modo generico.
-4. Copia il blocco **Istruzioni** nel campo Istruzioni del sotto-agente: contiene già le pagine web specifiche che il chef deve consultare.
-5. Abilita il connettore **Google Search** per questo specifico sotto-agente (senza di esso non può consultare le pagine indicate nelle Istruzioni). Non caricare nulla nella sezione Knowledge.
-6. Salva il sotto-agente.
-
-Ripeti per tutti i chef pianificati. Ogni sotto-agente porta con sé solo i propri riferimenti, già scritti nelle sue Istruzioni: non serve replicarli altrove.
-
-### Fase 3 — Verifica prima di testare
-
-Un rapido controllo incrociato prima del test:
-- L'agente principale ha, in Knowledge, tutti e soli i file di `orchestrator/` (nessun file dei chef caricato qui per errore) e **il connettore Google Search non è abilitato**.
-- Ogni sotto-agente ha il connettore **Google Search abilitato** e **nulla caricato in Knowledge**.
-- Ogni sotto-agente ha le Istruzioni copiate per intero dal proprio README, comprese le pagine web indicate come fonte: non mescolare le pagine di un chef con quelle di un altro (es. il Chef Dolci non deve avere tra le sue Istruzioni le pagine di `chef-primi/`).
-- Ogni sotto-agente ha una Descrizione specifica (non generica), da cui dipende il corretto instradamento (routing) da parte dell'agente principale.
-
-### Fase 4 — Testa il flusso end-to-end
-
-Apri una conversazione con l'agente Responsabile di Brigata e prova, ad esempio:
-
-> "Ciao! Devo organizzare una cena per 6 persone, stagione autunnale, una persona è vegetariana e un'altra ha un'intolleranza ai crostacei. Vorrei un menù elegante ma non troppo formale."
-
-Cosa dovresti osservare:
-1. L'agente principale accoglie la richiesta e, se mancano informazioni (es. fascia di prezzo, occasione), le chiede.
-2. Delega in sequenza ai chef competenti, passando loro il contesto raccolto.
-3. Ogni chef risponde con proposte coerenti con i vincoli (stagione, intolleranze, formalità), basandosi solo sui propri riferimenti web assegnati.
-4. L'agente principale assembla le proposte in un menù finale unico, coerente, e lo presenta all'utente con il nome dello chef "firmatario" di ogni portata.
-5. L'utente può chiedere modifiche puntuali (es. "cambia il primo, troppo simile all'antipasto") e l'agente principale richiama solo il chef pertinente.
-
-Se qualcosa non funziona, vedi la sezione Troubleshooting più sotto.
-
-### Fase 5 — Estensioni possibili (facoltative)
-
-Una volta che la demo di base funziona, puoi arricchirla:
-- Aggiungere il sotto-agente **Sommelier** (README e riferimenti web già pronti in `sommelier/`) per l'abbinamento vini.
-- Aggiungere un sotto-agente **Chef Panetteria** o **Allergie & Intolleranze** dedicato a un controllo incrociato finale.
-- Aggiungere un sotto-agente **Costi/Budget** che stima il costo del menù per persona.
-- Tradurre i prompt in altre lingue per una demo multilingua.
+### Passo 2 — Costruisci ed esegui il Workflow No-Code (`workflow/`)
+Segui la guida [`workflow/README.md`](./workflow/README.md) per configurare il **Workflow Operativo di Brigata** nel canvas **Flow** di Gemini Enterprise (caricando i 3 file di `workflow/knowledge/`).
+Incolla come input il menù appena generato dal Chat Agent (oppure usa uno dei 3 scenari pronti in [`workflow/esempi-input/menu-approvato-esempio.md`](./workflow/esempi-input/menu-approvato-esempio.md)) e osserva il workflow produrre in sequenza:
+1. 📦 **Lista della Spesa per Fornitore** (con calcolo automatico degli scarti di pulitura)
+2. ⚠️ **Matrice dei 14 Allergeni e "Piatti Sentinella"** per gli ospiti con intolleranze
+3. 💶 **Preventivo Food Cost e Semaforo Budget** (🟢 Verde / 🟡 Giallo / 🔴 Rosso)
+4. ⏱️ **Piano di *Mise en Place* (`T-24h`, `T-4h`, `Servizio al Pass`)** per ogni partita della cucina
+5. ✉️ **Dossier Evento + Bozza Email di Briefing** per i capi partita
 
 ---
 
-## 6. Esempio di conversazione (per capire il tono atteso)
-
-**Utente**: "Vorrei un menù di pesce per un pranzo di lavoro, 4 persone, formale."
-
-**Responsabile di Brigata**: "Perfetto! Un pranzo di lavoro a base di pesce per 4 persone, stile formale. Prima di procedere: siamo in una stagione o periodo particolare da valorizzare, e ci sono allergie o preferenze da tenere in considerazione?"
-
-**Utente**: "Siamo in estate, nessuna allergia."
-
-**Responsabile di Brigata**: *(delega internamente a Chef Antipasti, Chef Primi, Chef Secondi, Chef Contorni, Chef Pasticceria con il contesto raccolto, poi assembla)*
-
-"Ecco la proposta della brigata per il tuo pranzo di lavoro estivo a base di pesce:
-- 🥗 **Antipasto** — Crudo di ricciola con agrumi e finocchietto *(Chef Antipasti)*
-- 🍝 **Primo** — Linguine alle vongole veraci *(Chef Primi)*
-- 🥩 **Secondo** — Filetto di branzino in crosta di erbe, con...
-- 🥦 **Contorno** — ...
-- 🍮 **Dolce** — ...
-
-Va bene così o vuoi che modifichi qualche portata?"
-
----
-
-## 7. Troubleshooting / FAQ
-
-**L'agente principale non delega mai a un sotto-agente specifico.**
-→ Controlla che la Descrizione del sotto-agente sia specifica (es. "propone antipasti", non "aiuta con la cucina"): è il principale segnale usato per il routing.
-
-**Un chef risponde con informazioni generiche, non quelle delle pagine indicate nelle Istruzioni.**
-→ Verifica che il connettore **Google Search** sia abilitato su quello specifico sotto-agente e che il blocco Istruzioni sia stato copiato per intero (i link alle pagine sono parte delle Istruzioni, non un campo separato).
-
-**Un chef non riesce a rispondere o dice di non poter accedere alle pagine web.**
-→ Controlla che il connettore **Google Search** sia effettivamente abilitato su quel sotto-agente (e non, per errore, sull'agente principale); se una pagina indicata nelle Istruzioni non è più disponibile, sostituiscila con una pagina equivalente verificata (non far indovinare un URL al modello).
-
-**Il menù finale è incoerente (es. due portate con lo stesso ingrediente protagonista).**
-→ Questo controllo è responsabilità esplicita delle Istruzioni dell'agente principale (vedi `orchestrator/README.md`, sezione "Regole"): se non avviene, verifica di aver copiato le Istruzioni per intero.
-
-**Un vincolo alimentare (es. allergia) non viene rispettato.**
-→ Assicurati che il contesto raccolto dall'agente principale (allergie/intolleranze) venga effettivamente passato a *ogni* sotto-agente chiamato, non solo al primo.
-
-**Un chef propone ricette che sembrano appartenere a un altro chef (es. il Chef Dolci parla di risotti).**
-→ Controlla le Istruzioni copiate su quel sotto-agente: probabilmente sono stati incollati per errore anche i link o le istruzioni di un altro chef (es. quelli di `chef-primi/`) insieme a quelli corretti. Ogni sotto-agente deve avere solo le Istruzioni della propria cartella.
-
----
-
-Buona costruzione! 👨‍🍳🤖
+Buona costruzione e buona demo! 👨‍🍳⚙️🤖
