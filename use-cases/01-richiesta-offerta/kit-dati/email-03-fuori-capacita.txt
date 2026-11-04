@@ -1,0 +1,15 @@
+Da: engineering@aerostructures-nord.example
+Oggetto: RFQ - Attrezzatura di laminazione longherone secondario
+
+Gentile Team Tecnico,
+
+vi contattiamo dal reparto attrezzature di AeroStructures Nord (settore aerospazio). Stiamo cercando un fornitore per la stampa 3D e successiva fresatura CNC (tolleranza ± 0,25 mm) di un attrezzo di laminazione destinato a cicli in forno fino a 110 °C.
+
+Il pezzo da realizzare è una culla monolitica con larghezza di 1400 mm e altezza di 850 mm; poiché il componente deve alloggiare l'intera semiala senza giunzioni intermedie, lo sviluppo longitudinale complessivo dell'attrezzo è di 4,6 metri.
+Come materiale avremmo individuato il vostro CaraCarb-CF40 (PA6 caricato carbonio).
+
+Ci servirebbe 1 solo esemplare con consegna entro 8 settimane. Potete confermarci la fattibilità e inviarci la vostra migliore offerta?
+
+Un cordiale saluto,
+Ing. Davide Sartori
+Manufacturing Engineering

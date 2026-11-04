@@ -1,0 +1,21 @@
+Da: ufficio.tecnico@cantierinauticiblu.example
+Oggetto: RFQ - Richiesta preventivo stampo console scafo 38 piedi
+
+Buongiorno,
+
+siamo un cantiere nautico e stiamo avviando la produzione di un nuovo day-cruiser. Avremmo bisogno di una vostra quotazione per la realizzazione di uno stampo per laminazione a freddo (infusione sottovuoto a temperatura ambiente) della console centrale di coperta.
+
+Di seguito le specifiche tecniche del componente:
+- Settore: Nautico
+- Tipo di pezzo: Stampo per infusione a freddo
+- Dimensioni d'ingombro: 3200 x 1600 x 900 mm
+- Materiale richiesto: Polipropilene caricato fibra di vetro (CaraComp-GF30)
+- Lavorazione richiesta: Stampa 3D + fresatura CNC con tolleranza ± 0,25 mm
+- Quantità: 1 pezzo
+- Consegna desiderata: entro 8 settimane dall'ordine
+
+Restiamo in attesa di un vostro riscontro sulla fattibilità e del relativo preventivo.
+
+Cordiali saluti,
+Ing. Marco Ferri
+Cantieri Nautici Blu S.r.l.

@@ -1,0 +1,27 @@
+RIUNIONE ALLINEAMENTO REPARTO CELLULA DI FRESATURA & RETROFIT (PROGETTO MILL-X)
+Data: 04 Novembre 2026
+Partecipanti presenti: Giulia Moretti (PM), Luca Visconti (Ingegneria), Sara Fontana (Robotica), Davide Villa (Produzione), Matteo Colombo (Acquisti).
+
+---
+
+[00:00] Giulia Moretti: Ciao a tutti, apriamo il tavolo sul retrofit della cella MILL-X. Come primo punto dobbiamo congelare la scelta della cabina di aspirazione polveri.
+
+[00:02] Davide Villa: Il modello a filtri antistatici a cartuccia garantisce la portata richiesta e occupa 80 cm in meno in pianta.
+
+[00:03] Giulia Moretti: D'accordo, allora decidiamo di installare l'unità di aspirazione a filtri antistatici a cartuccia. Matteo, procedi tu con la conferma d'ordine dell'aspiratore?
+
+[00:04] Matteo Colombo: Sì, emetto l'ordine dell'unità di aspirazione entro martedì 10/11/2026.
+
+[00:06] Luca Visconti: Con il nuovo aspiratore dobbiamo spostare di mezzo metro l'armadio pneumatico sul layout di officina. Io posso aggiornare il disegno del layout 2D della cella, lo faccio a breve.
+
+[00:08] Sara Fontana: A proposito dell'elettromandrino di fresatura, ieri abbiamo notato una leggera vibrazione sopra i 14.000 giri. Bisognerebbe verificare i tempi di approvvigionamento dei cuscinetti ceramici: qualcuno dovrebbe sentire il fornitore dei mandrini per farsi mandare il listino ricambi aggiornato.
+
+[00:10] Davide Villa: Vero, e nel frattempo in officina abbiamo deciso di limitare via software i giri massimi del mandrino a 12.000 rpm fino al controllo vibrometrico.
+
+[00:12] Giulia Moretti: Bene, registriamo questa seconda decisione: limitazione temporanea del mandrino a 12.000 rpm fino a verifica tecnica. Sara, imposti tu il blocco nel PLC della macchina entro domani 05/11/2026?
+
+[00:13] Sara Fontana: Sì, imposto il limite a 12.000 rpm nel PLC entro il 05/11/2026.
+
+[00:15] Luca Visconti: Per l'analisi vibrometrica vera e propria con l'accelerometro, ho sentito stamattina al caffè Roberto Galli del laboratorio esterno: facciamo eseguire a Roberto Galli il test vibrometrico sul mandrino entro venerdì 13/11/2026.
+
+[00:17] Giulia Moretti: Ok, rimane come punto aperto la valutazione se fermare l'impianto per manutenzione straordinaria nella settimana 48 o nella settimana 49, in base al carico commesse che vedremo lunedì prossimo. Chiudiamo qui, grazie!

@@ -1,0 +1,33 @@
+RIUNIONE DI AVANZAMENTO COMMESSA C-2026-014 (CELLA ROBOTIZZATA LFAM NAUTICA)
+Data: 04 Novembre 2026
+Partecipanti presenti: Giulia Moretti (PM), Luca Visconti (Ingegneria), Sara Fontana (Robotica), Matteo Colombo (Acquisti), Elena Rinaldi (Qualità).
+
+---
+
+[00:00] Giulia Moretti: Buongiorno a tutti. Facciamo il punto sulla commessa C-2026-014. Il cliente ha chiesto conferma della data del Factory Acceptance Test (FAT).
+
+[00:02] Luca Visconti: Dal lato meccanico il basamento della tavola rotante è completo. Abbiamo però valutato le due opzioni per il passaggio cavi sul polso robot: proponiamo di adottare la guaina corrugata ad alta flessibilità invece della catena portacavi rigida, perché riduce gli ingombri in fresatura.
+
+[00:04] Sara Fontana: Concordo con Luca, nelle simulazioni offline la guaina corrugata evita qualsiasi collisione quando lavoriamo sottosquadro.
+
+[00:05] Giulia Moretti: Perfetto, allora prima decisione presa: adottiamo ufficialmente la guaina corrugata ad alta flessibilità per il polso robot sulla C-2026-014. Luca, riesci ad aggiornare la distinta base meccanica?
+
+[00:06] Luca Visconti: Sì, aggiorno la distinta base meccanica del polso robot entro venerdì 06/11/2026.
+
+[00:08] Matteo Colombo: Appena Luca rilascia la distinta, emetto l'ordine per il kit guaina. Mi impegno a inviare l'ordine d'acquisto al fornitore entro lunedì 09/11/2026.
+
+[00:10] Giulia Moretti: Ottimo. Secondo punto: parametro materiale per il collaudo. Il cliente vorrebbe fare il test di stampa usando CaraComp-GF30 nero anziché grigio naturale.
+
+[00:12] Elena Rinaldi: Non ci sono problemi tecnici, abbiamo già 1.000 kg di CaraComp-GF30 nero in magazzino certificati. Quindi possiamo confermare l'uso del CaraComp-GF30 nero per il FAT.
+
+[00:14] Giulia Moretti: Bene, seconda decisione registrata: il collaudo FAT verrà eseguito con compound CaraComp-GF30 nero. Elena, prepari tu il protocollo di collaudo FAT da inviare in visione al cliente?
+
+[00:15] Elena Rinaldi: Certamente, preparo e invio la bozza del protocollo di collaudo FAT entro mercoledì 11/11/2026.
+
+[00:17] Sara Fontana: Per quanto riguarda il post-processor del percorso utensile, ho completato i test ieri. Dobbiamo solo decidere la data ufficiale del FAT con il cliente: propongo il 24/11/2026.
+
+[00:19] Giulia Moretti: Tutti d'accordo sul 24/11/2026? Sì, perfetto: terza decisione, fissiamo la data del FAT al 24/11/2026. Sara, carichi i parametri definitivi del post-processor nel controller della cella entro il 13/11/2026?
+
+[00:20] Sara Fontana: Confermato, carico i parametri nel controller entro venerdì 13/11/2026.
+
+[00:21] Giulia Moretti: Resta solo un punto aperto: non sappiamo ancora se al FAT parteciperanno 2 o 4 tecnici del cliente per organizzare i pass visitatori e il pranzo; attendiamo risposta dalla loro segreteria tecnica. Grazie a tutti!
