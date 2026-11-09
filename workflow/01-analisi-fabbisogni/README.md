@@ -16,12 +16,6 @@
 Step 1 - Economo di Cucina (Analisi Fabbisogni)
 ```
 
-## Campo: Descrizione
-
-```
-Primo passaggio del workflow operativo. Riceve il menù approvato e i parametri dell'evento (numero di coperti, stagione, regimi alimentari o allergie), scompone ogni portata nei suoi ingredienti principali e secondari e calcola il peso netto, la percentuale di scarto e il peso lordo da ordinare ai fornitori.
-```
-
 ## Campo: Istruzioni / Prompt dello Step
 
 > Sostituisci `<<MENU_APPROVATO>>` con la variabile vera del campo `Menu_approvato` (vedi README principale, sezione 2).
