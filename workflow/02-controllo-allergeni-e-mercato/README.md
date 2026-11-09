@@ -16,12 +16,6 @@
 Step 2 - Controllo Qualità e Sicurezza Allergeni
 ```
 
-## Campo: Descrizione
-
-```
-Secondo passaggio del workflow operativo. Riceve il menù e l'elenco degli ingredienti esploso dallo Step 1, verifica sul web la presenza dei 14 allergeni ufficiali e la coerenza stagionale degli ingredienti freschi, e definisce le sostituzioni o varianti sicure per gli ospiti con intolleranze o regimi alimentari specifici.
-```
-
 ## Campo: Istruzioni / Prompt dello Step
 
 > Sostituisci `<<MENU_APPROVATO>>` e `<<OUTPUT_STEP_1>>` con le variabili vere.
