@@ -68,10 +68,6 @@ Nei README degli step trovi segnaposto come `<<MENU_APPROVATO>>` e `<<OUTPUT_STE
 ### Fase 1 — Contenitore
 1. **+ New agent → Workflow → Build manually**.
 2. **Nome**: `Workflow Operativo di Brigata — Dal Menù al Servizio`
-3. **Descrizione**:
-   ```
-   Workflow sequenziale no-code che riceve un menù approvato e i dettagli di un evento (numero ospiti, stagione, intolleranze, budget) ed esegue in catena: 1) esplosione ingredienti e lista della spesa con rese, 2) verifica allergeni e stagionalità, 3) calcolo del food cost e preventivo, 4) cronoprogramma di mise en place per le partite della brigata, 5) generazione del dossier operativo e bozza briefing per cucina e sala.
-   ```
 
 ### Fase 2 — Trigger MANUALE con campo di input
 1. Nel canvas clicca il nodo trigger (di default può comparire un **Schedule**, "Daily at 9:00 AM").
