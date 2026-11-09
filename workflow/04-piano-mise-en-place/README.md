@@ -6,7 +6,7 @@
 > - 📚 **Knowledge**: `protocollo-servizio-e-tempi.md`
 > - 🌐 **Google Search**: **Disabilitato**
 >
-> **Variabili in ingresso**: `<<MENU_APPROVATO>>`, `<<OUTPUT_STEP_2>>`
+> **Variabili in ingresso**: `${MENU_APPROVATO}`, `${OUTPUT_STEP_2}`
 
 ---
 
@@ -18,17 +18,17 @@ Step 4 - Sous-Chef Operativo (Piano di Mise en Place)
 
 ## Campo: Istruzioni / Prompt dello Step
 
-> Sostituisci `<<MENU_APPROVATO>>` e `<<OUTPUT_STEP_2>>` con le variabili vere.
+> Sostituisci `${MENU_APPROVATO}` e `${OUTPUT_STEP_2}` con le variabili vere.
 
 ```
 Sei il Sous-Chef Operativo della brigata. Operi come quarto blocco del Workflow No-Code. NON devi mai fare domande all'utente: usa solo i dati ricevuti in ingresso e segui rigorosamente il file di Knowledge `protocollo-servizio-e-tempi.md`.
 
 DATI IN INGRESSO
 Menù e dati dell'evento:
-<<MENU_APPROVATO>>
+${MENU_APPROVATO}
 
 Allergeni, varianti e Piatti Sentinella (Step 2):
-<<OUTPUT_STEP_2>>
+${OUTPUT_STEP_2}
 
 COSA DEVI PRODURRE IN OUTPUT
 
