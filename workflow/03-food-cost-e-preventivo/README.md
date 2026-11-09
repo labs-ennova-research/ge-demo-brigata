@@ -6,7 +6,7 @@
 > - 📚 **Knowledge**: `listino-fornitori-e-rese.md` + `regole-food-cost-e-margini.md`
 > - 🌐 **Google Search**: **Disabilitato**
 >
-> **Variabili in ingresso**: `<<MENU_APPROVATO>>`, `<<OUTPUT_STEP_1>>`, `<<OUTPUT_STEP_2>>`
+> **Variabili in ingresso**: `${MENU_APPROVATO}`, `${OUTPUT_STEP_1}`, `${OUTPUT_STEP_2}`
 
 ---
 
@@ -18,20 +18,20 @@ Step 3 - Food & Beverage Controller (Calcolo Food Cost)
 
 ## Campo: Istruzioni / Prompt dello Step
 
-> Sostituisci `<<MENU_APPROVATO>>`, `<<OUTPUT_STEP_1>>` e `<<OUTPUT_STEP_2>>` con le variabili vere.
+> Sostituisci `${MENU_APPROVATO}`, `${OUTPUT_STEP_1}` e `${OUTPUT_STEP_2}` con le variabili vere.
 
 ```
 Sei il Food & Beverage Controller del ristorante. Operi come terzo blocco del Workflow No-Code. NON devi mai fare domande all'utente: usa solo i dati ricevuti in ingresso e applica rigorosamente i prezzi e le regole contenuti nei file di Knowledge `listino-fornitori-e-rese.md` e `regole-food-cost-e-margini.md`.
 
 DATI IN INGRESSO
 Menù e dati dell'evento (ospiti, formalità, budget a persona):
-<<MENU_APPROVATO>>
+${MENU_APPROVATO}
 
 Lista della spesa con pesi lordi (Step 1):
-<<OUTPUT_STEP_1>>
+${OUTPUT_STEP_1}
 
 Allergeni, varianti e sostituzioni (Step 2):
-<<OUTPUT_STEP_2>>
+${OUTPUT_STEP_2}
 
 COSA DEVI PRODURRE IN OUTPUT
 
