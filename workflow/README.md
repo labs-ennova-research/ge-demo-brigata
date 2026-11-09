@@ -1,129 +1,172 @@
-# ⚙️ Workflow Operativo di Brigata — Demo No-Code Workflow per Gemini Enterprise
+# ⚙️ Workflow Operativo di Brigata — Demo No-Code per Gemini Enterprise (Workflow Builder)
 
-Questa cartella contiene tutto il materiale (prompt dei singoli blocchi, file di Knowledge aziendale, configurazione dei connettori e input di test) per costruire passo dopo passo, in **Gemini Enterprise**, un flusso **No-Code in modalità Workflow** collegato alla metafora della **Brigata di Cucina**.
+Questa cartella contiene tutto il necessario (prompt dei 5 step, file di Knowledge, input di test) per costruire in **Gemini Enterprise → Workflow Builder** il flusso che trasforma un **menù approvato** in: lista della spesa, matrice allergeni, food cost e semaforo budget, piano di mise en place e briefing di brigata.
 
-> 🔗 **Come si collega alla cartella `chatagent/`?**
-> - In [`../chatagent/`](../chatagent/README.md) hai costruito la fase **creativa e conversazionale**: il *Responsabile di Brigata* dialoga con il cliente e coordina gli chef per ideare e approvare il menù.
-> - Qui in `workflow/` costruisci la fase **esecutiva e di back-office**: una volta che il menù è stato approvato, parte un **Workflow No-Code sequenziale** che trasforma automaticamente quel menù in **Lista della Spesa con scarti, Analisi Allergeni, Calcolo del Food Cost & Preventivo, Cronoprogramma di Mise en Place per ogni partita e Briefing pronto da inviare su Gmail / Google Docs**.
-
----
-
-## 1. Differenza tra Modalità Chat Agent e Modalità Workflow in Gemini Enterprise
-
-Questa demo è pensata proprio per mostrare dal vivo, sullo stesso dominio ("la brigata di cucina"), quando scegliere un **Chat Agent** e quando scegliere un **Workflow No-Code**:
-
-| Caratteristica | 💬 Modalità Chat Agent (`../chatagent/`) | ⚙️ Modalità Workflow (`./workflow/`) |
-|---|---|---|
-| **Obiettivo** | Esplorare, consigliare, raccogliere requisiti in modo interattivo | Eseguire un processo operativo strutturato, ripetibile e verificabile |
-| **Controllo del flusso** | **Dinamico (guidato dall'LLM)**: l'orchestratore decide chi chiamare e fa domande all'utente | **Deterministico / Sequenziale (Canvas Flow)**: i passaggi vengono eseguiti in ordine fisso (`Step 1 → Step 2 → ...`) |
-| **Input tipico** | Conversazione libera a più turni con il cliente | Input strutturato (un menù approvato, un form evento) o attivazione automatica (**Schedule** / Trigger) |
-| **Passaggio dati** | Contesto conversazionale passato ai sotto-agenti | L'output di ogni blocco diventa l'input strutturato del blocco successivo |
-| **Integrazioni tipiche** | Knowledge + Google Search per rispondere alle domande | Knowledge + Google Search + **Azioni / Connettori Workspace** (Gmail, Google Docs, Drive, Calendar) + **Human-in-the-loop** |
+> **Versione corretta e testata**: rispetto alla prima versione del repo, qui sono inclusi
+> - il **trigger Manuale con campo di input** (il Schedule non ha campi di input e non può ricevere il menù);
+> - le **variabili** che collegano ogni step al menù e agli output degli step precedenti;
+> - le regole **anti-invenzione** (niente posti a sedere, colori o dettagli non presenti nel menù o nel protocollo);
+> - le regole **anti-blocco** (nessuno step deve mai fermarsi a chiedere dati all'utente);
+> - le correzioni a food cost e semaforo (vedi `knowledge/regole-food-cost-e-margini.md`).
 
 ---
 
-## 2. Il caso d'uso: "Dal Menù Approvato alla Messa in Linea della Brigata"
-
-Quando un ristorante o un servizio di catering conferma un evento, il lavoro della brigata è appena iniziato: prima di accendere i fornelli servono **acquisti precisi (economato)**, **verifica sicurezza alimentare (allergeni)**, **controllo dei margini (food cost)** e **organizzazione dei tempi di cucina (mise en place)**.
-
-Nel canvas **Flow** di Gemini Enterprise, questo processo diventa una catena lineare di **5 blocchi (step)** No-Code:
+## 1. Come è fatto il flusso
 
 ```mermaid
 flowchart LR
-    T["📥 Input / Trigger\nMenù approvato + N° ospiti\n(o Trigger Schedule)"] --> S1["1️⃣ Economo di Cucina\nEsplosione ingredienti,\nrese e lista spesa\n📚 Knowledge"]
-    S1 --> S2["2️⃣ Controllo Qualità & Allergeni\nVerifica 14 allergeni, stagionalità\ne sostituzioni sicure\n🌐 Google Search"]
-    S2 --> S3["3️⃣ Food & Beverage Controller\nCalcolo Food Cost, margini\ne preventivo cliente\n📚 Knowledge"]
-    S3 --> S4["4️⃣ Sous-Chef Operativo\nCronoprogramma T-24h / T-4h / Pass\nper ogni partita della brigata\n📚 Knowledge"]
-    S4 --> S5["5️⃣ Dossier & Briefing Brigata\nGenerazione scheda operativa\n+ Bozza Gmail / Google Docs\n✉️ Connettori Workspace"]
+    T["🖐️ Trigger MANUALE<br/>campo di input: Menu_approvato"] --> S1["1️⃣ Economo<br/>Lista spesa e rese"]
+    S1 --> S2["2️⃣ Qualità & Allergeni"]
+    S2 --> S3["3️⃣ Food Cost & Semaforo"]
+    S3 --> S4["4️⃣ Sous-Chef<br/>Mise en place"]
+    S4 --> S5["5️⃣ Dossier & Briefing"]
+    T -. menù .-> S2
+    T -. menù .-> S3
+    T -. menù .-> S4
+    T -. menù .-> S5
+    S1 -. output .-> S3
+    S1 -. output .-> S5
+    S2 -. output .-> S3
+    S2 -. output .-> S4
+    S2 -. output .-> S5
+    S3 -. output .-> S5
+    S4 -. output .-> S5
 ```
 
-### Cosa fa ciascuno Step del Workflow
+**Regola fondamentale**: in un workflow ogni step è un agente isolato. Vede **solo** quello che gli scrivi nel suo prompt. Il menù e gli output degli step precedenti **non arrivano da soli**: vanno inseriti nelle istruzioni di ogni step come variabili.
 
-| Step | Ruolo nella Brigata | Input ricevuto | Risorse / Connettori No-Code | Output prodotto |
-|---|---|---|---|---|
-| **Step 1** | 📦 **Economo di Cucina** | Menù approvato + N° coperti + vincoli | **Knowledge**: `listino-fornitori-e-rese.md` | Tabella ingredienti esplosa per portata, peso netto, scarto %, peso lordo da ordinare |
-| **Step 2** | 🔍 **Controllo Qualità & Allergeni** | Lista ingredienti dello Step 1 + intolleranze ospiti | **Connettore**: `Google Search` (pagine EUFIC / stagionalità) | Matrice dei 14 allergeni per portata, semaforo stagionalità e varianti sicure per gli ospiti allergici |
-| **Step 3** |💶 **Food & Beverage Controller** | Quantità lorde (Step 1) + varianti (Step 2) | **Knowledge**: `listino-fornitori-e-rese.md` + `regole-food-cost-e-margini.md` | Calcolo Food Cost totale e per coperto, prezzo di vendita consigliato, alert fuori-budget |
-| **Step 4** | ⏱️ **Sous-Chef Operativo** | Menù definitivo + varianti allergeni | **Knowledge**: `protocollo-servizio-e-tempi.md` | Piano di *Mise en Place* diviso in `T-24h`, `T-4h` e `Servizio (Pass)` assegnato a ogni partita |
-| **Step 5** | 📋 **Direttore Operativo / Maître** | Tutti gli output degli Step 1–4 | **Connettori (opzionali)**: `Google Docs` / `Gmail` + checkpoint di conferma | **Dossier Operativo Completo** + creazione automatica documento o bozza email per i capi partita |
+| Step | Variabili in ingresso |
+|---|---|
+| 1 Economo | `Menu_approvato` |
+| 2 Qualità & Allergeni | `Menu_approvato`, output Step 1 |
+| 3 Food Cost | `Menu_approvato`, output Step 1, output Step 2 |
+| 4 Sous-Chef | `Menu_approvato`, output Step 2 |
+| 5 Dossier | `Menu_approvato`, output Step 1, 2, 3, 4 (+ `Destinatari_briefing` se creato) |
 
 ---
 
-## 3. Struttura della cartella `workflow/`
+## 2. Convenzione dei segnaposto nei prompt
 
-```
-workflow/
-├── README.md                                  <- sei qui: guida generale al Workflow No-Code
-├── 01-analisi-fabbisogni/
-│   └── README.md                              <- Configurazione e Prompt dello Step 1 (Economo)
-├── 02-controllo-allergeni-e-mercato/
-│   └── README.md                              <- Configurazione e Prompt dello Step 2 (Qualità & Allergeni)
-├── 03-food-cost-e-preventivo/
-│   └── README.md                              <- Configurazione e Prompt dello Step 3 (Food Cost Controller)
-├── 04-piano-mise-en-place/
-│   └── README.md                              <- Configurazione e Prompt dello Step 4 (Sous-Chef Operativo)
-├── 05-briefing-e-notifica/
-│   └── README.md                              <- Configurazione e Prompt dello Step 5 (Dossier + Gmail/Docs)
-├── knowledge/
-│   ├── listino-fornitori-e-rese.md            <- File Knowledge: prezzi al kg, % scarto, lotti d'ordine
-│   ├── regole-food-cost-e-margini.md          <- File Knowledge: target food cost, moltiplicatori e regole budget
-│   └── protocollo-servizio-e-tempi.md         <- File Knowledge: tempi standard e compiti delle partite in cucina
-└── esempi-input/
-    └── menu-approvato-esempio.md              <- 3 input pronti da incollare per testare subito il workflow
-```
+Nei README degli step trovi segnaposto come `<<MENU_APPROVATO>>` e `<<OUTPUT_STEP_1>>`. **Non vanno copiati così com'è**: vanno sostituiti con la variabile vera inserita dal selettore variabili dell'editor.
+
+| Segnaposto nel README | Cosa inserire nell'editor |
+|---|---|
+| `<<MENU_APPROVATO>>` | la variabile del campo `Menu_approvato` del trigger Manuale |
+| `<<OUTPUT_STEP_1>>` | la variabile di output dello Step 1 |
+| `<<OUTPUT_STEP_2>>` | la variabile di output dello Step 2 |
+| `<<OUTPUT_STEP_3>>` | la variabile di output dello Step 3 |
+| `<<OUTPUT_STEP_4>>` | la variabile di output dello Step 4 |
+
+> 💡 **Come si inserisce una variabile**: nelle istruzioni dello step cerca nell'editor il selettore delle variabili (pulsante o menu per riferire campi del trigger e output degli step precedenti). La documentazione Google cita, per l'agent step esistente, la sintassi `${nome_step.output}`; per i nodi Gemini Agent usa il selettore se disponibile, perché la sintassi esatta può variare.
+>
+> 💡 **Verifica che la variabile sia entrata**: dopo il test run apri lo step e controlla il suo **Input** (nello screenshot di test: riga "Input" sopra "Output"). Se il menù non compare nell'input, il collegamento non è andato a buon fine.
 
 ---
 
-## 4. Percorso guidato passo-passo in Gemini Enterprise
+## 3. Costruzione passo-passo
 
-### Fase 1 — Crea il contenitore del Workflow
-1. Apri **Gemini Enterprise → Agent Designer (Workflow Builder)** e avvia una nuova configurazione orientata al **flusso (Flow / Multi-step Workflow)**.
-2. Assegna come **Nome**:
-   ```
-   Workflow Operativo di Brigata — Dal Menù al Servizio
-   ```
-3. Assegna come **Descrizione**:
+### Fase 1 — Contenitore
+1. **+ New agent → Workflow → Build manually**.
+2. **Nome**: `Workflow Operativo di Brigata — Dal Menù al Servizio`
+3. **Descrizione**:
    ```
    Workflow sequenziale no-code che riceve un menù approvato e i dettagli di un evento (numero ospiti, stagione, intolleranze, budget) ed esegue in catena: 1) esplosione ingredienti e lista della spesa con rese, 2) verifica allergeni e stagionalità, 3) calcolo del food cost e preventivo, 4) cronoprogramma di mise en place per le partite della brigata, 5) generazione del dossier operativo e bozza briefing per cucina e sala.
    ```
-4. Carica nella sezione **Knowledge** i 3 file presenti nella sottocartella [`knowledge/`](./knowledge/):
-   - [`listino-fornitori-e-rese.md`](./knowledge/listino-fornitori-e-rese.md)
-   - [`regole-food-cost-e-margini.md`](./knowledge/regole-food-cost-e-margini.md)
-   - [`protocollo-servizio-e-tempi.md`](./knowledge/protocollo-servizio-e-tempi.md)
 
-### Fase 2 — Costruisci la catena sequenziale nel tab "Flow"
-Apri la vista visuale **Flow** e configura i **5 passaggi in sequenza** seguendo nell'ordine le istruzioni contenute in ciascuna sottocartella:
+### Fase 2 — Trigger MANUALE con campo di input
+1. Nel canvas clicca il nodo trigger (di default può comparire un **Schedule**, "Daily at 9:00 AM").
+2. Nel pannello di configurazione cambia il tipo in **Manual trigger**.
+3. In **Input fields** aggiungi **un solo campo di testo**:
+   - **Nome**: `Menu_approvato`
+   - **Tipo**: testo (lungo, se l'editor lo permette)
+   - **Obbligatorio**: sì
+4. Questo campo è dove, a ogni esecuzione, si incolla il blocco con menù + ospiti + allergie + budget (vedi `esempi-input/menu-approvato-esempio.md`).
+5. **(Opzionale) Secondo campo `Destinatari_briefing`**: testo, non obbligatorio. Se lo compili con gli indirizzi email dei capi partita, la bozza Outlook nasce con i destinatari già inseriti; se lo lasci vuoto, la bozza viene creata senza destinatari e li aggiungi tu. Se non lo crei, togli `<<DESTINATARI_BRIEFING>>` dal prompt dello Step 5.
 
-1. **Step 1 (`01-analisi-fabbisogni/README.md`)**: Nodo collegato alla **Knowledge** interna (`listino-fornitori-e-rese.md`), senza Google Search.
-2. **Step 2 (`02-controllo-allergeni-e-mercato/README.md`)**: Nodo con connettore **Google Search** abilitato per la verifica puntuale degli allergeni e della stagionalità.
-3. **Step 3 (`03-food-cost-e-preventivo/README.md`)**: Nodo collegato alla **Knowledge** interna (`listino-fornitori-e-rese.md` e `regole-food-cost-e-margini.md`), senza Google Search.
-4. **Step 4 (`04-piano-mise-en-place/README.md`)**: Nodo collegato alla **Knowledge** interna (`protocollo-servizio-e-tempi.md`), senza Google Search.
-5. **Step 5 (`05-briefing-e-notifica/README.md`)**: Nodo finale di sintesi e formattazione del Dossier, con possibilità di agganciare i connettori **Google Docs** e **Gmail** (con approvazione utente *Human-in-the-loop* prima dell'invio).
+### Fase 3 — Knowledge dei singoli step
+Il Knowledge si carica **sul singolo nodo**, non sul workflow intero:
 
-> 💡 **Modalità Singolo Flusso vs Blocchi Separati nel Canvas**:
-> - Se la tua versione di Agent Designer usa **nodi/step distinti sul canvas Flow**, incolla ciascuno dei 5 blocchi nel rispettivo nodo collegandoli in serie (`Step 1 → Step 2 → Step 3 → Step 4 → Step 5`).
-> - Se preferisci orchestrare i 5 nodi da un **Coordinatore di Workflow** che invoca rigorosamente i 5 passaggi in ordine fisso senza fare domande intermedie all'utente, trovi il prompt di coordinamento sequenziale direttamente in [`05-briefing-e-notifica/README.md`](./05-briefing-e-notifica/README.md).
+| Step | Knowledge da collegare | Google Search |
+|---|---|---|
+| 1 | `listino-fornitori-e-rese.md` | ❌ |
+| 2 | nessuno | ✅ |
+| 3 | `listino-fornitori-e-rese.md` + `regole-food-cost-e-margini.md` | ❌ |
+| 4 | `protocollo-servizio-e-tempi.md` | ❌ |
+| 5 | nessuno | ❌ (connettore **Outlook** attivo, solo creazione bozza: vedi Step 5) |
 
-### Fase 3 — (Opzionale) Configura un Trigger automatico nella tab "Schedule"
-Uno dei punti di forza della modalità **Workflow** rispetto al Chat Agent è la possibilità di eseguirlo in automatico tramite la tab **Schedule**:
-- Apri la tab **Schedule** in Agent Designer.
-- Imposta la frequenza su **Weekly** (es. ogni *Lunedì alle 08:30*).
-- Nel prompt programmato, chiedi al workflow di elaborare il menù dell'evento settimanale (o di leggere il file `Menu_Settimana_Corrente` da Google Drive se hai abilitato il connettore Drive) e preparare nella tua Inbox il Dossier Operativo pronto da approvare.
+### Fase 4 — I 5 step
+Crea i 5 nodi **Gemini Agent** in serie e incolla nome, descrizione e istruzioni dai README:
 
-### Fase 4 — Testa il Workflow con un input reale
-Apri la tab **Preview**, copia uno degli scenari pronti in [`esempi-input/menu-approvato-esempio.md`](./esempi-input/menu-approvato-esempio.md) (oppure incolla direttamente il menù che hai generato poco prima con il **Chat Agent**!) e avvia l'esecuzione.
+1. [`01-analisi-fabbisogni/README.md`](./01-analisi-fabbisogni/README.md)
+2. [`02-controllo-allergeni-e-mercato/README.md`](./02-controllo-allergeni-e-mercato/README.md)
+3. [`03-food-cost-e-preventivo/README.md`](./03-food-cost-e-preventivo/README.md)
+4. [`04-piano-mise-en-place/README.md`](./04-piano-mise-en-place/README.md)
+5. [`05-briefing-e-notifica/README.md`](./05-briefing-e-notifica/README.md)
 
-Osserverai il workflow attraversare tutti i 5 passaggi senza interrompersi per fare domande conversazionali, restituendo in un'unica esecuzione:
-1. 📦 **Tabella Economato & Lista della Spesa** (con pesi netti, scarti e pesi lordi)
-2. ⚠️ **Matrice Sicurezza Allergeni & Sostituzioni** (per gli ospiti vegetariani o intolleranti)
-3. 💶 **Analisi Food Cost & Preventivo Commerciale** (costo materia prima, margine e verifica budget)
-4. ⏱️ **Cronoprogramma di Cucina (`T-24h`, `T-4h`, `Pass`)** suddiviso per ogni Chef di Partita
-5. ✉️ **Bozza Email / Documento di Briefing** pronta per essere inviata alla brigata
+In ogni prompt, **sostituisci i segnaposto `<<...>>` con le variabili vere** (sezione 2).
+
+> 🔁 **Consiglio**: costruisci e prova **uno step alla volta**. Fai girare il test dopo lo Step 1; se non si ferma e produce la tabella, replica il meccanismo sugli altri.
 
 ---
 
-## 5. Perché mostrare insieme `chatagent/` e `workflow/` durante una demo
+## 4. Come si avvia il workflow
 
-Presentare entrambi i casi d'uso in sequenza permette di raccontare una storia aziendale completa in Gemini Enterprise:
-1. **Atto 1 — Co-creazione Conversazionale (`chatagent/`)**: quando il problema è aperto e richiede dialogo, ascolto del cliente e creatività, usiamo il **Chat Agent multi-agente**.
-2. **Atto 2 — Automazione dei Processi (`workflow/`)**: quando la decisione è presa e bisogna eseguire calcoli, controlli di conformità, pianificazione operativa e invio di documenti senza errori né dimenticanze, passiamo l'output al **Workflow No-Code**.
+### A) Test dall'editor
+1. Apri la tab **Test**.
+2. Clicca **Start a test run**: con il trigger Manuale compare il campo `Menu_approvato`.
+3. Incolla un blocco di `esempi-input/menu-approvato-esempio.md` e avvia.
+4. Al termine espandi gli step per controllare **Input** e **Output** di ciascuno.
+
+### B) Da una chat di Gemini Enterprise (il collegamento col chat agent)
+Un workflow con trigger manuale si può lanciare da una chat scrivendo `@` seguito dal nome del workflow. È il modo più vicino al passaggio "menù approvato → workflow":
+1. Concludi la conversazione con il **Responsabile di Brigata** (`../chatagent/`).
+2. Copia il menù finale e aggiungi numero ospiti, stagione, allergie e budget.
+3. In chat scrivi `@Workflow Operativo di Brigata` e incolla il blocco nel campo di input.
+
+> ⚠️ Probabilmente il workflow deve essere acceso (**Turn on**) per comparire con `@`. Questo non è esplicitato nella documentazione: verificalo nel tuo ambiente.
+
+### C) Schedule (opzionale, non adatto al flusso menù-per-menù)
+Il trigger **Schedule** esegue il workflow a orari fissi, ma **non ha campi di input**: non può ricevere un menù incollato. Va bene solo se il menù viene letto da una fonte fissa (es. un file Drive, con relativo connettore) e se i prompt dei nodi sono scritti di conseguenza. Per la demo usa il trigger Manuale.
+
+---
+
+## 5. Cosa deve produrre il workflow
+
+1. 📦 Tabella Economato e Lista della Spesa (pesi netti, scarti, pesi lordi)
+2. ⚠️ Matrice allergeni e Piatti Sentinella
+3. 💶 Food Cost, preventivo e semaforo budget (con verifica esplicita delle condizioni)
+4. ⏱️ Cronoprogramma `T-24h` / `T-4h` / Servizio al Pass per partita
+5. ✉️ Dossier operativo in 4 sezioni + **bozza** email di briefing creata in Outlook (non inviata)
+
+---
+
+## 6. Problemi frequenti
+
+| Sintomo | Causa probabile | Soluzione |
+|---|---|---|
+| Lo step si ferma con **"Human input required"** e chiede il menù | Il menù non è arrivato nel prompt dello step | Inserisci `<<MENU_APPROVATO>>` come variabile vera nelle istruzioni e verifica l'**Input** dello step |
+| La tab Test mostra solo "Start a test run" senza campi | Il trigger è ancora **Schedule** | Cambialo in **Manual trigger** e aggiungi `Menu_approvato` |
+| Uno step a metà catena chiede dati già calcolati | Manca la variabile dell'output dello step precedente | Aggiungi `<<OUTPUT_STEP_n>>` nel blocco DATI IN INGRESSO |
+| L'email di briefing contiene posti a sedere, colori o dettagli mai forniti | Il modello ha inventato | Le regole anti-invenzione sono già nei prompt: controlla che siano state incollate |
+| Lo Step 5 si ferma e chiede un'approvazione prima di creare la bozza | Revisione umana prevista per le azioni di scrittura sui connettori | Approva la creazione della bozza (non invia nulla) |
+| Lo Step 5 non crea la bozza | Connettore Outlook non abilitato sul nodo o data store Outlook non configurato dall'amministratore | Controlla il connettore sul nodo e chiedi all'admin di verificare il data store Outlook e i permessi di scrittura sulla posta |
+| Il semaforo risulta verde ma il food cost % è sopra il target | Regola del verde non rispettata | Usa il nuovo Step 3 e il nuovo `regole-food-cost-e-margini.md` |
+
+---
+
+## 7. Struttura della cartella
+
+```
+workflow/
+├── README.md                                  <- sei qui
+├── 01-analisi-fabbisogni/README.md            <- Step 1 (Economo)
+├── 02-controllo-allergeni-e-mercato/README.md <- Step 2 (Qualità & Allergeni)
+├── 03-food-cost-e-preventivo/README.md        <- Step 3 (Food Cost)
+├── 04-piano-mise-en-place/README.md           <- Step 4 (Sous-Chef)
+├── 05-briefing-e-notifica/README.md           <- Step 5 (Dossier & Briefing)
+├── knowledge/
+│   ├── listino-fornitori-e-rese.md            <- invariato
+│   ├── regole-food-cost-e-margini.md          <- AGGIORNATO (regola +10% e semaforo verde)
+│   └── protocollo-servizio-e-tempi.md         <- AGGIORNATO (tempi di cottura e regole anti-invenzione)
+└── esempi-input/menu-approvato-esempio.md     <- AGGIORNATO (formato per il campo Menu_approvato)
+```
