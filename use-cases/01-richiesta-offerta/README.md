@@ -6,13 +6,13 @@
 
 ## 📁 Kit dati (`kit-dati/`)
 
-Tutti i file fittizi pronti da caricare in **Knowledge** o usare come prompt di test si trovano nella sottocartella [`./kit-dati/`](./kit-dati/):
+Tutti i file fittizi pronti da usare nel workshop si trovano nella sottocartella [`./kit-dati/`](./kit-dati/):
 
 | File | Uso | Descrizione |
 |---|---|---|
-| [`scheda-capacita-macchine.md`](./kit-dati/scheda-capacita-macchine.md) | **Knowledge** (Gradino 1 e Sub-agent Pre-qualifica) | Volume massimo (`4000 × 2000 × 1500 mm`), materiali supportati, tolleranze, tempi indicativi, esclusioni |
-| [`datasheet-materiali.md`](./kit-dati/datasheet-materiali.md) | **Knowledge** (Sub-agent Materiali) | 3 materiali compositi fittizi (`CaraComp-GF30`, `CaraCarb-CF40`, `CaraBio-LF25`) con proprietà e applicazioni |
-| [`case-study.md`](./kit-dati/case-study.md) | **Knowledge** (Sub-agent Casi applicativi) | 4 referenze fittizie nei settori nautico, aerospazio, architettura e automotive |
+| [`scheda-capacita-macchine.md`](./kit-dati/scheda-capacita-macchine.md) | **Knowledge** (Gradino 1) / **Bucket dati** (Sub-agent Pre-qualifica) | Volume massimo (`4000 × 2000 × 1500 mm`), materiali supportati, tolleranze, tempi indicativi, esclusioni |
+| [`datasheet-materiali.md`](./kit-dati/datasheet-materiali.md) | **Bucket dati** (Sub-agent Materiali) | 3 materiali compositi fittizi (`CaraComp-GF30`, `CaraCarb-CF40`, `CaraBio-LF25`) con proprietà e applicazioni |
+| [`case-study.md`](./kit-dati/case-study.md) | **Bucket dati** (Sub-agent Casi applicativi) | 4 referenze fittizie nei settori nautico, aerospazio, architettura e automotive |
 | [`email-01-completa.txt`](./kit-dati/email-01-completa.txt) | **Prompt di test 1** | Email con tutti i requisiti, settore nautico, dentro i limiti dimensionali (`3200 × 1600 × 900 mm`) |
 | [`email-02-incompleta.txt`](./kit-dati/email-02-incompleta.txt) | **Prompt di test 2** | Email generica priva di dimensioni, quantità e tempistiche |
 | [`email-03-fuori-capacita.txt`](./kit-dati/email-03-fuori-capacita.txt) | **Prompt di test 3 (Caso limite)** | Email con lunghezza espressa in metri nel testo (`4,6 metri` = `4600 mm` > `4000 mm` max) |
@@ -82,17 +82,17 @@ CASI LIMITE
 
 ```mermaid
 flowchart TD
-    R["🎯 Desk pre-vendita (Root Agent)\nNessuna Knowledge"] --> S1["🔍 Pre-qualifica\n📚 scheda-capacita-macchine.md"]
-    R --> S2["🧪 Materiali\n📚 datasheet-materiali.md"]
-    R --> S3["📂 Casi applicativi\n📚 case-study.md"]
-    R --> S4["✍️ Redattore\nNessuna Knowledge"]
+    R["🎯 Desk pre-vendita (Root Agent)\nNessuna sorgente dati"] --> S1["🔍 Pre-qualifica\n☁️ Bucket: scheda-capacita-macchine.md"]
+    R --> S2["🧪 Materiali\n☁️ Bucket: datasheet-materiali.md"]
+    R --> S3["📂 Casi applicativi\n☁️ Bucket: case-study.md"]
+    R --> S4["✍️ Redattore\nNessuna sorgente dati"]
 ```
 
 ---
 
 ### 1. Agente Principale (Root)
 
-- **Knowledge:** Nessuna
+- **Sorgente dati:** Nessuna
 
 #### Campo: `Name`
 ```text
@@ -128,7 +128,7 @@ REGOLE
 
 ### 2. Sub-agent 1: `Pre-qualifica`
 
-- **Knowledge:** [`kit-dati/scheda-capacita-macchine.md`](./kit-dati/scheda-capacita-macchine.md)
+- **Sorgente dati:** punta al bucket dove sono ospitati i dati ([`kit-dati/scheda-capacita-macchine.md`](./kit-dati/scheda-capacita-macchine.md))
 
 #### Campo: `Name`
 ```text
@@ -147,7 +147,7 @@ Usa le stesse istruzioni del **Gradino 1**.
 
 ### 3. Sub-agent 2: `Materiali`
 
-- **Knowledge:** [`kit-dati/datasheet-materiali.md`](./kit-dati/datasheet-materiali.md)
+- **Sorgente dati:** punta al bucket dove sono ospitati i dati ([`kit-dati/datasheet-materiali.md`](./kit-dati/datasheet-materiali.md))
 
 #### Campo: `Name`
 ```text
@@ -171,7 +171,7 @@ INPUT
 I requisiti del pezzo (settore, applicazione, vincoli termici o meccanici) passati dal coordinatore.
 
 PROCEDURA
-1. Consulta esclusivamente il file datasheet-materiali nella tua conoscenza.
+1. Consulta esclusivamente il file datasheet-materiali nel bucket.
 2. Individua il materiale o i materiali compatibili con il settore e i requisiti richiesti.
 3. Per ogni materiale suggerito, riporta nome commerciale, proprietà chiave che lo rende adatto e limiti di utilizzo.
 
@@ -193,7 +193,7 @@ CASI LIMITE
 
 ### 4. Sub-agent 3: `Casi applicativi`
 
-- **Knowledge:** [`kit-dati/case-study.md`](./kit-dati/case-study.md)
+- **Sorgente dati:** punta al bucket dove sono ospitati i dati ([`kit-dati/case-study.md`](./kit-dati/case-study.md))
 
 #### Campo: `Name`
 ```text
@@ -237,7 +237,7 @@ CASI LIMITE
 
 ### 5. Sub-agent 4: `Redattore`
 
-- **Knowledge:** Nessuna
+- **Sorgente dati:** Nessuna
 
 #### Campo: `Name`
 ```text

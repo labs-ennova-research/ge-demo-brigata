@@ -6,13 +6,13 @@
 
 ## 📁 Kit dati (`kit-dati/`)
 
-Tutti i file fittizi pronti da caricare in **Knowledge** si trovano nella sottocartella [`./kit-dati/`](./kit-dati/):
+Tutti i file fittizi pronti da usare nel workshop si trovano nella sottocartella [`./kit-dati/`](./kit-dati/):
 
 | File | Uso | Descrizione |
 |---|---|---|
-| [`manuale-troubleshooting.md`](./kit-dati/manuale-troubleshooting.md) | **Knowledge** (Gradino 1 e Sub-agent Manuale) | Tabella allarmi (`E101`–`E110`) e sintomi senza codice, cause probabili, procedure passo-passo e regole di escalation. **Il codice `E199` non è presente (caso limite)** |
-| [`storico-ticket.csv`](./kit-dati/storico-ticket.csv) | **Knowledge** (Sub-agent Storico ticket) | 20 ticket storici con matricola macchina, codice allarme, descrizione, soluzione e ore di risoluzione (inclusi 3 ticket ripetuti su `E104` per la matricola `M-0042`) |
-| [`modello-scheda-intervento.md`](./kit-dati/modello-scheda-intervento.md) | **Knowledge** (Sub-agent Escalation) | Template ufficiale della scheda intervento con i campi obbligatori per il tecnico |
+| [`manuale-troubleshooting.md`](./kit-dati/manuale-troubleshooting.md) | **Knowledge** (Gradino 1) / **Bucket dati** (Sub-agent Manuale) | Tabella allarmi (`E101`–`E110`) e sintomi senza codice, cause probabili, procedure passo-passo e regole di escalation. **Il codice `E199` non è presente (caso limite)** |
+| [`storico-ticket.md`](./kit-dati/storico-ticket.md) | **Bucket dati** (Sub-agent Storico ticket) | 20 ticket storici in tabella con matricola macchina, codice allarme, descrizione, soluzione e ore di risoluzione (inclusi 3 ticket ripetuti su `E104` per la matricola `M-0042`) |
+| [`modello-scheda-intervento.md`](./kit-dati/modello-scheda-intervento.md) | **Bucket dati** (Sub-agent Escalation) | Template ufficiale della scheda intervento con i campi obbligatori per il tecnico |
 
 ---
 
@@ -74,16 +74,16 @@ CASI LIMITE
 
 ```mermaid
 flowchart TD
-    R["🎯 Triage assistenza (Root Agent)\nNessuna Knowledge"] --> S1["📖 Manuale\n📚 manuale-troubleshooting.md"]
-    R --> S2["🗂️ Storico ticket\n📚 storico-ticket.csv"]
-    R --> S3["🚨 Escalation\n📚 modello-scheda-intervento.md"]
+    R["🎯 Triage assistenza (Root Agent)\nNessuna sorgente dati"] --> S1["📖 Manuale\n☁️ Bucket: manuale-troubleshooting.md"]
+    R --> S2["🗂️ Storico ticket\n☁️ Bucket: storico-ticket.md"]
+    R --> S3["🚨 Escalation\n☁️ Bucket: modello-scheda-intervento.md"]
 ```
 
 ---
 
 ### 1. Agente Principale (Root)
 
-- **Knowledge:** Nessuna
+- **Sorgente dati:** Nessuna
 
 #### Campo: `Name`
 ```text
@@ -120,7 +120,7 @@ REGOLE
 
 ### 2. Sub-agent 1: `Manuale`
 
-- **Knowledge:** [`kit-dati/manuale-troubleshooting.md`](./kit-dati/manuale-troubleshooting.md)
+- **Sorgente dati:** punta al bucket dove sono ospitati i dati ([`kit-dati/manuale-troubleshooting.md`](./kit-dati/manuale-troubleshooting.md))
 
 #### Campo: `Name`
 ```text
@@ -139,7 +139,7 @@ Usa le stesse istruzioni del **Gradino 1**.
 
 ### 3. Sub-agent 2: `Storico ticket`
 
-- **Knowledge:** [`kit-dati/storico-ticket.csv`](./kit-dati/storico-ticket.csv)
+- **Sorgente dati:** punta al bucket dove sono ospitati i dati ([`kit-dati/storico-ticket.md`](./kit-dati/storico-ticket.md))
 
 #### Campo: `Name`
 ```text
@@ -163,7 +163,7 @@ INPUT
 Codice allarme, descrizione del sintomo ed eventuale matricola macchina.
 
 PROCEDURA
-1. Cerca nel file storico-ticket.csv i ticket con lo stesso codice allarme o una descrizione simile.
+1. Cerca nel file storico-ticket.md i ticket con lo stesso codice allarme o una descrizione simile.
 2. Se è indicata una matricola macchina, conta quante volte il problema si è verificato su quella specifica matricola e mettilo in evidenza.
 3. Seleziona al massimo 3 ticket più pertinenti.
 
@@ -172,7 +172,7 @@ FORMATO DELL'OUTPUT
 - Elenco ticket pertinenti (massimo 3) con: ID Ticket | Data | Matricola | Soluzione adottata | Tempo di risoluzione (ore).
 
 REGOLE
-- Cerca solo nel file storico-ticket.csv. Non inventare precedenti.
+- Cerca solo nel file storico-ticket.md. Non inventare precedenti.
 - Restituisci al massimo 3 ticket con id, data, soluzione e tempo di risoluzione.
 
 CASI LIMITE
@@ -183,7 +183,7 @@ CASI LIMITE
 
 ### 4. Sub-agent 3: `Escalation`
 
-- **Knowledge:** [`kit-dati/modello-scheda-intervento.md`](./kit-dati/modello-scheda-intervento.md)
+- **Sorgente dati:** punta al bucket dove sono ospitati i dati ([`kit-dati/modello-scheda-intervento.md`](./kit-dati/modello-scheda-intervento.md))
 
 #### Campo: `Name`
 ```text

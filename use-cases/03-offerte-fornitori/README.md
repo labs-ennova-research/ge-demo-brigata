@@ -6,14 +6,14 @@
 
 ## 📁 Kit dati (`kit-dati/`)
 
-Tutti i file fittizi pronti da caricare in **Knowledge** o usare come test si trovano nella sottocartella [`./kit-dati/`](./kit-dati/):
+Tutti i file fittizi pronti da usare nel workshop si trovano nella sottocartella [`./kit-dati/`](./kit-dati/):
 
 | File | Uso | Descrizione |
 |---|---|---|
-| [`offerta-fornitore-A.md`](./kit-dati/offerta-fornitore-A.md) | **Knowledge / Input** | Offerta completa (*PoliGranuli S.r.l.*): prezzo `4,50 €/kg`, 5.000 kg, consegna 4 settimane, pagamento 60 gg DFFM, validità 60 giorni, garanzia 12 mesi |
-| [`offerta-fornitore-B.md`](./kit-dati/offerta-fornitore-B.md) | **Knowledge / Input** | Offerta completa (*ResinTech Europe GmbH*): prezzo più alto (`5,10 €/kg`), tempi più brevi (2 settimane), pagamento 30 gg data fattura, validità 30 giorni, garanzia 24 mesi |
-| [`offerta-fornitore-C.md`](./kit-dati/offerta-fornitore-C.md) | **Knowledge / Input (Caso limite)** | Offerta (*EcoCompound Nord S.p.A.*): prezzo basso (`4,20 €/kg`), **senza condizioni di pagamento** e con la validità (`15 giorni`) nascosta nelle note legali a piè di pagina |
-| [`criteri-valutazione-acquisti.md`](./kit-dati/criteri-valutazione-acquisti.md) | **Knowledge** (Sub-agent Analista) | Criteri di valutazione con pesi: Prezzo `40%`, Tempi di consegna `30%`, Condizioni di pagamento `20%`, Garanzia `10%` e scale di punteggio `1–5` |
+| [`offerta-fornitore-A.md`](./kit-dati/offerta-fornitore-A.md) | **Knowledge / Input** (Gradino 1) / **Bucket dati** (Sub-agent Estrattore) | Offerta completa (*PoliGranuli S.r.l.*): prezzo `4,50 €/kg`, 5.000 kg, consegna 4 settimane, pagamento 60 gg DFFM, validità 60 giorni, garanzia 12 mesi |
+| [`offerta-fornitore-B.md`](./kit-dati/offerta-fornitore-B.md) | **Knowledge / Input** (Gradino 1) / **Bucket dati** (Sub-agent Estrattore) | Offerta completa (*ResinTech Europe GmbH*): prezzo più alto (`5,10 €/kg`), tempi più brevi (2 settimane), pagamento 30 gg data fattura, validità 30 giorni, garanzia 24 mesi |
+| [`offerta-fornitore-C.md`](./kit-dati/offerta-fornitore-C.md) | **Knowledge / Input** (Gradino 1) / **Bucket dati** (Sub-agent Estrattore, **Caso limite**) | Offerta (*EcoCompound Nord S.p.A.*): prezzo basso (`4,20 €/kg`), **senza condizioni di pagamento** e con la validità (`15 giorni`) nascosta nelle note legali a piè di pagina |
+| [`criteri-valutazione-acquisti.md`](./kit-dati/criteri-valutazione-acquisti.md) | **Bucket dati** (Sub-agent Analista) | Criteri di valutazione con pesi: Prezzo `40%`, Tempi di consegna `30%`, Condizioni di pagamento `20%`, Garanzia `10%` e scale di punteggio `1–5` |
 
 ---
 
@@ -66,16 +66,16 @@ REGOLE
 
 ```mermaid
 flowchart TD
-    R["🎯 Analisi offerte (Root Agent)\nNessuna Knowledge"] --> S1["📄 Estrattore\n📚 offerte A, B, C"]
-    R --> S2["📊 Analista\n📚 criteri-valutazione-acquisti.md"]
-    R --> S3["🤝 Negoziatore\nNessuna Knowledge"]
+    R["🎯 Analisi offerte (Root Agent)\nNessuna sorgente dati"] --> S1["📄 Estrattore\n☁️ Bucket: offerte A, B, C"]
+    R --> S2["📊 Analista\n☁️ Bucket: criteri-valutazione-acquisti.md"]
+    R --> S3["🤝 Negoziatore\nNessuna sorgente dati"]
 ```
 
 ---
 
 ### 1. Agente Principale (Root)
 
-- **Knowledge:** Nessuna
+- **Sorgente dati:** Nessuna
 
 #### Campo: `Name`
 ```text
@@ -110,7 +110,7 @@ REGOLE
 
 ### 2. Sub-agent 1: `Estrattore`
 
-- **Knowledge:** [`offerta-fornitore-A.md`](./kit-dati/offerta-fornitore-A.md), [`offerta-fornitore-B.md`](./kit-dati/offerta-fornitore-B.md), [`offerta-fornitore-C.md`](./kit-dati/offerta-fornitore-C.md)
+- **Sorgente dati:** punta al bucket dove sono ospitati i dati ([`offerta-fornitore-A.md`](./kit-dati/offerta-fornitore-A.md), [`offerta-fornitore-B.md`](./kit-dati/offerta-fornitore-B.md), [`offerta-fornitore-C.md`](./kit-dati/offerta-fornitore-C.md))
 
 #### Campo: `Name`
 ```text
@@ -129,7 +129,7 @@ Usa le stesse istruzioni del **Gradino 1**.
 
 ### 3. Sub-agent 2: `Analista`
 
-- **Knowledge:** [`kit-dati/criteri-valutazione-acquisti.md`](./kit-dati/criteri-valutazione-acquisti.md)
+- **Sorgente dati:** punta al bucket dove sono ospitati i dati ([`kit-dati/criteri-valutazione-acquisti.md`](./kit-dati/criteri-valutazione-acquisti.md))
 
 #### Campo: `Name`
 ```text
@@ -171,7 +171,7 @@ REGOLE
 
 ### 4. Sub-agent 3: `Negoziatore`
 
-- **Knowledge:** Nessuna
+- **Sorgente dati:** Nessuna
 
 #### Campo: `Name`
 ```text

@@ -6,13 +6,13 @@
 
 ## 📁 Kit dati (`kit-dati/`)
 
-Tutti i file fittizi pronti da caricare in **Knowledge** (o importare come Google Sheet) si trovano nella sottocartella [`./kit-dati/`](./kit-dati/):
+Tutti i file fittizi pronti da usare nel workshop si trovano nella sottocartella [`./kit-dati/`](./kit-dati/):
 
 | File | Uso | Descrizione |
 |---|---|---|
-| [`stato-commesse.csv`](./kit-dati/stato-commesse.csv) | **Knowledge / Google Sheet** (Gradini 1 e 2) | 15 commesse attive/consegnate. Include **commesse con data passata e stato `"in corso"`** (es. `C-2026-004` e `C-2026-009` rispetto a novembre 2026) e commesse con rischi di avanzamento o fornitori/ricambi nelle note (`C-2026-007`, `C-2026-011`, `C-2026-012`) |
-| [`soglie.md`](./kit-dati/soglie.md) | **Knowledge** (Sub-agent Analista ritardi e Analista rischi) | Regole ufficiali per classificare una commessa **IN RITARDO**, **A RISCHIO** o **REGOLARE** |
-| [`stato-commesse-settimana-tranquilla.csv`](./kit-dati/stato-commesse-settimana-tranquilla.csv) | **Knowledge per Test Gradino 3 (Caso limite)** | Copia dello Sheet con 15 commesse tutte consegnate o regolari (nessuna commessa in ritardo né a rischio) |
+| [`stato-commesse.md`](./kit-dati/stato-commesse.md) | **Knowledge** (Gradino 1) / **Bucket dati** (Sub-agent Gradino 2) | 15 commesse attive/consegnate in tabella. Include **commesse con data passata e stato `"in corso"`** (es. `C-2026-004` e `C-2026-009` rispetto a novembre 2026) e commesse con rischi di avanzamento o fornitori/ricambi nelle note (`C-2026-007`, `C-2026-011`, `C-2026-012`) |
+| [`soglie.md`](./kit-dati/soglie.md) | **Bucket dati** (Sub-agent Analista ritardi e Analista rischi) | Regole ufficiali per classificare una commessa **IN RITARDO**, **A RISCHIO** o **REGOLARE** |
+| [`stato-commesse-settimana-tranquilla.md`](./kit-dati/stato-commesse-settimana-tranquilla.md) | **Bucket dati per Test Gradino 3 (Caso limite)** | Tabella con 15 commesse tutte consegnate o regolari (nessuna commessa in ritardo né a rischio) |
 
 ---
 
@@ -20,7 +20,7 @@ Tutti i file fittizi pronti da caricare in **Knowledge** (o importare come Googl
 
 ### Configurazione in Agent Designer
 
-- **Knowledge da caricare:** [`kit-dati/stato-commesse.csv`](./kit-dati/stato-commesse.csv) *(oppure collega lo Sheet tramite connettore)*
+- **Knowledge da caricare:** [`kit-dati/stato-commesse.md`](./kit-dati/stato-commesse.md) *(oppure collega lo Sheet tramite connettore)*
 - **Connettori / Google Search:** Disabilitati
 
 #### Campo: `Name`
@@ -75,17 +75,17 @@ CASI LIMITE
 
 ```mermaid
 flowchart TD
-    R["🎯 Report commesse (Root Agent)\nNessuna Knowledge"] --> S1["🔍 Consultazione\n📚 stato-commesse.csv"]
-    R --> S2["⏰ Analista ritardi\n📚 stato-commesse.csv + soglie.md"]
-    R --> S3["⚠️ Analista rischi\n📚 stato-commesse.csv + soglie.md"]
-    R --> S4["📝 Redattore report\nNessuna Knowledge"]
+    R["🎯 Report commesse (Root Agent)\nNessuna sorgente dati"] --> S1["🔍 Consultazione\n☁️ Bucket: stato-commesse.md"]
+    R --> S2["⏰ Analista ritardi\n☁️ Bucket: stato-commesse.md + soglie.md"]
+    R --> S3["⚠️ Analista rischi\n☁️ Bucket: stato-commesse.md + soglie.md"]
+    R --> S4["📝 Redattore report\nNessuna sorgente dati"]
 ```
 
 ---
 
 ### 1. Agente Principale (Root)
 
-- **Knowledge:** Nessuna
+- **Sorgente dati:** Nessuna
 
 #### Campo: `Name`
 ```text
@@ -120,7 +120,7 @@ REGOLE
 
 ### 2. Sub-agent 1: `Consultazione`
 
-- **Knowledge:** [`kit-dati/stato-commesse.csv`](./kit-dati/stato-commesse.csv)
+- **Sorgente dati:** punta al bucket dove sono ospitati i dati ([`kit-dati/stato-commesse.md`](./kit-dati/stato-commesse.md))
 
 #### Campo: `Name`
 ```text
@@ -139,7 +139,7 @@ Usa le stesse istruzioni del **Gradino 1**.
 
 ### 3. Sub-agent 2: `Analista ritardi`
 
-- **Knowledge:** [`kit-dati/stato-commesse.csv`](./kit-dati/stato-commesse.csv), [`kit-dati/soglie.md`](./kit-dati/soglie.md)
+- **Sorgente dati:** punta al bucket dove sono ospitati i dati ([`kit-dati/stato-commesse.md`](./kit-dati/stato-commesse.md), [`kit-dati/soglie.md`](./kit-dati/soglie.md))
 
 #### Campo: `Name`
 ```text
@@ -180,7 +180,7 @@ REGOLE
 
 ### 4. Sub-agent 3: `Analista rischi`
 
-- **Knowledge:** [`kit-dati/stato-commesse.csv`](./kit-dati/stato-commesse.csv), [`kit-dati/soglie.md`](./kit-dati/soglie.md)
+- **Sorgente dati:** punta al bucket dove sono ospitati i dati ([`kit-dati/stato-commesse.md`](./kit-dati/stato-commesse.md), [`kit-dati/soglie.md`](./kit-dati/soglie.md))
 
 #### Campo: `Name`
 ```text
@@ -222,7 +222,7 @@ REGOLE
 
 ### 5. Sub-agent 4: `Redattore report`
 
-- **Knowledge:** Nessuna
+- **Sorgente dati:** Nessuna
 
 #### Campo: `Name`
 ```text
@@ -270,4 +270,4 @@ REGOLE
 | **3** | **Invio al Team** | `Azione Connettore` | Invio su Google Chat o Gmail *(oppure chiusura con output)* |
 
 ### 🧪 Test di chiusura
-- Sostituisci il file nella Knowledge con [`stato-commesse-settimana-tranquilla.csv`](./kit-dati/stato-commesse-settimana-tranquilla.csv) e avvia il workflow: verifica che il report dichiari esplicitamente che **non ci sono commesse in ritardo né a rischio**, senza inventare criticità.
+- Nel bucket dati usa [`stato-commesse-settimana-tranquilla.md`](./kit-dati/stato-commesse-settimana-tranquilla.md) e avvia il workflow: verifica che il report dichiari esplicitamente che **non ci sono commesse in ritardo né a rischio**, senza inventare criticità.

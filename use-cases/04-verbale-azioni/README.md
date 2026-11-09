@@ -6,13 +6,13 @@
 
 ## 📁 Kit dati (`kit-dati/`)
 
-Tutti i file fittizi pronti da caricare in **Knowledge** o usare come input di test si trovano nella sottocartella [`./kit-dati/`](./kit-dati/):
+Tutti i file fittizi pronti da usare nel workshop si trovano nella sottocartella [`./kit-dati/`](./kit-dati/):
 
 | File | Uso | Descrizione |
 |---|---|---|
 | [`trascrizione-riunione-1.txt`](./kit-dati/trascrizione-riunione-1.txt) | **Prompt di test 1** | Riunione di avanzamento (22 battute) con 3 decisioni e 4 azioni tutte dotate di owner esplicito e scadenza con data |
-| [`trascrizione-riunione-2.txt`](./kit-dati/trascrizione-riunione-2.txt) | **Prompt di test 2 (Caso limite)** | Riunione con 5 azioni: una **senza owner** (*"qualcuno dovrebbe sentire il fornitore"*), una assegnata a **Roberto Galli** (**non presente** in `partecipanti.csv`) e una con scadenza vaga (*"a breve"*) |
-| [`partecipanti.csv`](./kit-dati/partecipanti.csv) | **Knowledge** (Sub-agent Verificatore) | Anagrafica `nome, ruolo, email` dei partecipanti autorizzati al progetto |
+| [`trascrizione-riunione-2.txt`](./kit-dati/trascrizione-riunione-2.txt) | **Prompt di test 2 (Caso limite)** | Riunione con 5 azioni: una **senza owner** (*"qualcuno dovrebbe sentire il fornitore"*), una assegnata a **Roberto Galli** (**non presente** in `partecipanti.md`) e una con scadenza vaga (*"a breve"*) |
+| [`partecipanti.md`](./kit-dati/partecipanti.md) | **Bucket dati** (Sub-agent Verificatore) | Anagrafica in tabella (`nome, ruolo, email`) dei partecipanti autorizzati al progetto |
 
 ---
 
@@ -75,16 +75,16 @@ CASI LIMITE
 
 ```mermaid
 flowchart TD
-    R["🎯 Follow-up riunioni (Root Agent)\nNessuna Knowledge"] --> S1["📝 Estrattore\nNessuna Knowledge"]
-    R --> S2["✅ Verificatore\n📚 partecipanti.csv"]
-    R --> S3["✉️ Redattore\nNessuna Knowledge"]
+    R["🎯 Follow-up riunioni (Root Agent)\nNessuna sorgente dati"] --> S1["📝 Estrattore\nNessuna sorgente dati"]
+    R --> S2["✅ Verificatore\n☁️ Bucket: partecipanti.md"]
+    R --> S3["✉️ Redattore\nNessuna sorgente dati"]
 ```
 
 ---
 
 ### 1. Agente Principale (Root)
 
-- **Knowledge:** Nessuna
+- **Sorgente dati:** Nessuna
 
 #### Campo: `Name`
 ```text
@@ -120,7 +120,7 @@ REGOLE
 
 ### 2. Sub-agent 1: `Estrattore`
 
-- **Knowledge:** Nessuna
+- **Sorgente dati:** Nessuna
 
 #### Campo: `Name`
 ```text
@@ -139,7 +139,7 @@ Usa le stesse istruzioni del **Gradino 1**.
 
 ### 3. Sub-agent 2: `Verificatore`
 
-- **Knowledge:** [`kit-dati/partecipanti.csv`](./kit-dati/partecipanti.csv)
+- **Sorgente dati:** punta al bucket dove sono ospitati i dati ([`kit-dati/partecipanti.md`](./kit-dati/partecipanti.md))
 
 #### Campo: `Name`
 ```text
@@ -148,7 +148,7 @@ Verificatore
 
 #### Campo: `Description`
 ```text
-Incrocia gli owner delle azioni con il file partecipanti.csv per associare l'email e segnala owner non in elenco o scadenze prive di data.
+Incrocia gli owner delle azioni con il file partecipanti.md per associare l'email e segnala owner non in elenco o scadenze prive di data.
 ```
 
 #### Campo: `Instructions`
@@ -163,9 +163,9 @@ INPUT
 La tabella delle azioni estratte da Estrattore.
 
 PROCEDURA
-1. Per ogni azione controlla che l'Owner sia presente nel file partecipanti.csv e aggiungi la sua email.
+1. Per ogni azione controlla che l'Owner sia presente nel file partecipanti.md e aggiungi la sua email.
 2. Se l'Owner è "NON ASSEGNATO", mantieni "NON ASSEGNATO" e segna l'esito come DA CHIARIRE.
-3. Se l'Owner è una persona nominata ma non compare in partecipanti.csv, segna esplicitamente "OWNER NON IN ELENCO".
+3. Se l'Owner è una persona nominata ma non compare in partecipanti.md, segna esplicitamente "OWNER NON IN ELENCO".
 4. Se la scadenza non è una data di calendario precisa (es. "a breve"), segna esplicitamente "SCADENZA DA DEFINIRE".
 
 FORMATO DELL'OUTPUT
@@ -173,7 +173,7 @@ FORMATO DELL'OUTPUT
 - Tabella verificata con colonne: Azione | Owner | Email | Scadenza | Esito Verifica (OK / NON ASSEGNATO / OWNER NON IN ELENCO / SCADENZA DA DEFINIRE).
 
 REGOLE
-- Usa solo il file partecipanti.csv per verificare nomi ed email.
+- Usa solo il file partecipanti.md per verificare nomi ed email.
 - Non correggere i dati: segnala le anomalie.
 ```
 
@@ -181,7 +181,7 @@ REGOLE
 
 ### 4. Sub-agent 3: `Redattore`
 
-- **Knowledge:** Nessuna
+- **Sorgente dati:** Nessuna
 
 #### Campo: `Name`
 ```text

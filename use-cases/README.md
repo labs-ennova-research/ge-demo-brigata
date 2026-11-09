@@ -19,8 +19,8 @@ Tutti i gruppi partono dal gradino 1. Si sale al gradino successivo solo quando 
 ## 0. Struttura di questa cartella (`use-cases/`)
 
 Per facilitare il workshop e la preparazione, ogni caso ha una propria sottocartella con:
-- **`README.md`**: tutte le configurazioni pronte da copiare/incollare per **Gradino 1** (Chat Agent), **Gradino 2** (Root Agent + Sub-agent completi di Nome, Descrizione, Istruzioni e Knowledge) e **Gradino 3** (Workflow), oltre ai prompt di test.
-- **`kit-dati/`**: i file fittizi pronti all'uso (testi, CSV, schede tecniche, trascrizioni) già allineati con i casi limite richiesti dai test.
+- **`README.md`**: tutte le configurazioni pronte da copiare/incollare per **Gradino 1** (Chat Agent), **Gradino 2** (Root Agent + Sub-agent completi di Nome, Descrizione, Istruzioni e collegamento al bucket dati) e **Gradino 3** (Workflow), oltre ai prompt di test.
+- **`kit-dati/`**: i file fittizi pronti all'uso (testi, tabelle Markdown, schede tecniche, trascrizioni) già allineati con i casi limite richiesti dai test.
 
 | Caso | Cartella e Guida Agenti | Kit Dati |
 |---|---|---|
@@ -114,13 +114,13 @@ Agent Designer è lo strumento no-code di Gemini Enterprise per creare agenti si
 | Description | Una frase su cosa fa. Nel gradino 2 è importante: aiuta l'agente principale a capire a chi delegare |
 | Instructions | Le istruzioni complete (template al paragrafo 3.3). C'è anche *Help me write*, utile per rifinire, non per partire da zero |
 | Model | Lascia il modello predefinito, salvo indicazioni diverse dell'IT |
-| Data sources & tools | I connettori che l'agente può usare (Drive, Gmail, ecc.) |
-| Knowledge | *Add files*: i file del kit da caricare come conoscenza dell'agente |
+| Data sources & tools | I connettori e i bucket dati che l'agente o i sub-agent possono usare |
+| Knowledge | *Add files*: i file del kit da caricare per l'agente singolo (Gradino 1) |
 
-**Due modi per dare i dati all'agente:**
+**Come dare i dati agli agenti:**
 
-- **Caricare i file in Knowledge**. È più semplice e prevedibile: l'agente vede solo quei file. **È la scelta consigliata per il workshop.**
-- **Collegare la cartella Drive** come sorgente dati. È più realistico, ma l'agente può pescare anche altri documenti a cui l'utente ha accesso, e i risultati sono meno controllabili.
+- **Agente singolo (Gradino 1)**: si caricano i file in *Knowledge*. È semplice e immediato: l'agente vede solo quei file.
+- **Sub-agent (Gradino 2)**: per i sub-agent non si carica manualmente la *Knowledge*, ma si fanno puntare direttamente a un **bucket** dove sono ospitati i dati.
 
 ### 3.2 Workflow Builder (gradino 3)
 
@@ -197,7 +197,7 @@ Tre principi da far passare in aula:
 
 1. **Riapri lo stesso agente** del gradino 1, oppure duplicalo se l'interfaccia lo consente e vuoi tenere la versione precedente.
 2. Trasformalo in sub-agent: la soluzione più pulita è creare un nuovo agente principale ("root") e riportare le istruzioni del gradino 1 in un sub-agent con lo stesso compito. In alternativa, si aggiungono sub-agent all'agente esistente e si riscrivono le sue istruzioni da "esecutore" a "coordinatore". Scegli una delle due modalità e usala per tutti i gruppi.
-3. Aggiungi gli altri sub-agent con *Add subagent*, ognuno con nome, descrizione e istruzioni proprie. Carica in ciascuno solo i file che gli servono.
+3. Aggiungi gli altri sub-agent con *Add subagent*, ognuno con nome, descrizione e istruzioni proprie, facendoli puntare al bucket dove sono ospitati i dati.
 4. Scrivi le istruzioni del root agent: **quando** chiamare ciascun sub-agent e **come** combinare le risposte.
 5. Prova in *Preview* con i prompt di prova, poi chiama il facilitatore.
 
@@ -222,18 +222,18 @@ Tre principi da far passare in aula:
 
 | File | Contenuto da preparare |
 |---|---|
-| `scheda-capacita-macchine.pdf` | Una pagina con: volume massimo di stampa (es. 4000 × 2000 × 1500 mm, valore fittizio), materiali supportati (5–6 voci), tolleranze tipiche, tempi indicativi di produzione per fascia dimensionale, cosa *non* si fa (es. pezzi trasparenti, certificazioni alimentari) |
+| `scheda-capacita-macchine.md` | Una pagina con: volume massimo di stampa (es. 4000 × 2000 × 1500 mm, valore fittizio), materiali supportati (5–6 voci), tolleranze tipiche, tempi indicativi di produzione per fascia dimensionale, cosa *non* si fa (es. pezzi trasparenti, certificazioni alimentari) |
 | `email-01-completa.txt` | Richiesta con tutti i dati: settore nautico, stampo per scafo, dimensioni dentro il volume, materiale indicato, quantità 1, consegna in 8 settimane |
 | `email-02-incompleta.txt` | Richiesta generica: "ci serve un preventivo per un componente in composito, potete aiutarci?", senza dimensioni né quantità |
 | `email-03-fuori-capacita.txt` | Pezzo con una dimensione oltre il volume massimo di stampa, scritta in modo poco evidente (es. in metri, dentro un paragrafo) |
-| `datasheet-materiali.pdf` | 3 materiali fittizi con proprietà principali e applicazioni tipiche |
-| `case-study.pdf` | 4 casi applicativi fittizi, uno per settore: nautico, aerospazio, architettura, automotive |
+| `datasheet-materiali.md` | 3 materiali fittizi con proprietà principali e applicazioni tipiche |
+| `case-study.md` | 4 casi applicativi fittizi, uno per settore: nautico, aerospazio, architettura, automotive |
 
 Il caso limite è l'email 3: la dimensione fuori capacità deve essere "nascosta" abbastanza da sfuggire a un agente che non confronta davvero i valori.
 
 ### 5.2 Gradino 1 · Agente "Pre-qualifica RFQ"
 
-**Knowledge:** `scheda-capacita-macchine.pdf`
+**Knowledge:** `scheda-capacita-macchine.md`
 
 **Description:** Pre-qualifica le richieste d'offerta dei clienti confrontandole con la scheda capacità macchine.
 
@@ -283,12 +283,12 @@ CASI LIMITE
 
 ### 5.3 Gradino 2 · Root agent "Desk pre-vendita"
 
-| Agente | Ruolo | Knowledge |
+| Agente | Ruolo | Sorgente dati |
 |---|---|---|
 | **Desk pre-vendita** (root) | Capisce la richiesta e la smista | Nessuna |
-| Pre-qualifica | L'agente del gradino 1 | `scheda-capacita-macchine.pdf` |
-| Materiali | Risponde su proprietà e scelta dei materiali | `datasheet-materiali.pdf` |
-| Casi applicativi | Trova referenze pertinenti per settore | `case-study.pdf` |
+| Pre-qualifica | L'agente del gradino 1 | Bucket dati (`scheda-capacita-macchine.md`) |
+| Materiali | Risponde su proprietà e scelta dei materiali | Bucket dati (`datasheet-materiali.md`) |
+| Casi applicativi | Trova referenze pertinenti per settore | Bucket dati (`case-study.md`) |
 | Redattore | Scrive la risposta al cliente a partire dagli output degli altri | Nessuna |
 
 **Instructions del root:**
@@ -346,15 +346,15 @@ REGOLE
 
 | File | Contenuto da preparare |
 |---|---|
-| `manuale-troubleshooting.pdf` | 3–4 pagine con una tabella allarmi: codice (es. E101–E110, fittizi), descrizione, cause probabili, procedura di verifica passo passo, quando chiamare il tecnico. Il codice **E199** non deve comparire |
-| `storico-ticket.csv` | 20 righe con colonne `id_ticket, data, matricola_macchina, codice_allarme, descrizione_cliente, soluzione, tempo_risoluzione_ore`. Almeno 3 ticket sullo stesso allarme (es. E104) |
-| `modello-scheda-intervento.docx` | Campi: cliente, matricola, codice allarme, descrizione, verifiche già fatte, priorità, ricambi ipotizzati |
+| `manuale-troubleshooting.md` | 3–4 pagine con una tabella allarmi: codice (es. E101–E110, fittizi), descrizione, cause probabili, procedura di verifica passo passo, quando chiamare il tecnico. Il codice **E199** non deve comparire |
+| `storico-ticket.md` | Tabella di 20 righe con colonne `id_ticket, data, matricola_macchina, codice_allarme, descrizione_cliente, soluzione, tempo_risoluzione_ore`. Almeno 3 ticket sullo stesso allarme (es. E104) |
+| `modello-scheda-intervento.md` | Campi: cliente, matricola, codice allarme, descrizione, verifiche già fatte, priorità, ricambi ipotizzati |
 
 I casi limite sono due: l'allarme E199, assente dal manuale, e una segnalazione senza matricola, che serve al gradino 3.
 
 ### 6.2 Gradino 1 · Agente "Supporto manuale"
 
-**Knowledge:** `manuale-troubleshooting.pdf`
+**Knowledge:** `manuale-troubleshooting.md`
 
 **Instructions:**
 
@@ -395,12 +395,12 @@ CASI LIMITE
 
 ### 6.3 Gradino 2 · Root agent "Triage assistenza"
 
-| Agente | Ruolo | Knowledge |
+| Agente | Ruolo | Sorgente dati |
 |---|---|---|
 | **Triage assistenza** (root) | Classifica la segnalazione e coordina | Nessuna |
-| Manuale | L'agente del gradino 1 | `manuale-troubleshooting.pdf` |
-| Storico ticket | Trova i ticket simili e come sono stati risolti | `storico-ticket.csv` |
-| Escalation | Compila la scheda intervento per il tecnico | `modello-scheda-intervento.docx` |
+| Manuale | L'agente del gradino 1 | Bucket dati (`manuale-troubleshooting.md`) |
+| Storico ticket | Trova i ticket simili e come sono stati risolti | Bucket dati (`storico-ticket.md`) |
+| Escalation | Compila la scheda intervento per il tecnico | Bucket dati (`modello-scheda-intervento.md`) |
 
 **Instructions del root:**
 
@@ -426,7 +426,7 @@ REGOLE
 
 **Sub-agent:**
 
-- **Storico ticket:** "Cerca nel CSV i ticket con lo stesso codice allarme o una descrizione simile. Restituisci al massimo 3 ticket con id, data, soluzione e tempo di risoluzione. Se non ce ne sono, dillo."
+- **Storico ticket:** "Cerca in `storico-ticket.md` i ticket con lo stesso codice allarme o una descrizione simile. Restituisci al massimo 3 ticket con id, data, soluzione e tempo di risoluzione. Se non ce ne sono, dillo."
 - **Escalation:** "Compila la scheda intervento con i soli dati ricevuti. Lascia 'da completare' nei campi senza dati. Non assegnare ricambi se non sono indicati dal manuale o dallo storico."
 
 **Test per salire:** per "E104 sulla matricola M-0042" la risposta unisce la procedura del manuale e almeno un ticket simile dallo storico.
@@ -453,10 +453,10 @@ REGOLE
 
 | File | Contenuto da preparare |
 |---|---|
-| `offerta-fornitore-A.pdf` | Offerta completa: prezzo unitario, quantità, tempi di consegna, condizioni di pagamento, validità, garanzia |
-| `offerta-fornitore-B.pdf` | Offerta completa ma con prezzo più alto e tempi più brevi |
-| `offerta-fornitore-C.pdf` | Offerta **senza condizioni di pagamento** e con la validità scritta in un punto poco evidente |
-| `criteri-valutazione-acquisti.pdf` | I criteri con un peso: prezzo 40%, tempi 30%, condizioni di pagamento 20%, garanzia 10% (valori di esempio) |
+| `offerta-fornitore-A.md` | Offerta completa: prezzo unitario, quantità, tempi di consegna, condizioni di pagamento, validità, garanzia |
+| `offerta-fornitore-B.md` | Offerta completa ma con prezzo più alto e tempi più brevi |
+| `offerta-fornitore-C.md` | Offerta **senza condizioni di pagamento** e con la validità scritta in un punto poco evidente |
+| `criteri-valutazione-acquisti.md` | I criteri con un peso: prezzo 40%, tempi 30%, condizioni di pagamento 20%, garanzia 10% (valori di esempio) |
 
 Il caso limite è l'offerta C.
 
@@ -488,11 +488,11 @@ REGOLE
 
 ### 7.3 Gradino 2 · Root agent "Analisi offerte"
 
-| Agente | Ruolo | Knowledge |
+| Agente | Ruolo | Sorgente dati |
 |---|---|---|
 | **Analisi offerte** (root) | Coordina estrazione, confronto e negoziazione | Nessuna |
-| Estrattore | L'agente del gradino 1 | Le tre offerte |
-| Analista | Costruisce la matrice di confronto pesata | `criteri-valutazione-acquisti.pdf` |
+| Estrattore | L'agente del gradino 1 | Bucket dati (le tre offerte) |
+| Analista | Costruisce la matrice di confronto pesata | Bucket dati (`criteri-valutazione-acquisti.md`) |
 | Negoziatore | Individua i punti da rinegoziare | Nessuna |
 
 **Instructions del root:**
@@ -543,7 +543,7 @@ REGOLE
 |---|---|
 | `trascrizione-riunione-1.txt` | Riunione di avanzamento di 20–30 battute, con 3 decisioni e 4 azioni tutte con owner e scadenza |
 | `trascrizione-riunione-2.txt` | Riunione con 5 azioni: una **senza owner** ("qualcuno dovrebbe sentire il fornitore"), una con owner **non presente** tra i partecipanti, una con scadenza vaga ("a breve") |
-| `partecipanti.csv` | `nome, ruolo, email` dei partecipanti, con nomi ed email fittizi |
+| `partecipanti.md` | Tabella con `nome, ruolo, email` dei partecipanti, con nomi ed email fittizi |
 
 ### 8.2 Gradino 1 · Agente "Estrattore verbale"
 
@@ -568,11 +568,11 @@ REGOLE
 
 ### 8.3 Gradino 2 · Root agent "Follow-up riunioni"
 
-| Agente | Ruolo | Knowledge |
+| Agente | Ruolo | Sorgente dati |
 |---|---|---|
 | **Follow-up riunioni** (root) | Coordina | Nessuna |
 | Estrattore | L'agente del gradino 1 | Nessuna |
-| Verificatore | Incrocia owner e partecipanti, controlla le scadenze | `partecipanti.csv` |
+| Verificatore | Incrocia owner e partecipanti, controlla le scadenze | Bucket dati (`partecipanti.md`) |
 | Redattore | Scrive il follow-up | Nessuna |
 
 **Sub-agent:**
@@ -605,11 +605,11 @@ REGOLE
 
 | File | Contenuto da preparare |
 |---|---|
-| `stato-commesse` (Google Sheet) | 15 righe, colonne: `codice_commessa, cliente, macchina, fase, data_consegna_prevista, stato, avanzamento_%, note`. Fasi possibili: progettazione, approvvigionamento, assemblaggio, collaudo, spedizione. Includi **una commessa con data già passata e stato "in corso"**, 2–3 commesse con note che indicano un rischio (es. "ritardo fornitore componenti") |
-| `soglie.pdf` | Regole di esempio: ritardo se la data è passata e lo stato non è "consegnata"; rischio se mancano meno di 15 giorni e l'avanzamento è sotto il 70%, o se le note citano fornitori o ricambi |
-| `stato-commesse-settimana-tranquilla` (copia dello Sheet) | Stesse colonne, nessuna commessa in ritardo né a rischio. Serve al test del gradino 3 |
+| `stato-commesse.md` | Tabella di 15 righe, colonne: `codice_commessa, cliente, macchina, fase, data_consegna_prevista, stato, avanzamento_%, note`. Fasi possibili: progettazione, approvvigionamento, assemblaggio, collaudo, spedizione. Includi **una commessa con data già passata e stato "in corso"**, 2–3 commesse con note che indicano un rischio (es. "ritardo fornitore componenti") |
+| `soglie.md` | Regole di esempio: ritardo se la data è passata e lo stato non è "consegnata"; rischio se mancano meno di 15 giorni e l'avanzamento è sotto il 70%, o se le note citano fornitori o ricambi |
+| `stato-commesse-settimana-tranquilla.md` | Tabella con le stesse colonne, nessuna commessa in ritardo né a rischio. Serve al test del gradino 3 |
 
-Nota: lo Sheet va condiviso e collegato tramite connettore, oppure esportato in CSV e caricato in Knowledge. In aula il CSV è più prevedibile; lo Sheet collegato è più realistico per il gradino 3.
+Nota: al Gradino 1 il file `stato-commesse.md` può essere caricato in Knowledge, mentre al Gradino 2 i sub-agent puntano al bucket dove sono ospitati i dati.
 
 ### 9.2 Gradino 1 · Agente "Consultazione commesse"
 
@@ -632,12 +632,12 @@ REGOLE
 
 ### 9.3 Gradino 2 · Root agent "Report commesse"
 
-| Agente | Ruolo | Knowledge |
+| Agente | Ruolo | Sorgente dati |
 |---|---|---|
 | **Report commesse** (root) | Coordina e decide il formato | Nessuna |
-| Consultazione | L'agente del gradino 1 | Foglio commesse |
-| Analista ritardi | Applica la regola di ritardo | Foglio commesse, `soglie.pdf` |
-| Analista rischi | Applica le regole di rischio | Foglio commesse, `soglie.pdf` |
+| Consultazione | L'agente del gradino 1 | Bucket dati (`stato-commesse.md`) |
+| Analista ritardi | Applica la regola di ritardo | Bucket dati (`stato-commesse.md`, `soglie.md`) |
+| Analista rischi | Applica le regole di rischio | Bucket dati (`stato-commesse.md`, `soglie.md`) |
 | Redattore report | Scrive il report | Nessuna |
 
 **Instructions del root:**
@@ -702,7 +702,7 @@ REGOLE
 | L'agente inventa valori mancanti | Manca una regola esplicita | Aggiungere "Se un valore non c'è, scrivi 'non indicato'" e un caso limite |
 | L'agente usa conoscenze generali invece dei file | Le istruzioni non limitano la fonte | Aggiungere "Usa solo [file]"; verificare che i file siano in Knowledge |
 | Il root agent risponde senza delegare | Descrizioni dei sub-agent vaghe o istruzioni del root senza regole di delega | Riscrivere le descrizioni con il compito preciso; nel root, una regola "quando → chi" per ogni sub-agent |
-| Due sub-agent danno risposte diverse | Fonti sovrapposte | Dare a ogni sub-agent solo i file che gli servono |
+| Due sub-agent danno risposte diverse | Fonti sovrapposte | Far puntare ogni sub-agent solo ai dati nel bucket che gli servono |
 | Il workflow non riceve i dati del trigger | Riferimento all'output mancante nel prompt del passaggio | Passare esplicitamente i campi con il riferimento all'output del passaggio precedente |
 | Nessuno trova l'approvazione | Non si guarda in *Runs* | Mostrare lo stato *Needs Review* e dove si apre l'esecuzione |
 | Il connettore non può scrivere | Azione non abilitata in sandbox | Chiudere il flusso dopo l'approvazione con l'output finale |
