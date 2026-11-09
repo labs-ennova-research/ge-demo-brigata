@@ -5,7 +5,7 @@ Questo repository contiene tutto il materiale (prompt, descrizioni, file di Know
 1. 💬 **[`chatagent/`](./chatagent/README.md) — Modalità Chat Agent (Multi-Agente Conversazionale)**
    L'utente dialoga con il **Responsabile di Brigata** (agente orchestratore) che raccoglie i requisiti dell'evento e delega dinamicamente la creazione delle portate ai singoli **Chef di Partita** (sotto-agenti specializzati) fino all'approvazione del menù.
 2. ⚙️ **[`workflow/`](./workflow/README.md) — Modalità Workflow No-Code (Pipeline Sequenziale & Automazione)**
-   Una volta che il menù è stato approvato, parte il **Workflow Operativo di Brigata**: una catena sequenziale deterministica di 5 step che trasforma il menù in **Lista della Spesa con scarti, Matrice dei 14 Allergeni, Calcolo del Food Cost & Semaforo Budget, Cronoprogramma di *Mise en Place* (`T-24h`, `T-4h`, `Pass`) e Bozza Briefing per Gmail / Google Docs**.
+   Una volta che il menù è stato approvato, si lancia il **Workflow Operativo di Brigata** (trigger manuale con il menù incollato in un campo di input): una catena sequenziale deterministica di 5 step che trasforma il menù in **Lista della Spesa con scarti, Matrice dei 14 Allergeni, Calcolo del Food Cost & Semaforo Budget, Cronoprogramma di *Mise en Place* (`T-24h`, `T-4h`, `Pass`) e Bozza di Briefing creata in Outlook (senza invio)**.
 
 ---
 
@@ -24,18 +24,18 @@ flowchart LR
         S1["1️⃣ Economo\nLista Spesa & Rese"] --> S2["2️⃣ Qualità & HACCP\n14 Allergeni & Stagione"]
         S2 --> S3["3️⃣ Controller\nFood Cost & Budget"]
         S3 --> S4["4️⃣ Sous-Chef\nTimeline Mise en Place"]
-        S4 --> S5["5️⃣ Briefing & Invio\nGoogle Docs / Gmail"]
+        S4 --> S5["5️⃣ Briefing & Bozza\nBozza email in Outlook"]
     end
 
-    P1 -- "Menù approvato" --> P2
+    P1 -- "Menù approvato (copiato a mano)" --> P2
 ```
 
 | Dimensione | 💬 Parte 1: `chatagent/` (Chat Agent) | ⚙️ Parte 2: `workflow/` (Workflow No-Code) |
 |---|---|---|
 | **Quando usarla** | Quando serve **dialogo, esplorazione e co-creazione** con l'utente | Quando serve **esecuzione rigorosa, calcoli ripetibili e automazione** |
 | **Logica di controllo** | **Dinamica**: l'agente principale decide chi interpellare e fa domande all'utente | **Sequenziale / Deterministica (Flow)**: i 5 step girano sempre in ordine fisso senza interrompersi |
-| **Modalità di attivazione** | Conversazione in chat con l'utente | Invio di un menù strutturato o esecuzione pianificata (**Schedule**) |
-| **Grounding & Connettori** | File in **Knowledge** (orchestratore) + **Google Search** (sotto-agenti chef) | File di listino/protocollo in **Knowledge** + **Google Search** + **Gmail / Google Docs** |
+| **Modalità di attivazione** | Conversazione in chat con l'utente | **Trigger manuale** con un campo di input (`Menu_approvato`): si lancia dalla tab **Test** o da una chat con `@nome-workflow`. Il trigger **Schedule** esiste ma non ha campi di input, quindi non adatto a ricevere un menù |
+| **Grounding & Connettori** | File in **Knowledge** (orchestratore) + **Google Search** (sotto-agenti chef) | File di listino/protocollo in **Knowledge** + **Google Search** + **Outlook** (solo creazione bozza) |
 
 ---
 
@@ -65,13 +65,13 @@ ge-demo-brigata/
     ├── 02-controllo-allergeni-e-mercato/README.md     <- Step 2: Qualità & 14 Allergeni (Google Search)
     ├── 03-food-cost-e-preventivo/README.md            <- Step 3: Food Cost Controller & Semaforo Budget
     ├── 04-piano-mise-en-place/README.md               <- Step 4: Sous-Chef (Timeline T-24h / T-4h / Pass)
-    ├── 05-briefing-e-notifica/README.md               <- Step 5: Dossier Evento + Connettori Gmail / Docs
+    ├── 05-briefing-e-notifica/README.md               <- Step 5: Dossier Evento + bozza email in Outlook
     ├── knowledge/
     │   ├── listino-fornitori-e-rese.md                <- File Knowledge: prezzi €/kg, % scarto, grammature
     │   ├── regole-food-cost-e-margini.md              <- File Knowledge: formule food cost e semafori budget
     │   └── protocollo-servizio-e-tempi.md             <- File Knowledge: tempi e compiti delle partite
     └── esempi-input/
-        └── menu-approvato-esempio.md                  <- 3 scenari pronti da incollare per testare il workflow
+        └── menu-approvato-esempio.md                  <- 3 scenari pronti da incollare nel campo Menu_approvato
 ```
 
 ---
@@ -86,13 +86,16 @@ Avvia una conversazione di prova, ad esempio:
 Quando il Responsabile di Brigata ti presenta il menù completo approvato, **copia il testo del menù**.
 
 ### Passo 2 — Costruisci ed esegui il Workflow No-Code (`workflow/`)
-Segui la guida [`workflow/README.md`](./workflow/README.md) per configurare il **Workflow Operativo di Brigata** nel canvas **Flow** di Gemini Enterprise (caricando i 3 file di `workflow/knowledge/`).
-Incolla come input il menù appena generato dal Chat Agent (oppure usa uno dei 3 scenari pronti in [`workflow/esempi-input/menu-approvato-esempio.md`](./workflow/esempi-input/menu-approvato-esempio.md)) e osserva il workflow produrre in sequenza:
+Segui la guida [`workflow/README.md`](./workflow/README.md) per configurare il **Workflow Operativo di Brigata** in **Workflow Builder** di Gemini Enterprise: trigger **Manuale** con il campo `Menu_approvato`, i 5 nodi in serie con le **variabili** che passano il menù e gli output da uno step all'altro, e i 3 file di `workflow/knowledge/` collegati ai nodi indicati nella guida.
+
+> ⚠️ **Il passaggio dal Chat Agent al Workflow è manuale**: il Chat Agent non lancia il workflow da solo. Copia il menù finale, aggiungi numero ospiti, stagione, allergie e budget, poi incollalo nel campo di input dalla tab **Test** (**Start a test run**) oppure da una chat con `@nome-workflow`.
+
+Usa il menù appena generato dal Chat Agent (oppure uno dei 3 scenari pronti in [`workflow/esempi-input/menu-approvato-esempio.md`](./workflow/esempi-input/menu-approvato-esempio.md)) e osserva il workflow produrre in sequenza:
 1. 📦 **Lista della Spesa per Fornitore** (con calcolo automatico degli scarti di pulitura)
 2. ⚠️ **Matrice dei 14 Allergeni e "Piatti Sentinella"** per gli ospiti con intolleranze
 3. 💶 **Preventivo Food Cost e Semaforo Budget** (🟢 Verde / 🟡 Giallo / 🔴 Rosso)
 4. ⏱️ **Piano di *Mise en Place* (`T-24h`, `T-4h`, `Servizio al Pass`)** per ogni partita della cucina
-5. ✉️ **Dossier Evento + Bozza Email di Briefing** per i capi partita
+5. ✉️ **Dossier Evento + Bozza Email di Briefing in Outlook** (non inviata) per i capi partita
 
 ---
 
