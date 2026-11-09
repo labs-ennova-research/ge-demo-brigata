@@ -16,12 +16,6 @@
 Step 4 - Sous-Chef Operativo (Piano di Mise en Place)
 ```
 
-## Campo: Descrizione
-
-```
-Quarto passaggio del workflow operativo. Traduce il menù approvato e le varianti per intolleranze in un cronoprogramma operativo di cucina diviso nelle tre finestre standard (T-24h, T-4h, Servizio al Pass) e assegna ogni compito alle specifiche partite della brigata (Garde Manger, Primi, Rôtisseur, Entremetier, Pâtissier, Sommelier).
-```
-
 ## Campo: Istruzioni / Prompt dello Step
 
 > Sostituisci `<<MENU_APPROVATO>>` e `<<OUTPUT_STEP_2>>` con le variabili vere.
