@@ -288,14 +288,19 @@ CASI LIMITE
 
 ## 🪜 Gradino 3 · Workflow: "Intake RFQ"
 
+> **Nota architetturale:** In Gemini Enterprise non è possibile richiamare un agente no-code creato in Agent Designer dentro un workflow (sono supportati solo agenti ADK o A2A). Ricostruiamo quindi i sub-agent del Gradino 2 come una **catena sequenziale di blocchi `Gemini Agent`** riutilizzando con copia-incolla le stesse istruzioni e il collegamento al bucket dati.
+
 ### Configurazione in Workflow Builder
 
-| # | Passaggio | Tipo | Configurazione |
-|---|---|---|---|
-| **0** | **Trigger** | `Manual` (o `Event`) | **Manuale** con campo di input `testo_email`. *(Variante avanzata: Event su Gmail con filtro oggetto contiene "RFQ")* |
-| **1** | **Analisi Pre-vendita** | `Agente esistente` | Seleziona l'agente **Desk pre-vendita**. Prompt: `Analizza questa richiesta d'offerta: ${trigger.testo_email}` |
-| **2** | **Revisione Commerciale** | `Human in the loop (Approval)` | Mostra all'approvatore la sintesi interna e la bozza di risposta generata nello Step 1 |
-| **3** | **Invio / Bozza** | `Azione Connettore` | Invio email o creazione bozza Gmail con l'output approvato *(oppure chiusura del flusso con output finale se il connettore in scrittura non è attivo)* |
+| # | Passaggio | Tipo | Sorgente dati (Bucket) | Configurazione / Prompt |
+|---|---|---|---|---|
+| **0** | **Trigger** | `Manual` (o `Event`) | — | **Manuale** con campo di input `testo_email`. *(Variante avanzata: Event su Gmail con filtro oggetto contiene "RFQ")* |
+| **1** | **Pre-qualifica** | `Gemini Agent` | Bucket (`scheda-capacita-macchine.md`) | Copia le istruzioni del Sub-agent `Pre-qualifica` del Gradino 2 e aggiungi in fondo: `Email da analizzare: ${trigger.testo_email}` |
+| **2** | **Materiali** | `Gemini Agent` | Bucket (`datasheet-materiali.md`) | Copia le istruzioni del Sub-agent `Materiali` del Gradino 2 e aggiungi in fondo: `Email del cliente: ${trigger.testo_email}` |
+| **3** | **Casi applicativi** | `Gemini Agent` | Bucket (`case-study.md`) | Copia le istruzioni del Sub-agent `Casi applicativi` del Gradino 2 e aggiungi in fondo: `Email del cliente: ${trigger.testo_email}` |
+| **4** | **Redattore** | `Gemini Agent` | Nessuna | Copia le istruzioni del Sub-agent `Redattore` del Gradino 2 e aggiungi in fondo: `Esito Pre-qualifica: ${step1.output} | Materiali: ${step2.output} | Casi applicativi: ${step3.output}` |
+| **5** | **Revisione Commerciale** | `Human in the loop (Approval)` | — | Mostra all'approvatore l'esito della pre-qualifica (`${step1.output}`) e la bozza di risposta (`${step4.output}`) |
+| **6** | **Invio / Bozza** | `Azione Connettore` | — | Invio email o creazione bozza Gmail con `${step4.output}` approvato *(oppure chiusura del flusso con output finale se il connettore in scrittura non è attivo)* |
 
 ### 🧪 Test di chiusura
 - Avvia il workflow inserendo il testo di [`email-02-incompleta.txt`](./kit-dati/email-02-incompleta.txt).

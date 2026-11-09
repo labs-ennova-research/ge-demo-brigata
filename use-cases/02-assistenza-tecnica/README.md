@@ -230,15 +230,19 @@ REGOLE
 
 ## 🪜 Gradino 3 · Workflow: "Nuova segnalazione"
 
+> **Nota architetturale:** In Gemini Enterprise non è possibile richiamare un agente no-code creato in Agent Designer dentro un workflow (sono supportati solo agenti ADK o A2A). Ricostruiamo quindi i sub-agent del Gradino 2 come una **catena sequenziale di blocchi `Gemini Agent`** riutilizzando con copia-incolla le stesse istruzioni e il collegamento al bucket dati.
+
 ### Configurazione in Workflow Builder
 
-| # | Passaggio | Tipo | Configurazione |
-|---|---|---|---|
-| **0** | **Trigger** | `Manual` | Campi di input: `descrizione`, `codice_allarme`, `matricola` *(quest'ultimo **non obbligatorio**)* |
-| **1** | **Verifica Matricola** | `Human in the loop (Request info)` | Se `matricola` è vuota, chiede all'operatore di inserirla *(se il builder non supporta condizioni, chiedi sempre conferma della matricola o di scrivere "già indicata")* |
-| **2** | **Triage Tecnico** | `Agente esistente` | Seleziona **Triage assistenza**. Prompt: `Esegui il triage per questa segnalazione. Codice: ${trigger.codice_allarme}, Descrizione: ${trigger.descrizione}, Matricola: ${trigger.matricola} ${step1.output}` |
-| **3** | **Approvazione Service** | `Human in the loop (Approval)` | Il responsabile del service approva priorità e scheda intervento |
-| **4** | **Notifica Tecnico** | `Azione Connettore` | Invio notifica al tecnico via Gmail o Google Chat *(oppure chiusura con output)* |
+| # | Passaggio | Tipo | Sorgente dati (Bucket) | Configurazione / Prompt |
+|---|---|---|---|---|
+| **0** | **Trigger** | `Manual` | — | Campi di input: `descrizione`, `codice_allarme`, `matricola` *(quest'ultimo **non obbligatorio**)* |
+| **1** | **Verifica Matricola** | `Human in the loop (Request info)` | — | Se `matricola` è vuota, chiede all'operatore di inserirla *(se il builder non supporta condizioni, chiedi sempre conferma della matricola o di scrivere "già indicata")* |
+| **2** | **Manuale** | `Gemini Agent` | Bucket (`manuale-troubleshooting.md`) | Copia le istruzioni del Sub-agent `Manuale` del Gradino 2 e aggiungi in fondo: `Codice allarme: ${trigger.codice_allarme} | Descrizione: ${trigger.descrizione}` |
+| **3** | **Storico ticket** | `Gemini Agent` | Bucket (`storico-ticket.md`) | Copia le istruzioni del Sub-agent `Storico ticket` del Gradino 2 e aggiungi in fondo: `Codice: ${trigger.codice_allarme} | Descrizione: ${trigger.descrizione} | Matricola: ${trigger.matricola} ${step1.output}` |
+| **4** | **Escalation e Triage** | `Gemini Agent` | Bucket (`modello-scheda-intervento.md`) | Copia le istruzioni del Sub-agent `Escalation` del Gradino 2 e aggiungi in fondo: `Stabilisci la Priorità (ALTA/MEDIA/BASSA), riporta cosa fare subito da ${step2.output}, i precedenti da ${step3.output} e compila la scheda intervento se previsto (Matricola: ${trigger.matricola} ${step1.output}).` |
+| **5** | **Approvazione Service** | `Human in the loop (Approval)` | — | Il responsabile del service approva priorità e scheda intervento (`${step4.output}`) |
+| **6** | **Notifica Tecnico** | `Azione Connettore` | — | Invio notifica al tecnico via Gmail o Google Chat *(oppure chiusura con output)* |
 
 ### 🧪 Test di chiusura
-- Avvia il workflow lasciando vuoto il campo `matricola`: verifica che il flusso si metta in pausa su **Request info** prima di invocare l'agente `Triage assistenza`.
+- Avvia il workflow lasciando vuoto il campo `matricola`: verifica che il flusso si metta in pausa su **Request info** prima di eseguire i passaggi `Gemini Agent` del triage.

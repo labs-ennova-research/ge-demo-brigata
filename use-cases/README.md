@@ -136,8 +136,8 @@ Workflow Builder crea **workflow agent**: agenti che eseguono una sequenza di pa
 
 **Passaggi principali:**
 
-- **Gemini Agent**: un passaggio AI con istruzioni proprie.
-- **Agente esistente**: richiama un agente già costruito, come quello del gradino 2. Riceve solo ciò che gli si passa esplicitamente nel prompt del passaggio, anche facendo riferimento all'output dei passaggi precedenti con la sintassi `${nome_step.output}`. Se l'agente di origine viene aggiornato, il workflow usa automaticamente la versione più recente.
+- **Gemini Agent**: un passaggio AI con istruzioni proprie e collegamento al bucket dati. Riceve solo ciò che gli si passa esplicitamente nel prompt del passaggio, facendo riferimento ai campi del trigger o all'output dei passaggi precedenti con la sintassi `${nome_step.output}`.
+  > **Nota su agenti esistenti (ADK/A2A) vs Gemini Agent:** In Gemini Enterprise lo step che richiama un agente esterno dentro un workflow supporta solo agenti registrati via codice (**ADK** o protocollo **A2A**), non gli agenti no-code creati in Agent Designer. Per questo, al Gradino 3 **ricostruiamo i sub-agent del Gradino 2 come una catena sequenziale di step `Gemini Agent`** dentro il workflow, riutilizzando con copia-incolla le stesse istruzioni e il collegamento al bucket dati.
 - **Human in the loop**, in due tipi:
   - **Request info**: mette in pausa il flusso e fa una o più domande a una persona.
   - **Approval**: mette in pausa il flusso e presenta l'output per approvazione prima dei passaggi successivi.
@@ -207,8 +207,10 @@ Tre principi da far passare in aula:
 
 1. Crea un nuovo workflow in Workflow Builder.
 2. Scegli il trigger. In aula, il **manuale con campi di input** è il più affidabile; l'evento o la pianificazione sono un plus.
-3. Aggiungi i passaggi: tipicamente un passaggio *agente esistente* che richiama l'agente del gradino 2, poi un passaggio *Gemini Agent* per preparare l'output finale, poi **Approval**, poi l'azione.
+3. Aggiungi i passaggi: ricostruisci i sub-agent del gradino 2 come una **catena sequenziale di passaggi *Gemini Agent*** (incollando le istruzioni già scritte al gradino 2, puntando agli stessi dati nel bucket e passando gli output con `${nome_step.output}`), poi aggiungi **Approval** (ed eventuale **Request info**), infine l'azione sul connettore.
 4. Esegui il workflow, vai in *Runs*, apri l'esecuzione in *Needs Review* e prova sia l'approvazione sia il rifiuto.
+
+**Il punto da far capire al gradino 3:** mentre al gradino 2 il Root Agent decide dinamicamente in chat quali sub-agent invocare, il workflow trasforma quei sub-agent in una **pipeline deterministica passo-passo** governata da un trigger e bloccata da un punto di approvazione umana prima di ogni azione in scrittura.
 
 **Variante senza connettori in scrittura:** il flusso si chiude con l'approvazione e l'output finale visibile nell'esecuzione. Il valore didattico, cioè dove e perché mettere l'umano, resta intatto.
 
@@ -327,12 +329,17 @@ REGOLE
 
 ### 5.4 Gradino 3 · Workflow "Intake RFQ"
 
+Si ricostruiscono i sub-agent del Gradino 2 come catena di blocchi `Gemini Agent`:
+
 | # | Passaggio | Configurazione |
 |---|---|---|
 | 0 | Trigger | **Manuale** con campo di input `testo_email`. Variante avanzata: **Event** sul connettore email, con filtro sull'oggetto (es. contiene "RFQ") |
-| 1 | Agente esistente | Desk pre-vendita. Prompt: `Analizza questa richiesta d'offerta: ${trigger.testo_email}` (adatta il riferimento alla sintassi mostrata nel builder) |
-| 2 | Approval | Mostra all'approvatore la bozza di risposta e l'esito della pre-qualifica |
-| 3 | Azione | Invio della risposta via connettore email; oppure, se l'invio non è abilitato, creazione di una bozza o semplice chiusura con output |
+| 1 | Gemini Agent (`Pre-qualifica`) | Bucket: `scheda-capacita-macchine.md`. Stesse istruzioni del sub-agent *Pre-qualifica*, input: `${trigger.testo_email}` |
+| 2 | Gemini Agent (`Materiali`) | Bucket: `datasheet-materiali.md`. Stesse istruzioni del sub-agent *Materiali*, input: `${trigger.testo_email}` |
+| 3 | Gemini Agent (`Casi applicativi`) | Bucket: `case-study.md`. Stesse istruzioni del sub-agent *Casi applicativi*, input: `${trigger.testo_email}` |
+| 4 | Gemini Agent (`Redattore`) | Nessuna sorgente dati. Stesse istruzioni del sub-agent *Redattore*, combina `${step1.output}`, `${step2.output}`, `${step3.output}` |
+| 5 | Approval | Mostra all'approvatore la bozza di risposta e l'esito della pre-qualifica |
+| 6 | Azione | Invio della risposta via connettore email; oppure, se l'invio non è abilitato, creazione di una bozza o semplice chiusura con output |
 
 **Test di chiusura:** con `email-02-incompleta.txt` il flusso si ferma all'approvazione con le domande per il cliente; rifiutando, nulla parte.
 
@@ -433,13 +440,17 @@ REGOLE
 
 ### 6.4 Gradino 3 · Workflow "Nuova segnalazione"
 
+Si ricostruiscono i sub-agent del Gradino 2 come catena di blocchi `Gemini Agent`:
+
 | # | Passaggio | Configurazione |
 |---|---|---|
 | 0 | Trigger | Manuale con campi `descrizione`, `codice_allarme`, `matricola` (quest'ultimo **non obbligatorio**) |
 | 1 | Request info | Se la matricola è vuota, chiede all'operatore di inserirla. Se il builder non permette una condizione, mettilo sempre e fai rispondere "già indicata" quando c'è |
-| 2 | Agente esistente | Triage assistenza, con descrizione, codice e matricola nel prompt |
-| 3 | Approval | Il responsabile del service approva priorità e scheda intervento |
-| 4 | Azione | Notifica al tecnico (email o messaggio in Chat), oppure chiusura con output |
+| 2 | Gemini Agent (`Manuale`) | Bucket: `manuale-troubleshooting.md`. Stesse istruzioni del sub-agent *Manuale*, input: `${trigger.codice_allarme}` e `${trigger.descrizione}` |
+| 3 | Gemini Agent (`Storico ticket`) | Bucket: `storico-ticket.md`. Stesse istruzioni del sub-agent *Storico ticket*, input: codice, descrizione e matricola (`${trigger.matricola} ${step1.output}`) |
+| 4 | Gemini Agent (`Escalation e Triage`) | Bucket: `modello-scheda-intervento.md`. Stesse istruzioni del sub-agent *Escalation* + assegnazione priorità, combinando `${step2.output}` e `${step3.output}` |
+| 5 | Approval | Il responsabile del service approva priorità e scheda intervento |
+| 6 | Azione | Notifica al tecnico (email o messaggio in Chat), oppure chiusura con output |
 
 **Test di chiusura:** una segnalazione senza matricola fa partire la richiesta di informazioni prima del triage.
 
@@ -521,13 +532,16 @@ REGOLE
 
 ### 7.4 Gradino 3 · Workflow "Nuova offerta"
 
+Si ricostruiscono i sub-agent del Gradino 2 come catena di blocchi `Gemini Agent`:
+
 | # | Passaggio | Configurazione |
 |---|---|---|
-| 0 | Trigger | Manuale con il nome del fornitore e il riferimento al file; variante avanzata: Event su nuovo file nella cartella del kit, se disponibile |
-| 1 | Agente esistente | Analisi offerte |
-| 2 | Gemini Agent | "Scrivi una bozza di email di rinegoziazione al fornitore usando solo i punti indicati dal Negoziatore. Tono professionale, massimo 120 parole." |
-| 3 | Approval | Il buyer approva la bozza |
-| 4 | Azione | Invio via email, oppure chiusura con output |
+| 0 | Trigger | Manuale con il nome del fornitore (`fornitore_target`); variante avanzata: Event su nuovo file nella cartella del kit, se disponibile |
+| 1 | Gemini Agent (`Estrattore`) | Bucket: le tre offerte (`offerta-fornitore-A.md`, `B`, `C`). Stesse istruzioni del sub-agent *Estrattore* applicate a tutte le offerte |
+| 2 | Gemini Agent (`Analista`) | Bucket: `criteri-valutazione-acquisti.md`. Stesse istruzioni del sub-agent *Analista*, input: `${step1.output}` |
+| 3 | Gemini Agent (`Negoziatore e Bozza`) | Nessuna sorgente dati. Individua i punti da rinegoziare su `${trigger.fornitore_target}` a partire da `${step2.output}` e scrive la bozza di email di rinegoziazione (max 120 parole) |
+| 4 | Approval | Il buyer approva la bozza |
+| 5 | Azione | Invio via email, oppure chiusura con output |
 
 **Test di chiusura:** la bozza cita solo punti presenti nel confronto e non esce senza approvazione.
 
@@ -586,12 +600,16 @@ REGOLE
 
 ### 8.4 Gradino 3 · Workflow "Follow-up riunione"
 
+Si ricostruiscono i sub-agent del Gradino 2 come catena di blocchi `Gemini Agent`:
+
 | # | Passaggio | Configurazione |
 |---|---|---|
 | 0 | Trigger | Manuale con campo `trascrizione` |
-| 1 | Agente esistente | Follow-up riunioni |
-| 2 | Approval | L'organizzatore della riunione approva |
-| 3 | Azione | Invio ai partecipanti, oppure chiusura con output |
+| 1 | Gemini Agent (`Estrattore`) | Nessuna sorgente dati. Stesse istruzioni del sub-agent *Estrattore*, input: `${trigger.trascrizione}` |
+| 2 | Gemini Agent (`Verificatore`) | Bucket: `partecipanti.md`. Stesse istruzioni del sub-agent *Verificatore*, input: `${step1.output}` |
+| 3 | Gemini Agent (`Redattore`) | Nessuna sorgente dati. Stesse istruzioni del sub-agent *Redattore*, input: `${step1.output}` e `${step2.output}` |
+| 4 | Approval | L'organizzatore della riunione approva |
+| 5 | Azione | Invio ai partecipanti, oppure chiusura con output |
 
 **Test di chiusura:** rifiutando l'approvazione, il flusso si chiude senza inviare nulla. Fai provare esplicitamente il rifiuto, non solo l'approvazione.
 
@@ -661,12 +679,16 @@ REGOLE
 
 ### 9.4 Gradino 3 · Workflow "Report settimanale"
 
+Si ricostruiscono i sub-agent del Gradino 2 come catena di blocchi `Gemini Agent`:
+
 | # | Passaggio | Configurazione |
 |---|---|---|
 | 0 | Trigger | **Schedule** settimanale (es. lunedì alle 8:00). In aula, per provarlo subito, aggiungi o usa un trigger manuale |
-| 1 | Agente esistente | Report commesse, prompt: "Prepara il report settimanale" |
-| 2 | Approval | Il responsabile OPS approva |
-| 3 | Azione | Invio al team (email o Chat), oppure chiusura con output |
+| 1 | Gemini Agent (`Analista ritardi`) | Bucket: `stato-commesse.md`, `soglie.md`. Stesse istruzioni del sub-agent *Analista ritardi* |
+| 2 | Gemini Agent (`Analista rischi`) | Bucket: `stato-commesse.md`, `soglie.md`. Stesse istruzioni del sub-agent *Analista rischi* |
+| 3 | Gemini Agent (`Redattore report`) | Nessuna sorgente dati. Stesse istruzioni del sub-agent *Redattore report*, input: `${step1.output}` e `${step2.output}` |
+| 4 | Approval | Il responsabile OPS approva |
+| 5 | Azione | Invio al team (email o Chat), oppure chiusura con output |
 
 **Test di chiusura:** sulla copia "settimana tranquilla" il report dice che non ci sono criticità, senza inventare rischi.
 

@@ -215,15 +215,18 @@ REGOLE
 
 ## 🪜 Gradino 3 · Workflow: "Nuova offerta"
 
+> **Nota architetturale:** In Gemini Enterprise non è possibile richiamare un agente no-code creato in Agent Designer dentro un workflow (sono supportati solo agenti ADK o A2A). Ricostruiamo quindi i sub-agent del Gradino 2 come una **catena sequenziale di blocchi `Gemini Agent`** riutilizzando con copia-incolla le stesse istruzioni e il collegamento al bucket dati.
+
 ### Configurazione in Workflow Builder
 
-| # | Passaggio | Tipo | Configurazione |
-|---|---|---|---|
-| **0** | **Trigger** | `Manual` (o `Event`) | **Manuale** con campo `fornitore_target` (es. `Fornitore A` o `Fornitore C`) |
-| **1** | **Analisi comparativa** | `Agente esistente` | Seleziona **Analisi offerte**. Prompt: `Confronta tutte le offerte disponibili e concentra i punti di rinegoziazione su ${trigger.fornitore_target}` |
-| **2** | **Bozza Email Rinegoziazione** | `Gemini Agent` | Prompt: `"Scrivi una bozza di email di rinegoziazione indirizzata a ${trigger.fornitore_target} usando solo i punti indicati dal Negoziatore in ${step1.output}. Tono professionale, massimo 120 parole."` |
-| **3** | **Approvazione Buyer** | `Human in the loop (Approval)` | Il buyer rivede e approva la bozza di email |
-| **4** | **Invio Email** | `Azione Connettore` | Invio via Gmail *(oppure chiusura con output finale)* |
+| # | Passaggio | Tipo | Sorgente dati (Bucket) | Configurazione / Prompt |
+|---|---|---|---|---|
+| **0** | **Trigger** | `Manual` (o `Event`) | — | **Manuale** con campo `fornitore_target` (es. `Fornitore A` o `Fornitore C`) |
+| **1** | **Estrattore** | `Gemini Agent` | Bucket (`offerta-fornitore-A.md`, `B`, `C`) | Copia le istruzioni del Sub-agent `Estrattore` del Gradino 2 e aggiungi in fondo: `Estrai la tabella standardizzata per tutte le offerte presenti nel bucket (Fornitore A, B e C).` |
+| **2** | **Analista** | `Gemini Agent` | Bucket (`criteri-valutazione-acquisti.md`) | Copia le istruzioni del Sub-agent `Analista` del Gradino 2 e aggiungi in fondo: `Tabelle offerte estratte: ${step1.output}` |
+| **3** | **Negoziatore e Bozza Email** | `Gemini Agent` | Nessuna | Copia le istruzioni del Sub-agent `Negoziatore` del Gradino 2 e aggiungi in fondo: `Matrice di confronto: ${step2.output}. Concentrati su ${trigger.fornitore_target} e scrivi una bozza di email di rinegoziazione (tono professionale, massimo 120 parole) usando solo i punti emersi.` |
+| **4** | **Approvazione Buyer** | `Human in the loop (Approval)` | — | Il buyer rivede la matrice (`${step2.output}`) e approva la bozza di email (`${step3.output}`) |
+| **5** | **Invio Email** | `Azione Connettore` | — | Invio via Gmail *(oppure chiusura con output finale)* |
 
 ### 🧪 Test di chiusura
 - Verifica che la bozza di email citi esclusivamente i punti emersi dal confronto e si fermi allo step **Approval** in stato *Needs Review* prima di qualsiasi invio.

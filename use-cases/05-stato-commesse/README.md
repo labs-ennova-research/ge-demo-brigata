@@ -260,14 +260,18 @@ REGOLE
 
 ## 🪜 Gradino 3 · Workflow: "Report settimanale"
 
+> **Nota architetturale:** In Gemini Enterprise non è possibile richiamare un agente no-code creato in Agent Designer dentro un workflow (sono supportati solo agenti ADK o A2A). Ricostruiamo quindi i sub-agent del Gradino 2 come una **catena sequenziale di blocchi `Gemini Agent`** riutilizzando con copia-incolla le stesse istruzioni e il collegamento al bucket dati.
+
 ### Configurazione in Workflow Builder
 
-| # | Passaggio | Tipo | Configurazione |
-|---|---|---|---|
-| **0** | **Trigger** | `Schedule` (o `Manual` per il test in aula) | Pianificazione settimanale (es. ogni Lunedì alle `08:00`) + attivazione manuale per il test |
-| **1** | **Generazione Report** | `Agente esistente` | Seleziona **Report commesse**. Prompt: `"Prepara il report settimanale"` |
-| **2** | **Approvazione OPS** | `Human in the loop (Approval)` | Il responsabile Operations approva il report generato |
-| **3** | **Invio al Team** | `Azione Connettore` | Invio su Google Chat o Gmail *(oppure chiusura con output)* |
+| # | Passaggio | Tipo | Sorgente dati (Bucket) | Configurazione / Prompt |
+|---|---|---|---|---|
+| **0** | **Trigger** | `Schedule` (o `Manual` per il test in aula) | — | Pianificazione settimanale (es. ogni Lunedì alle `08:00`) + attivazione manuale per il test |
+| **1** | **Analista ritardi** | `Gemini Agent` | Bucket (`stato-commesse.md`, `soglie.md`) | Copia le istruzioni del Sub-agent `Analista ritardi` del Gradino 2 e aggiungi in fondo: `Esegui l'analisi delle commesse in ritardo rispetto alla data odierna.` |
+| **2** | **Analista rischi** | `Gemini Agent` | Bucket (`stato-commesse.md`, `soglie.md`) | Copia le istruzioni del Sub-agent `Analista rischi` del Gradino 2 e aggiungi in fondo: `Esegui l'analisi delle commesse a rischio e il conteggio delle commesse regolari (escludendo quelle già in ritardo in ${step1.output}).` |
+| **3** | **Redattore report** | `Gemini Agent` | Nessuna | Copia le istruzioni del Sub-agent `Redattore report` del Gradino 2 e aggiungi in fondo: `Commesse in ritardo: ${step1.output} | Commesse a rischio e regolari: ${step2.output}` |
+| **4** | **Approvazione OPS** | `Human in the loop (Approval)` | — | Il responsabile Operations approva il report generato (`${step3.output}`) |
+| **5** | **Invio al Team** | `Azione Connettore` | — | Invio su Google Chat o Gmail *(oppure chiusura con output)* |
 
 ### 🧪 Test di chiusura
 - Nel bucket dati usa [`stato-commesse-settimana-tranquilla.md`](./kit-dati/stato-commesse-settimana-tranquilla.md) e avvia il workflow: verifica che il report dichiari esplicitamente che **non ci sono commesse in ritardo né a rischio**, senza inventare criticità.

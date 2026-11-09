@@ -230,14 +230,18 @@ REGOLE
 
 ## 🪜 Gradino 3 · Workflow: "Follow-up riunione"
 
+> **Nota architetturale:** In Gemini Enterprise non è possibile richiamare un agente no-code creato in Agent Designer dentro un workflow (sono supportati solo agenti ADK o A2A). Ricostruiamo quindi i sub-agent del Gradino 2 come una **catena sequenziale di blocchi `Gemini Agent`** riutilizzando con copia-incolla le stesse istruzioni e il collegamento al bucket dati.
+
 ### Configurazione in Workflow Builder
 
-| # | Passaggio | Tipo | Configurazione |
-|---|---|---|---|
-| **0** | **Trigger** | `Manual` | Campo di input: `trascrizione` |
-| **1** | **Elaborazione Verbale** | `Agente esistente` | Seleziona **Follow-up riunioni**. Prompt: `Elabora questa trascrizione e prepara il follow-up: ${trigger.trascrizione}` |
-| **2** | **Approvazione Organizzatore** | `Human in the loop (Approval)` | L'organizzatore della riunione controlla la bozza e la sezione "Da chiarire" prima dell'invio |
-| **3** | **Invio Follow-up** | `Azione Connettore` | Invio email ai partecipanti tramite Gmail *(oppure chiusura con output)* |
+| # | Passaggio | Tipo | Sorgente dati (Bucket) | Configurazione / Prompt |
+|---|---|---|---|---|
+| **0** | **Trigger** | `Manual` | — | Campo di input: `trascrizione` |
+| **1** | **Estrattore** | `Gemini Agent` | Nessuna | Copia le istruzioni del Sub-agent `Estrattore` del Gradino 2 e aggiungi in fondo: `Trascrizione della riunione: ${trigger.trascrizione}` |
+| **2** | **Verificatore** | `Gemini Agent` | Bucket (`partecipanti.md`) | Copia le istruzioni del Sub-agent `Verificatore` del Gradino 2 e aggiungi in fondo: `Azioni estratte da verificare: ${step1.output}` |
+| **3** | **Redattore** | `Gemini Agent` | Nessuna | Copia le istruzioni del Sub-agent `Redattore` del Gradino 2 e aggiungi in fondo: `Decisioni e punti aperti: ${step1.output} | Tabella azioni verificate: ${step2.output}` |
+| **4** | **Approvazione Organizzatore** | `Human in the loop (Approval)` | — | L'organizzatore della riunione controlla la bozza e la sezione "Da chiarire" (`${step3.output}`) prima dell'invio |
+| **5** | **Invio Follow-up** | `Azione Connettore` | — | Invio email ai partecipanti tramite Gmail *(oppure chiusura con output)* |
 
 ### 🧪 Test di chiusura
 - Esegui il workflow con [`trascrizione-riunione-2.txt`](./kit-dati/trascrizione-riunione-2.txt), apri la scheda **Runs** sullo stato *Needs Review* e **Rifiuta (Reject)** l'approvazione: verifica che il flusso si chiuda immediatamente senza inviare alcuna email.
