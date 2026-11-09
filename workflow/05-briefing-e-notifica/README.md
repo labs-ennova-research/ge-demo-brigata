@@ -24,12 +24,6 @@
 Step 5 - Dossier Operativo e Briefing di Brigata
 ```
 
-## Campo: Descrizione
-
-```
-Quinto e ultimo passaggio del workflow operativo. Consolida tutti i risultati degli step precedenti (Lista Spesa Economato, Matrice Allergeni, Preventivo Food Cost e Cronoprogramma Mise en Place) in un unico Dossier Evento e crea nella casella Outlook dell'utente la bozza di email di briefing per i capi partita, senza inviarla.
-```
-
 ## Campo: Istruzioni / Prompt dello Step 5
 
 > Sostituisci i cinque segnaposto `<<...>>` con le variabili vere.
