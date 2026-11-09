@@ -91,7 +91,7 @@ Il Knowledge si carica **sul singolo nodo**, non sul workflow intero:
 | 5 | nessuno | ❌ (connettore **Outlook** attivo, solo creazione bozza: vedi Step 5) |
 
 ### Fase 4 — I 5 step
-Crea i 5 nodi **Gemini Agent** in serie e incolla nome, descrizione e istruzioni dai README:
+Crea i 5 nodi **Gemini Agent** in serie e incolla nome e istruzioni dai README:
 
 1. [`01-analisi-fabbisogni/README.md`](./01-analisi-fabbisogni/README.md)
 2. [`02-controllo-allergeni-e-mercato/README.md`](./02-controllo-allergeni-e-mercato/README.md)
