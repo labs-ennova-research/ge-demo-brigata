@@ -47,3 +47,21 @@ Ogni volta che nell'evento è presente almeno un ospite con allergia o regime al
 1. Il piatto destinato all'ospite con allergia deve essere preparato **per primo**, su banco sanificato, prima di toccare gli altri piatti della stessa portata.
 2. Esce dal pass su un piatto di **colore o forma distinta** (oppure con *cloche* / segnalino dedicato) e viene consegnato a mano esclusivamente dal Responsabile di Sala / Maître, mai confuso sul vassoio comune.
 3. Questo promemoria deve comparire esplicitamente nella finestra `SERVIZIO / AL PASS` per tutte le portate interessate.
+
+---
+
+## 4. Regole di Temporizzazione delle Cotture al Pass
+
+1. L'ora di avvio di una cottura si calcola **a ritroso** dall'ora di uscita al pass: `avvio = uscita − durata di cottura − riposo`.
+2. Il riposo di pesce e carni è breve (2-3 minuti) e termina al momento dell'uscita: tra fine cottura e uscita non devono passare più di 5 minuti.
+3. Ogni cottura ha **una sola** temperatura al cuore di riferimento.
+4. Esempio per un secondo di pesce in uscita a `T0 + 70 min` con 15 minuti di forno: infornata a circa `T0 + 52-55 min`, non prima.
+
+---
+
+## 5. Regola di Fedeltà dei Documenti Prodotti
+
+Il piano operativo e il briefing devono contenere **solo** informazioni presenti nei dati dell'evento o in questo protocollo. Non vanno inventati:
+- numeri di coperto, posti a sedere o tavoli (gli ospiti speciali si indicano come "ospite vegetariano", "ospite allergico ai crostacei");
+- colori specifici di piatti, sigilli o simboli diversi da quanto indicato nella sezione 3 ("colore o forma distinta", cloche o segnalino dedicato);
+- attrezzature, risciacqui o procedure di sanificazione non previste dal protocollo.
