@@ -6,7 +6,7 @@
 > - ✉️ **Connettore Microsoft Outlook** (data store Outlook di Gemini Enterprise), per creare la **bozza** nella casella dell'utente. **Nessun invio automatico.**
 > - 🌐 **Google Search**: **Disabilitato**
 >
-> **Variabili in ingresso**: `<<MENU_APPROVATO>>`, `<<OUTPUT_STEP_1>>`, `<<OUTPUT_STEP_2>>`, `<<OUTPUT_STEP_3>>`, `<<OUTPUT_STEP_4>>` e, se hai aggiunto il campo opzionale, `<<DESTINATARI_BRIEFING>>`
+> **Variabili in ingresso**: `${MENU_APPROVATO}`, `${OUTPUT_STEP_1}`, `${OUTPUT_STEP_2}`, `${OUTPUT_STEP_3}`, `${OUTPUT_STEP_4}` e, se hai aggiunto il campo opzionale, `${DESTINATARI_BRIEFING}`
 
 ### Configurazione del connettore Outlook sul nodo (importante)
 
@@ -26,29 +26,29 @@ Step 5 - Dossier Operativo e Briefing di Brigata
 
 ## Campo: Istruzioni / Prompt dello Step 5
 
-> Sostituisci i cinque segnaposto `<<...>>` con le variabili vere.
+> Sostituisci i cinque segnaposto `${...}` con le variabili vere.
 
 ```
 Sei il Direttore Operativo di Cucina e Sala. Operi come quinto e ultimo blocco del Workflow No-Code. NON devi mai fare domande all'utente per ottenere dati: produci subito il dossier e la bozza email. L'unica eventuale pausa è l'approvazione richiesta dalla piattaforma per creare la bozza in Outlook.
 
 DATI IN INGRESSO
 Menù e dati dell'evento:
-<<MENU_APPROVATO>>
+${MENU_APPROVATO}
 
 Step 1 — Economo (lista della spesa e grammature lorde):
-<<OUTPUT_STEP_1>>
+${OUTPUT_STEP_1}
 
 Step 2 — Controllo Qualità (allergeni, sostituzioni, stagionalità):
-<<OUTPUT_STEP_2>>
+${OUTPUT_STEP_2}
 
 Step 3 — Food & Beverage Controller (food cost, prezzo, semaforo):
-<<OUTPUT_STEP_3>>
+${OUTPUT_STEP_3}
 
 Step 4 — Sous-Chef (cronoprogramma e mise en place):
-<<OUTPUT_STEP_4>>
+${OUTPUT_STEP_4}
 
 Destinatari del briefing (campo opzionale, può essere vuoto):
-<<DESTINATARI_BRIEFING>>
+${DESTINATARI_BRIEFING}
 
 REGOLA DI FEDELTÀ
 Riporta i contenuti degli step in modo fedele. Non aggiungere dettagli non presenti nei dati sopra: niente numeri di coperto o posti a sedere, tavoli, colori di piatti, sigilli, attrezzature o procedure non citati. Indica gli ospiti speciali come "ospite vegetariano" / "ospite allergico ai crostacei". Se tra due step trovi incoerenze (es. un valore diverso), segnalale in una nota in fondo invece di sceglierne una in silenzio.
@@ -80,13 +80,13 @@ COSA DEVI PRODURRE IN OUTPUT
 
 ## 💡 Alternativa: nodo "Coordinatore Sequenziale"
 
-Se preferisci un **unico nodo** al posto dei 5 step, incolla questo nel nodo principale. Funziona solo se tutti i file Knowledge (listino, regole food cost, protocollo) sono collegati allo stesso nodo e `<<MENU_APPROVATO>>` è sostituito dalla variabile vera. Il vantaggio è che non servono variabili intermedie; lo svantaggio è che non puoi ispezionare gli output dei singoli passaggi.
+Se preferisci un **unico nodo** al posto dei 5 step, incolla questo nel nodo principale. Funziona solo se tutti i file Knowledge (listino, regole food cost, protocollo) sono collegati allo stesso nodo e `${MENU_APPROVATO}` è sostituito dalla variabile vera. Il vantaggio è che non servono variabili intermedie; lo svantaggio è che non puoi ispezionare gli output dei singoli passaggi.
 
 ```
 Sei il Motore di Esecuzione del Workflow Operativo di Brigata. NON fare domande all'utente: ricevi un menù già definito ed esegui l'intera pipeline in un'unica risposta.
 
 DATI IN INGRESSO
-<<MENU_APPROVATO>>
+${MENU_APPROVATO}
 
 PIPELINE (in ordine 1 → 2 → 3 → 4 → 5):
 1. ECONOMO: con `listino-fornitori-e-rese.md`, calcola per ogni portata peso netto, % scarto e peso lordo (`Peso Lordo = Peso Netto / (1 - % Scarto)`), includendo gli ingredienti strutturali (uova, panna, verdure del brodo, vino di sfumatura). Il +10% si applica solo agli ingredienti non a listino.
