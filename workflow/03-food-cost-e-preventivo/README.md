@@ -16,12 +16,6 @@
 Step 3 - Food & Beverage Controller (Calcolo Food Cost)
 ```
 
-## Campo: Descrizione
-
-```
-Terzo passaggio del workflow operativo. Valorizza economicamente la lista della spesa (inclusi scarti, forfait dispensa, vini ed eventuali varianti allergeni), calcola il Food Cost totale e per coperto, determina il prezzo di vendita consigliato in base alla fascia di formalità e assegna il semaforo di conformità al budget verificando esplicitamente le condizioni previste dalle regole aziendali.
-```
-
 ## Campo: Istruzioni / Prompt dello Step
 
 > Sostituisci `<<MENU_APPROVATO>>`, `<<OUTPUT_STEP_1>>` e `<<OUTPUT_STEP_2>>` con le variabili vere.
