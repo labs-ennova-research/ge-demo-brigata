@@ -7,7 +7,7 @@ Il repository è organizzato in due sezioni principali:
 ```text
 ge-demo-brigata/
 ├── brigata/        <- Caso didattico guidato ("Brigata di Cucina": Chat Agent + Workflow)
-└── use-cases/      <- 5 casi d'uso aziendali per il workshop pratico ("Crea il tuo agente")
+└── use-cases/      <- 7 casi d'uso aziendali per il workshop pratico ("Crea il tuo agente")
 ```
 
 ---
@@ -24,11 +24,17 @@ Metafora guidata per mostrare in plenaria la differenza tra un sistema **Multi-A
 
 ## 🛠️ 2. Casi d'Uso per il Workshop (`use-cases/`)
 
-Guida completa e kit dati fittizi per costruire in gruppi 5 casi aziendali su 3 livelli progressivi di complessità (**Gradino 1: Chat Agent** → **Gradino 2: Root Agent + Sub-agent** → **Gradino 3: Workflow con approvazione umana**).
+Guida completa e kit dati fittizi per costruire i casi aziendali su **3 livelli progressivi di complessità**, disponibili in due percorsi didattici:
 
 - 👉 **[Vai alla guida generale del workshop (`use-cases/README.md`)](./use-cases/README.md)**
-  - 📋 [Caso 1 · Richiesta d'offerta (RFQ)](./use-cases/01-richiesta-offerta/README.md)
-  - 🔧 [Caso 2 · Assistenza tecnica](./use-cases/02-assistenza-tecnica/README.md)
-  - 📊 [Caso 3 · Offerte fornitori](./use-cases/03-offerte-fornitori/README.md)
-  - 📝 [Caso 4 · Dal verbale alle azioni](./use-cases/04-verbale-azioni/README.md)
-  - 🏭 [Caso 5 · Stato commesse](./use-cases/05-stato-commesse/README.md)
+
+### Percorso Avanzato (Gradino 1: Chat Agent → Gradino 2: Root Agent + Sub-agent → Gradino 3: Workflow)
+- 📋 [Caso 1 · Richiesta d'offerta (RFQ)](./use-cases/01-richiesta-offerta/README.md)
+- 🔧 [Caso 2 · Assistenza tecnica](./use-cases/02-assistenza-tecnica/README.md)
+- 📊 [Caso 3 · Offerte fornitori](./use-cases/03-offerte-fornitori/README.md)
+- 📝 [Caso 4 · Dal verbale alle azioni](./use-cases/04-verbale-azioni/README.md)
+- 🏭 [Caso 5 · Stato commesse](./use-cases/05-stato-commesse/README.md)
+
+### Percorso "Modalità Semplice" — Solo Connettore Outlook (Gradino 1: Prompt → Gradino 2: Agente senza connettori → Gradino 3: Agente con solo Outlook)
+- 📥 [Caso 6 · Smistamento Inbox e Bozze di Risposta](./use-cases/06-smistamento-inbox/README.md)
+- 📅 [Caso 7 · Preparazione e Follow-up Meeting](./use-cases/07-prep-followup-meeting/README.md)

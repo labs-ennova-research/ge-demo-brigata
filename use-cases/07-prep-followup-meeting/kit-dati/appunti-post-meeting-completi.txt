@@ -1,0 +1,9 @@
+Oggetto email / nota rapida: [WORKSHOP-APPUNTI] Esiti SAL Mensile Progetto Portale Fornitori (PF-2026) — 17/11/2026
+Partecipanti presenti: Elena Gatti, Marco Sala, Paolo Bernardi, Chiara Neri, Andrea Longo.
+
+Appunti veloci presi a fine riunione:
+- Decisione 1: confermato che l'ambiente di collaudo accetta certificati SAML 2.0 sia a 2048 sia a 4096 bit, quindi si procede con certificato a 4096 bit.
+- Decisione 2: confermata l'apertura dei test utente (UAT) per martedì 24/11/2026 su un primo lotto di 800 fornitori già bonificati, mantenendo invariata la data contrattuale di Go-Live del 18/12/2026.
+- Azione 1: Chiara Neri carica sull'area SFTP il file CSV del primo lotto di 800 fornitori bonificati entro giovedì 19/11/2026.
+- Azione 2: Marco Sala completa la configurazione del Single Sign-On in ambiente di collaudo e invia il link di accesso entro venerdì 20/11/2026.
+- Azione 3: Andrea Longo esegue il test pilota sulle prime 20 schede di qualifica documentale e invia il report di esito entro mercoledì 25/11/2026.

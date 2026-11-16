@@ -1,0 +1,18 @@
+EVENTO CALENDARIO OUTLOOK
+Titolo: [WORKSHOP] SAL Mensile Progetto Portale Fornitori (PF-2026) — Gruppo Aurora
+Data: Martedì 17 Novembre 2026
+Orario: 10:30 – 11:30
+Luogo: Sala Riunioni Manzoni (Sede Milano) / Collegamento Audio-Video
+Organizzatore: Elena Gatti (elena.gatti@novaservizi-demo.example)
+Invitati:
+- Marco Sala (marco.sala@novaservizi-demo.example)
+- Paolo Bernardi (p.bernardi@gruppoaurora.example)
+- Chiara Neri (c.neri@gruppoaurora.example)
+- Andrea Longo (a.longo@gruppoaurora.example)
+
+Descrizione / Agenda nell'invito:
+Buongiorno a tutti,
+convochiamo il SAL mensile del progetto Portale Fornitori (PF-2026) con la seguente scaletta:
+1. Stato caricamento anagrafiche fornitori e integrazione ERP;
+2. Pianificazione sessione di test utente (UAT) di fine novembre;
+3. Verifica tempistiche verso il rilascio di dicembre e varie ed eventuali.

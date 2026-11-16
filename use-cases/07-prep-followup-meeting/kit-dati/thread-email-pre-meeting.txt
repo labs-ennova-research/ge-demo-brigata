@@ -1,0 +1,49 @@
+=== EMAIL 1 (Più vecchia) ===
+Da: c.neri@gruppoaurora.example (Chiara Neri)
+A: elena.gatti@novaservizi-demo.example; marco.sala@novaservizi-demo.example
+Cc: p.bernardi@gruppoaurora.example
+Data: Mercoledì 11 Novembre 2026, 16:40
+Oggetto: [WORKSHOP] PF-2026 — Stato estrazione tracciati ERP e dubbio certificati SSO
+
+Ciao Elena, ciao Marco,
+
+purtroppo non riusciamo a inviarvi oggi l'estrazione CSV delle 1.200 anagrafiche fornitori dal nostro gestionale perché abbiamo trovato alcuni codici fiscali duplicati da bonificare internamente. Vi aggiorneremo nei prossimi giorni sulla nuova data di consegna del file.
+
+Approfitto per chiedervi una conferma tecnica: il vostro ambiente di collaudo supporta già i certificati SAML 2.0 a 4096 bit per l'autenticazione Single Sign-On (SSO), oppure dobbiamo generare un certificato a 2048 bit?
+
+Grazie,
+Chiara Neri — IT Application Lead, Gruppo Aurora
+
+---
+
+=== EMAIL 2 ===
+Da: elena.gatti@novaservizi-demo.example (Elena Gatti)
+A: c.neri@gruppoaurora.example
+Cc: marco.sala@novaservizi-demo.example; p.bernardi@gruppoaurora.example; a.longo@gruppoaurora.example
+Data: Giovedì 12 Novembre 2026, 11:15
+Oggetto: Re: [WORKSHOP] PF-2026 — Stato estrazione tracciati ERP e dubbio certificati SSO
+
+Ciao Chiara,
+
+grazie per l'avviso sui tracciati CSV. Ti segnalo però che per aprire regolarmente la sessione di test utente (UAT) con Andrea il 24/11/2026 abbiamo bisogno di ricevere il file bonificato al massimo entro giovedì 19/11/2026. Ne parliamo in dettaglio nel SAL di martedì 17 novembre.
+
+Un saluto,
+Elena Gatti — Project Manager, NovaServizi
+
+---
+
+=== EMAIL 3 (Più recente) ===
+Da: p.bernardi@gruppoaurora.example (Paolo Bernardi)
+A: elena.gatti@novaservizi-demo.example
+Cc: c.neri@gruppoaurora.example; a.longo@gruppoaurora.example; marco.sala@novaservizi-demo.example
+Data: Venerdì 13 Novembre 2026, 17:50
+Oggetto: Re: [WORKSHOP] PF-2026 — Stato estrazione tracciati ERP e dubbio certificati SSO
+
+Buonasera Elena,
+
+in vista del SAL di martedì anticipo una richiesta della nostra Direzione Generale: vorremmo anticipare il Go-Live ufficiale dal 18/12/2026 al 04/12/2026 per chiudere prima dell'inventario di fine anno, e attivare gratuitamente già nel rilascio di dicembre anche il modulo "Gestione Gare" per fare una prova sul campo nel primo trimestre.
+
+Contiamo di chiudere e approvare entrambi i punti direttamente durante la riunione di martedì mattina.
+
+A martedì,
+Paolo Bernardi — Direttore Acquisti, Gruppo Aurora S.p.A.

@@ -1,8 +1,9 @@
 # Workshop "Crea il tuo agente": guida alla costruzione dei casi
 
-Guida per il facilitatore del modulo **Gemini Enterprise e agenti no-code**. Spiega come preparare il kit dati e come costruire, gradino per gradino, i cinque casi presentati nelle slide 21–25 del deck.
+Guida per il facilitatore del modulo **Gemini Enterprise e agenti no-code**. Spiega come preparare il kit dati e come costruire, gradino per gradino, i **sette casi** disponibili in due modalità didattiche:
 
-Ogni caso segue la stessa progressione in tre gradini:
+### A) Modalità Standard / Avanzata (Casi 1–5)
+Progressione da agente singolo a sistema multi-agente e workflow:
 
 | Gradino | Strumento | Cosa si costruisce |
 |---|---|---|
@@ -10,7 +11,16 @@ Ogni caso segue la stessa progressione in tre gradini:
 | 2 · Root agent | Agent Designer (Flow) | L'agente del gradino 1 diventa un sub-agent; si aggiungono altri sub-agent e un agente principale che li coordina |
 | 3 · Workflow | Workflow Builder | Il processo diventa un flusso con trigger, passaggi e un punto di approvazione umana prima di ogni azione in scrittura |
 
-Tutti i gruppi partono dal gradino 1. Si sale al gradino successivo solo quando l'agente supera il **test per salire**: il facilitatore fa da "cancello" e verifica il test di persona prima di dare il via libera.
+### B) Modalità "Semplice" — Solo Connettore Outlook (Casi 6–7)
+Progressione pensata per utenti di business trasversali usando **esclusivamente il connettore Microsoft Outlook** (nessun altro connettore, nessun sub-agent, nessun workflow):
+
+| Gradino | Strumento | Cosa si costruisce |
+|---|---|---|
+| 1 · Prompt | Chat Gemini Enterprise | Uso diretto in chat (senza agente) per sintesi o bozze veloci su testi copiati/incollati |
+| 2 · Agente (semplice) senza connettori | Agent Designer | Agente singolo configurato con istruzioni fisse e documenti di contesto caricati in *Knowledge* (FAQ, SLA, template, linee guida, rubrica) |
+| 3 · Agente (semplice) con connettore Outlook | Agent Designer + Microsoft Outlook | Lo stesso agente singolo collegato **solo a Microsoft Outlook** per leggere mail/calendario e salvare bozze di risposta o follow-up (*Create message*, senza invio automatico) |
+
+Tutti i gruppi partono dal gradino 1. Si sale al gradino successivo solo quando si supera il **test per salire**: il facilitatore fa da "cancello" e verifica il test di persona prima di dare il via libera.
 
 > **Nota sull'interfaccia.** I nomi di menu e pulsanti citati qui seguono la documentazione Google di Agent Designer e Workflow Builder, che è in inglese e cambia spesso. Prima della prima edizione, fai un giro completo nella sandbox e allinea le etichette a quello che vedono davvero i partecipanti.
 
@@ -19,16 +29,18 @@ Tutti i gruppi partono dal gradino 1. Si sale al gradino successivo solo quando 
 ## 0. Struttura di questa cartella (`use-cases/`)
 
 Per facilitare il workshop e la preparazione, ogni caso ha una propria sottocartella con:
-- **`README.md`**: tutte le configurazioni pronte da copiare/incollare per **Gradino 1** (Chat Agent), **Gradino 2** (Root Agent + Sub-agent completi di Nome, Descrizione, Istruzioni e collegamento al bucket dati) e **Gradino 3** (Workflow), oltre ai prompt di test.
-- **`kit-dati/`**: i file fittizi pronti all'uso (testi, tabelle Markdown, schede tecniche, trascrizioni) già allineati con i casi limite richiesti dai test.
+- **`README.md`**: tutte le configurazioni e i prompt pronti da copiare/incollare per i **3 gradini** del caso, oltre ai test di verifica ("cancelli").
+- **`kit-dati/`**: i file fittizi pronti all'uso (testi, email, inviti, FAQ, template, tabelle Markdown, schede tecniche, trascrizioni) già allineati con i casi limite richiesti dai test.
 
-| Caso | Cartella e Guida Agenti | Kit Dati |
-|---|---|---|
-| **Caso 1 · Richiesta d'offerta** | [`01-richiesta-offerta/README.md`](./01-richiesta-offerta/README.md) | [`01-richiesta-offerta/kit-dati/`](./01-richiesta-offerta/kit-dati/) |
-| **Caso 2 · Assistenza tecnica** | [`02-assistenza-tecnica/README.md`](./02-assistenza-tecnica/README.md) | [`02-assistenza-tecnica/kit-dati/`](./02-assistenza-tecnica/kit-dati/) |
-| **Caso 3 · Offerte fornitori** | [`03-offerte-fornitori/README.md`](./03-offerte-fornitori/README.md) | [`03-offerte-fornitori/kit-dati/`](./03-offerte-fornitori/kit-dati/) |
-| **Caso 4 · Dal verbale alle azioni** | [`04-verbale-azioni/README.md`](./04-verbale-azioni/README.md) | [`04-verbale-azioni/kit-dati/`](./04-verbale-azioni/kit-dati/) |
-| **Caso 5 · Stato commesse** | [`05-stato-commesse/README.md`](./05-stato-commesse/README.md) | [`05-stato-commesse/kit-dati/`](./05-stato-commesse/kit-dati/) |
+| Caso | Modalità | Cartella e Guida Agenti | Kit Dati |
+|---|---|---|---|
+| **Caso 1 · Richiesta d'offerta** | Avanzata (Multi-Agente + Workflow) | [`01-richiesta-offerta/README.md`](./01-richiesta-offerta/README.md) | [`01-richiesta-offerta/kit-dati/`](./01-richiesta-offerta/kit-dati/) |
+| **Caso 2 · Assistenza tecnica** | Avanzata (Multi-Agente + Workflow) | [`02-assistenza-tecnica/README.md`](./02-assistenza-tecnica/README.md) | [`02-assistenza-tecnica/kit-dati/`](./02-assistenza-tecnica/kit-dati/) |
+| **Caso 3 · Offerte fornitori** | Avanzata (Multi-Agente + Workflow) | [`03-offerte-fornitori/README.md`](./03-offerte-fornitori/README.md) | [`03-offerte-fornitori/kit-dati/`](./03-offerte-fornitori/kit-dati/) |
+| **Caso 4 · Dal verbale alle azioni** | Avanzata (Multi-Agente + Workflow) | [`04-verbale-azioni/README.md`](./04-verbale-azioni/README.md) | [`04-verbale-azioni/kit-dati/`](./04-verbale-azioni/kit-dati/) |
+| **Caso 5 · Stato commesse** | Avanzata (Multi-Agente + Workflow) | [`05-stato-commesse/README.md`](./05-stato-commesse/README.md) | [`05-stato-commesse/kit-dati/`](./05-stato-commesse/kit-dati/) |
+| **Caso 6 · Smistamento Inbox e Bozze** | **Semplice (Solo Outlook)** | [`06-smistamento-inbox/README.md`](./06-smistamento-inbox/README.md) | [`06-smistamento-inbox/kit-dati/`](./06-smistamento-inbox/kit-dati/) |
+| **Caso 7 · Prep e Follow-up Meeting** | **Semplice (Solo Outlook)** | [`07-prep-followup-meeting/README.md`](./07-prep-followup-meeting/README.md) | [`07-prep-followup-meeting/kit-dati/`](./07-prep-followup-meeting/kit-dati/) |
 
 ---
 
@@ -69,7 +81,9 @@ Kit dati/
 ├── 02-assistenza-tecnica/
 ├── 03-offerte-fornitori/
 ├── 04-verbale-azioni/
-└── 05-stato-commesse/
+├── 05-stato-commesse/
+├── 06-smistamento-inbox/
+└── 07-prep-followup-meeting/
 ```
 
 Regole per il kit:
@@ -694,14 +708,50 @@ Si ricostruiscono i sub-agent del Gradino 2 come catena di blocchi `Gemini Agent
 
 ---
 
-## 10. Checklist del facilitatore
+## 10. Modalità "Semplice" — Solo Connettore Outlook (Casi 6 e 7)
+
+Quando il workshop è rivolto a un pubblico aziendale trasversale o non si vogliono introdurre sub-agent, bucket dati e Workflow Builder, i **Casi 6 e 7** offrono una progressione in **3 livelli semplificati** che utilizza **esclusivamente il connettore Microsoft Outlook** (nessun altro connettore attivo):
+
+1. **Gradino 1 · Prompt (uso diretto in chat):** sintesi o prime bozze veloci su testi copiati e incollati nella chat principale di Gemini Enterprise, per far toccare con mano sia la rapidità sia i limiti della mancanza di contesto aziendale.
+2. **Gradino 2 · Agente (semplice) senza connettori:** singolo agente in *Agent Designer* con istruzioni fisse e file caricati direttamente in *Knowledge* (FAQ, SLA, template, linee guida, rubrica stakeholder), testato ancora con copia-incolla.
+3. **Gradino 3 · Agente (semplice) con connettore Outlook:** lo stesso singolo agente con *Knowledge* + **solo il connettore Microsoft Outlook** abilitato in *Data sources & tools*, per leggere mail/calendario reali e salvare le risposte nella cartella *Bozze* di Outlook (*Create message*, disabilitando *Send mail*).
+
+> **Prerequisito per il Gradino 3 su Outlook:** ogni partecipante si auto-invia 2–3 email di prova (e per il Caso 7 crea 1 evento sul proprio Calendario Outlook) mantenendo il prefisso `[WORKSHOP]` nell'oggetto già predisposto nei file del `kit-dati/`, così l'agente filtra solo i messaggi dell'esercizio senza toccare la posta lavorativa reale.
+
+---
+
+### 10.1 Caso 6 · Smistamento Inbox e Bozze di Risposta (`06-smistamento-inbox/`)
+
+- **Guida completa e prompt:** [`06-smistamento-inbox/README.md`](./06-smistamento-inbox/README.md)
+- **Obiettivo:** classificare le email in arrivo per reparto e priorità/SLA, controllare i dati obbligatori e preparare bozze conformi a FAQ, template e limiti di delega ("Regole Rosse"), salvandole come bozza in Outlook.
+- **Kit dati (`06-smistamento-inbox/kit-dati/`):**
+  - `linee-guida-smistamento-e-sla.md` e `faq-e-template-risposte.md` *(Knowledge per Gradini 2 e 3)*;
+  - `email-01-chiarimento-fattura.txt` *(standard amministrativa)*, `email-02-urgenza-operativa-incompleta.txt` *(blocco ad alta priorità privo di Codice Contratto `NS-XXXX`)*, `email-03-richiesta-rimborso-fuori-delega.txt` *(caso limite: richiesta nota di credito 25% + riduzione preavviso da 60 a 15 giorni)*, `batch-inbox-mattina.txt` *(4 email miste inclusa newsletter da ignorare)*.
+- **Cancello per salire e chiudere:** sull'email 3 l'agente marca `DA SCALARE INTERNAMENTE` (`amministrazione@...` + `ufficio.legale@...`), applica rigorosamente il *Template C* interlocutorio senza promettere sconti/rimborsi/deroghe e al Gradino 3 salva **solo una bozza** in Outlook senza inviarla.
+
+---
+
+### 10.2 Caso 7 · Preparazione e Follow-up Meeting (`07-prep-followup-meeting/`)
+
+- **Guida completa e prompt:** [`07-prep-followup-meeting/README.md`](./07-prep-followup-meeting/README.md)
+- **Obiettivo:** preparare la *Scheda Prep 5 minuti* incrociando l'invito sul Calendario Outlook con lo storico delle email in Posta Outlook prima della riunione, e trasformare gli appunti post-meeting in una bozza di email di follow-up verificata salvata in Outlook.
+- **Kit dati (`07-prep-followup-meeting/kit-dati/`):**
+  - `linee-guida-meeting-e-template.md` e `rubrica-stakeholder-progetto.md` *(Knowledge per Gradini 2 e 3)*;
+  - `invito-calendario-sal-aurora.txt` + `thread-email-pre-meeting.txt` *(per la fase Prep: contengono una domanda tecnica rimasta senza risposta su SAML 4096 bit e richieste fuori perimetro sul Go-Live e sul modulo gratuito "Gestione Gare")*;
+  - `appunti-post-meeting-completi.txt` + `appunti-post-meeting-caso-limite.txt` *(per la fase Follow-up: il caso limite contiene un'azione senza owner, un'azione assegnata a `Stefano Riva` assente dalla rubrica, una scadenza vaga `"appena possibile"` e una richiesta fuori contratto da isolare)*.
+- **Cancello per salire e chiudere:** in fase *Prep* l'agente isola le richieste extra-contratto tra gli *Argomenti fuori perimetro*; in fase *Follow-up* segnala tutte e 4 le trappole senza inventare email per `Stefano Riva` e salva al Gradino 3 **solo la bozza** di follow-up in Outlook senza modificare il calendario né inviare messaggi.
+
+---
+
+## 11. Checklist del facilitatore
 
 ### Il giorno prima
 
-- [ ] Agent Designer e Workflow Builder visibili con un account di prova dei partecipanti
-- [ ] Kit dati completo nelle cinque sottocartelle, accessibile dagli account dei partecipanti
-- [ ] Ogni caso costruito almeno una volta fino al gradino 2, con i test che passano
-- [ ] Almeno un workflow del gradino 3 provato fino all'approvazione in *Runs*
+- [ ] Agent Designer (e Workflow Builder per i Casi 1–5) visibili con un account di prova dei partecipanti
+- [ ] Kit dati completo nelle sette sottocartelle, accessibile dagli account dei partecipanti
+- [ ] Per i Casi 6–7: connettore **Microsoft Outlook** autorizzato e testato in lettura + creazione bozza (*Create message*, con *Send mail* disabilitato)
+- [ ] Ogni caso scelto costruito almeno una volta fino al gradino target, con i test che passano
+- [ ] Almeno un workflow del gradino 3 (Casi 1–5) o una creazione bozza Outlook (Casi 6–7) provata end-to-end
 - [ ] Etichette dell'interfaccia allineate a questa guida
 
 ### Durante la costruzione
@@ -717,7 +767,7 @@ Si ricostruiscono i sub-agent del Gradino 2 come catena di blocchi `Gemini Agent
 
 ---
 
-## 11. Problemi frequenti
+## 12. Problemi frequenti
 
 | Sintomo | Causa probabile | Cosa suggerire |
 |---|---|---|
@@ -727,4 +777,5 @@ Si ricostruiscono i sub-agent del Gradino 2 come catena di blocchi `Gemini Agent
 | Due sub-agent danno risposte diverse | Fonti sovrapposte | Far puntare ogni sub-agent solo ai dati nel bucket che gli servono |
 | Il workflow non riceve i dati del trigger | Riferimento all'output mancante nel prompt del passaggio | Passare esplicitamente i campi con il riferimento all'output del passaggio precedente |
 | Nessuno trova l'approvazione | Non si guarda in *Runs* | Mostrare lo stato *Needs Review* e dove si apre l'esecuzione |
-| Il connettore non può scrivere | Azione non abilitata in sandbox | Chiudere il flusso dopo l'approvazione con l'output finale |
+| Il connettore Outlook legge troppe email personali (Casi 6–7) | Ricerca troppo ampia nel prompt | Usare sempre il prefisso `[WORKSHOP]` nell'oggetto delle email/eventi di test e chiederlo nel prompt |
+| Il connettore non può scrivere / creare la bozza | Azione *Create message* non abilitata in sandbox | Verificare le azioni del connettore Outlook oppure chiudere con la bozza pronta in chat da copiare |

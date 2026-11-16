@@ -1,0 +1,12 @@
+Oggetto email / nota rapida: [WORKSHOP-APPUNTI] Note grezze SAL Progetto Portale Fornitori (PF-2026) — 17/11/2026
+Partecipanti presenti: Elena Gatti, Marco Sala, Paolo Bernardi, Chiara Neri, Andrea Longo.
+
+Note buttate giù a caldo dopo il SAL:
+- Concordato l'uso del certificato SAML 2.0 a 4096 bit per il Single Sign-On di collaudo.
+- Deciso di avviare comunque la sessione UAT il 24/11/2026 partendo con il primo blocco di 800 fornitori già bonificati.
+- Prima del caricamento però bisogna inviare al team IT di Gruppo Aurora il tracciato CSV di esempio aggiornato con la nuova colonna "Codice SDI" entro mercoledì 18/11/2026 (in riunione non abbiamo fissato chi lo manda).
+- Marco Sala attiva il connettore SSO sull'ambiente di collaudo entro venerdì 20/11/2026.
+- Chiara Neri consegnerà il secondo blocco con le restanti 400 anagrafiche fornitori appena possibile, finita la pulizia dei codici fiscali.
+- Per scrupolo lato infrastruttura cliente, Chiara ha detto che Stefano Riva eseguirà una verifica dei permessi sul server SFTP entro lunedì 23/11/2026.
+- Andrea Longo completa i test UAT sulle prime 20 pratiche di qualifica entro mercoledì 25/11/2026.
+- In chiusura Paolo Bernardi ha ribadito la richiesta di anticipare il Go-Live al 04/12/2026 e di includere gratuitamente il modulo "Gestione Gare" già nel rilascio di dicembre; Elena ha risposto che non può confermarlo in seduta e che passerà la richiesta a Silvia De Luca per una valutazione separata.

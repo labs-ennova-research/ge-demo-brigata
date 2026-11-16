@@ -1,0 +1,27 @@
+=== EMAIL 1 ===
+Da: l.ferrari@tecnocarta-packaging.example
+Data: 16/11/2026 08:20
+Oggetto: [WORKSHOP] Preventivo estensione 15 nuove utenze reparto vendite
+Testo:
+Buongiorno, siamo già vostri clienti (Contratto NS-2210, TecnoCarta S.r.l.). Da gennaio vorremmo attivare 15 nuove utenze per la rete commerciale Italia. Potete prepararci un'offerta dedicata? Grazie, Laura Ferrari.
+
+=== EMAIL 2 ===
+Da: newsletter@osservatorio-digitale-b2b.example
+Data: 16/11/2026 08:35
+Oggetto: [WORKSHOP] Rassegna settimanale Cloud & AI — Iscriviti al webinar gratuito del 26 novembre
+Testo:
+Scopri i trend 2027 sulla digitalizzazione dei processi aziendali! Scarica il report gratuito e prenota il tuo posto al webinar online. Messaggio inviato automaticamente da indirizzo no-reply.
+
+=== EMAIL 3 ===
+Da: tesoreria@officine-bassi.example
+Data: 16/11/2026 08:52
+Oggetto: [WORKSHOP] Variazione coordinate IBAN per addebito SDD (Contratto NS-1904)
+Testo:
+Buongiorno, vi informiamo che dal prossimo mese Officine Bassi S.r.l. cambierà banca di appoggio per gli addebiti SEPA. Qual è la procedura e con quanto anticipo dobbiamo inviarvi i dati prima della fattura del 30 novembre? Cordiali saluti, Ufficio Tesoreria.
+
+=== EMAIL 4 ===
+Da: direzione.acquisti@gruppomeridiana-retail.example
+Data: 16/11/2026 10:05
+Oggetto: [WORKSHOP] Contestazione ritardo modulo Analytics e richiesta nota di credito (Contratto NS-3190)
+Testo:
+Chiediamo conferma scritta entro oggi dell'emissione di una nota di credito del 25% sul canone trimestrale e della riduzione del preavviso di disdetta da 60 a 15 giorni per il ritardo di attivazione del mese scorso. Dott. Valerio Conti — Gruppo Retail Meridiana S.r.l.
