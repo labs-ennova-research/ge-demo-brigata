@@ -1,0 +1,16 @@
+Titolo evento: [WORKSHOP] SAL Tecnico Pre-FAT Kestrel-500 Hybrid (COMM-2026-088) — Aerospace Tooling Nord
+Data e ora: Mercoledì 18 Novembre 2026, 14:30 – 15:30
+Luogo / Link: Sala Riunioni Collaudi / Collegamento video
+Organizzatore: Giulia Moretti <giulia.moretti@lfam-demo.example>
+Partecipanti invitati:
+- Giulia Moretti <giulia.moretti@lfam-demo.example>
+- Luca Visconti <luca.visconti@lfam-demo.example>
+- Sara Fontana <sara.fontana@lfam-demo.example>
+- Ing. Roberto Bassi <r.bassi@aerospacetooling.example>
+- Ing. Chiara Galli <c.galli@aerospacetooling.example>
+
+Descrizione / Scaletta:
+SAL tecnico di allineamento in vista della ripetizione FAT del 26/11/2026 sulla cella Kestrel-500 Hybrid (matricola KS-2026-011):
+1. Piano di chiusura deviazione FAT-03 (tolleranza fresatura mandrino KM-18) e riserva FAT-05 (allarme aria K404).
+2. Verifica requisiti sito stabilimento Varese (FAT-06: portata pavimento, aria compressa e aspirazione polveri).
+3. Conferma milestone Go/No-Go Spedizione (04/12/2026), spedizione (11/12/2026) e Go-Live SAT (22/12/2026).

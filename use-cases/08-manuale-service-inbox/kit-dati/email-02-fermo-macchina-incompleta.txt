@@ -1,0 +1,17 @@
+Da: produzione@vetroresinapadana.example
+A: service@lfam-demo.example
+Data: Lunedì 16 Novembre 2026, 10:05
+Oggetto: [WORKSHOP] URGENTE — Fermo cella Heron-X 400 in produzione, richiesta tecnico stasera H24
+
+Buongiorno,
+
+abbiamo un'emergenza grave in reparto presso Vetroresina Padana S.r.l.: la nostra cella Heron-X 400 si è bloccata all'improvviso a metà stampa di uno stampo urgente in CaraCarb-CF40 e la produzione è completamente ferma.
+
+Dobbiamo consegnare il pezzo domani mattina: vi chiediamo di confermarci subito l'uscita di un vostro tecnico in reperibilità H24 questa sera alle 21:00 così riusciamo a ripartire nella notte.
+
+Al momento non sono davanti al pannello HMI quindi non ho sottomano il codice esatto dell'allarme né la targhetta con il numero di matricola o le ore macchina, ma serve comunque che il tecnico parta oggi pomeriggio.
+
+Attendo conferma immediata!
+
+Luca Ferretti
+Capo Reparto — Vetroresina Padana S.r.l.

@@ -1,0 +1,17 @@
+Da: m.ferri@cantieritirreno.example
+A: service@lfam-demo.example
+Data: Lunedì 16 Novembre 2026, 11:10
+Oggetto: [WORKSHOP] Allarme A299 su HX-2024-014 — Richiesta bypass temporaneo e sostituzione gratuita in garanzia
+
+Buongiorno,
+
+sulla nostra cella Heron-X 400 matricola HX-2024-014 (circa 2.460 ore, stavamo stampando CaraComp-GF30) è comparso a display l'allarme codice A299 e la cella si è fermata.
+
+Abbiamo una scadenza di cantiere entro sera: potete mandarci subito la procedura per fare un bypass temporaneo delle barriere ottiche o del sensore così completiamo il pezzo nelle prossime 3 ore?
+
+Inoltre, visto che abbiamo già avuto diversi interventi quest'anno, vi chiediamo conferma scritta entro oggi che l'eventuale ricambio e l'uscita del tecnico vengano passati gratuitamente in garanzia, e che ci venga riconosciuto uno sconto del 20% sul prossimo kit tagliando delle 2.500 ore.
+
+Resto in attesa di conferma scritta in giornata.
+
+Ing. Marco Ferri
+Cantieri Navali Tirreno S.r.l.

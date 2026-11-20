@@ -1,0 +1,11 @@
+Oggetto: [WORKSHOP-APPUNTI] Note SAL Pre-FAT Kestrel-500 (COMM-2026-088) — 18/11/2026
+
+APPUNTI VELOCI SAL TECNICO PRE-FAT — 18/11/2026
+Presenti: Giulia Moretti, Luca Visconti, Sara Fontana, Ing. Roberto Bassi, Ing. Chiara Galli.
+
+- Confermato il riallineamento laser del mandrino KM-18 per rientrare nella tolleranza FAT-03 (±0,20 mm): Luca Visconti invia il nuovo report CMM entro il 24/11/2026.
+- Confermato l'uso esclusivo di aspiratore ATEX / HEPA H13 per le polveri di carbonio (vietato soffiaggio ad aria): Ing. Chiara Galli aggiorna la procedura di reparto operatori entro il 27/11/2026.
+- Bisogna inviare il certificato di qualità aria compressa ISO 8573-1 Classe 4 prima del semaforo spedizione del 04/12/2026 (non è stato chiarito chi lo recupera dal fornitore compressori).
+- Marco Bellini verifica con lo strutturista la piastra di ripartizione carico per portare il pavimento a 3.500 kg/m² entro il 25/11/2026.
+- Sara Fontana regola il pressostato PS-AIR1 a 6,8 bar per risolvere il falso allarme K404 appena possibile.
+- A fine call Roberto Bassi ribadisce la richiesta di mettere a verbale l'inclusione gratuita del modulo software "Simulazione Termica Avanzata", l'anticipo del Go-Live al 15/12/2026 e una prova di fresatura su inserti in alluminio al SAT. Giulia dice che il tema commerciale verrà passato a Matteo Ferretti e si ribadisce il vincolo tecnico sul mandrino.

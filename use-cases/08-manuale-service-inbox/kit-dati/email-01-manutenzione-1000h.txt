@@ -1,0 +1,19 @@
+Da: e.costa@compositeaerotech.example
+A: service@lfam-demo.example
+Data: Lunedì 16 Novembre 2026, 09:20
+Oggetto: [WORKSHOP] Informazioni tagliando 1.000 ore e serraggio ugello Heron-X 400 (HX-2025-029)
+
+Buongiorno team Service,
+
+siamo Composite Aerotech S.p.A.: la nostra cella Heron-X 400 (matricola HX-2025-029) ha raggiunto 985 ore di lavoro e vorremmo pianificare il tagliando delle 1.000 ore la prossima settimana.
+
+Potreste indicarci cortesemente:
+1. Quali operazioni e quale codice kit ricambi ufficiale sono previsti dal manuale per la manutenzione delle 1.000 ore?
+2. Dovendo sostituire le guarnizioni dell'ugello, a quale temperatura e a quale coppia dinamometrica va serrato l'ugello, e quali DPI sono obbligatori per l'operatore?
+3. Per pulire velocemente l'esterno dell'ugello dai residui di CaraCarb-CF40 possiamo usare una normale spazzola in acciaio?
+
+Grazie mille in anticipo per il supporto!
+
+Un cordiale saluto,
+Ing. Elena Costa
+Responsabile Produzione Compositi — Composite Aerotech S.p.A.

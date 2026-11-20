@@ -1,0 +1,45 @@
+Oggetto: [WORKSHOP] COMM-2026-088 — Chiarimenti tecnici Kestrel-500 e richieste prima del SAL
+
+--- EMAIL 1 ---
+Da: c.galli@aerospacetooling.example
+A: giulia.moretti@lfam-demo.example; luca.visconti@lfam-demo.example
+Data: Venerdì 13 Novembre 2026, 16:40
+
+Buongiorno Giulia e Luca,
+
+ho ricevuto la bozza del report Pre-FAT e avrei bisogno di tre chiarimenti tecnici rapidi per il nostro team di manutenzione prima del SAL di mercoledì 18:
+1. Il nostro capannone ha una soletta certificata a 2.800 kg/m²: possiamo comunque installare la Kestrel-500 Hybrid senza fare opere aggiuntive, oppure è un blocco reale?
+2. Quale classe esatta di essiccazione/qualità aria compressa (norma ISO 8573-1 e punto di rugiada) e quale tipo di filtro sull'aspirazione polveri servono prima del 14/12/2026?
+3. Per velocizzare la pulizia a fine turno dopo la fresatura del CaraCarb-CF40, i nostri operatori possono soffiare le polveri di fibra di carbonio dentro la cabina con le pistole ad aria compressa già installate a parete?
+
+Grazie mille,
+Ing. Chiara Galli
+Responsabile Manutenzione & Facility — Aerospace Tooling Nord S.p.A.
+
+--- EMAIL 2 ---
+Da: giulia.moretti@lfam-demo.example
+A: c.galli@aerospacetooling.example; luca.visconti@lfam-demo.example
+Data: Lunedì 16 Novembre 2026, 09:10
+
+Ciao Chiara,
+
+grazie per la segnalazione! Confermo che l'officina sta già eseguendo il riallineamento laser del mandrino KM-18 per rientrare nella tolleranza FAT-03 entro la riprova del 26/11/2026. Vediamoci direttamente al SAL di mercoledì 18 alle 14:30 per fare il punto complessivo sulla spedizione.
+
+A mercoledì,
+Giulia Moretti
+
+--- EMAIL 3 ---
+Da: r.bassi@aerospacetooling.example
+A: giulia.moretti@lfam-demo.example; c.galli@aerospacetooling.example
+Data: Martedì 17 Novembre 2026, 15:25
+
+Buongiorno Giulia,
+
+domani al SAL vorrei chiudere tre punti molto importanti per la nostra Direzione:
+- Vorremmo verificare se sull'elettromandrino KM-18 della Kestrel-500 possiamo fresare anche piccoli inserti in lega di alluminio già annegati negli stampi compositi.
+- Per chiudere l'anno fiscale ci serve anticipare il Go-Live / SAT dal 22/12/2026 al 15/12/2026.
+- A compensazione del piccolo ritardo emerso sulla prova FAT-03, chiediamo di includere gratuitamente il modulo software "Simulazione Termica Avanzata" e la qualifica del polimero PEKK-CF già in fase di avviamento.
+
+A domani,
+Ing. Roberto Bassi
+Direttore Stabilimento — Aerospace Tooling Nord S.p.A.

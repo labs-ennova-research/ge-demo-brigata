@@ -1,6 +1,6 @@
 # Workshop "Crea il tuo agente": guida alla costruzione dei casi
 
-Guida per il facilitatore del modulo **Gemini Enterprise e agenti no-code**. Spiega come preparare il kit dati e come costruire, gradino per gradino, i **sette casi** disponibili in due modalità didattiche:
+Guida per il facilitatore del modulo **Gemini Enterprise e agenti no-code**. Spiega come preparare il kit dati e come costruire, gradino per gradino, i **nove casi** disponibili in tre modalità didattiche:
 
 ### A) Modalità Standard / Avanzata (Casi 1–5)
 Progressione da agente singolo a sistema multi-agente e workflow:
@@ -20,6 +20,17 @@ Progressione pensata per utenti di business trasversali usando **esclusivamente 
 | 2 · Agente (semplice) senza connettori | Agent Designer | Agente singolo configurato con istruzioni fisse e documenti di contesto caricati in *Knowledge* (FAQ, SLA, template, linee guida, rubrica) |
 | 3 · Agente (semplice) con connettore Outlook | Agent Designer + Microsoft Outlook | Lo stesso agente singolo collegato **solo a Microsoft Outlook** per leggere mail/calendario e salvare bozze di risposta o follow-up (*Create message*, senza invio automatico) |
 
+### C) Workshop 2h — Progetto + Manuale Tecnico + Solo Outlook (Casi 8–9)
+Progressione pratica in 2 ore calibrata su un contesto industriale di produzione macchine, usando **solo Microsoft Outlook** come connettore (nessun connettore Teams, nessun sub-agent, nessun workflow):
+
+| Gradino | Strumento | Cosa si costruisce |
+|---|---|---|
+| 1 · Progetto Gemini | Progetti in Gemini Enterprise | Creazione di un Progetto con 3 documenti di commessa/flotta per superare test di **estrazione dati trasversali** fra più documenti |
+| 2 · Agente (semplice) senza connettori | Agent Designer | Agente tecnico singolo con istruzioni fisse e **Manuale di Uso e Manutenzione** della macchina (`Heron-X 400` / `Kestrel-500 Hybrid`) + linee guida caricati in *Knowledge* |
+| 3 · Agente (semplice) con connettore Outlook | Agent Designer + Microsoft Outlook | Lo stesso agente tecnico collegato **solo a Microsoft Outlook** per smistare email tecniche o preparare/verbalizzare meeting salvando le risposte in *Bozze* (*Create message*, senza invio) |
+
+> **Sfida avanzata per i gruppi più veloci (Workshop 2h):** oltre ai Casi 8 e 9, è possibile proporre il **[Caso 4 · Dal verbale alle azioni](./04-verbale-azioni/README.md)** lavorando sempre sulla **trascrizione (`transcript`) incollata** (non essendo disponibile il connettore Microsoft Teams).
+
 Tutti i gruppi partono dal gradino 1. Si sale al gradino successivo solo quando si supera il **test per salire**: il facilitatore fa da "cancello" e verifica il test di persona prima di dare il via libera.
 
 > **Nota sull'interfaccia.** I nomi di menu e pulsanti citati qui seguono la documentazione Google di Agent Designer e Workflow Builder, che è in inglese e cambia spesso. Prima della prima edizione, fai un giro completo nella sandbox e allinea le etichette a quello che vedono davvero i partecipanti.
@@ -30,17 +41,20 @@ Tutti i gruppi partono dal gradino 1. Si sale al gradino successivo solo quando 
 
 Per facilitare il workshop e la preparazione, ogni caso ha una propria sottocartella con:
 - **`README.md`**: tutte le configurazioni e i prompt pronti da copiare/incollare per i **3 gradini** del caso, oltre ai test di verifica ("cancelli").
-- **`kit-dati/`**: i file fittizi pronti all'uso (testi, email, inviti, FAQ, template, tabelle Markdown, schede tecniche, trascrizioni) già allineati con i casi limite richiesti dai test.
+- **`kit-dati/`**: i file fittizi pronti all'uso (dossier di progetto, manuali tecnici di uso e manutenzione, email, inviti, FAQ, template, tabelle Markdown, schede tecniche, trascrizioni) già allineati con i casi limite richiesti dai test.
+- **`*_revisione.docx`**: scheda partecipanti in formato Word pronta da stampare o distribuire in aula.
 
 | Caso | Modalità | Cartella e Guida Agenti | Kit Dati |
 |---|---|---|---|
 | **Caso 1 · Richiesta d'offerta** | Avanzata (Multi-Agente + Workflow) | [`01-richiesta-offerta/README.md`](./01-richiesta-offerta/README.md) | [`01-richiesta-offerta/kit-dati/`](./01-richiesta-offerta/kit-dati/) |
 | **Caso 2 · Assistenza tecnica** | Avanzata (Multi-Agente + Workflow) | [`02-assistenza-tecnica/README.md`](./02-assistenza-tecnica/README.md) | [`02-assistenza-tecnica/kit-dati/`](./02-assistenza-tecnica/kit-dati/) |
 | **Caso 3 · Offerte fornitori** | Avanzata (Multi-Agente + Workflow) | [`03-offerte-fornitori/README.md`](./03-offerte-fornitori/README.md) | [`03-offerte-fornitori/kit-dati/`](./03-offerte-fornitori/kit-dati/) |
-| **Caso 4 · Dal verbale alle azioni** | Avanzata (Multi-Agente + Workflow) | [`04-verbale-azioni/README.md`](./04-verbale-azioni/README.md) | [`04-verbale-azioni/kit-dati/`](./04-verbale-azioni/kit-dati/) |
+| **Caso 4 · Dal verbale alle azioni** | Avanzata / Sfida 2h *(con transcript)* | [`04-verbale-azioni/README.md`](./04-verbale-azioni/README.md) | [`04-verbale-azioni/kit-dati/`](./04-verbale-azioni/kit-dati/) |
 | **Caso 5 · Stato commesse** | Avanzata (Multi-Agente + Workflow) | [`05-stato-commesse/README.md`](./05-stato-commesse/README.md) | [`05-stato-commesse/kit-dati/`](./05-stato-commesse/kit-dati/) |
-| **Caso 6 · Smistamento Inbox e Bozze** | **Semplice (Solo Outlook)** | [`06-smistamento-inbox/README.md`](./06-smistamento-inbox/README.md) | [`06-smistamento-inbox/kit-dati/`](./06-smistamento-inbox/kit-dati/) |
-| **Caso 7 · Prep e Follow-up Meeting** | **Semplice (Solo Outlook)** | [`07-prep-followup-meeting/README.md`](./07-prep-followup-meeting/README.md) | [`07-prep-followup-meeting/kit-dati/`](./07-prep-followup-meeting/kit-dati/) |
+| **Caso 6 · Smistamento Inbox e Bozze** | Semplice (Prompt + Solo Outlook) | [`06-smistamento-inbox/README.md`](./06-smistamento-inbox/README.md) | [`06-smistamento-inbox/kit-dati/`](./06-smistamento-inbox/kit-dati/) |
+| **Caso 7 · Prep e Follow-up Meeting** | Semplice (Prompt + Solo Outlook) | [`07-prep-followup-meeting/README.md`](./07-prep-followup-meeting/README.md) | [`07-prep-followup-meeting/kit-dati/`](./07-prep-followup-meeting/kit-dati/) |
+| **Caso 8 · Assistenza Macchine e Inbox** | **Workshop 2h (Progetto + Manuale + Outlook)** | [`08-manuale-service-inbox/README.md`](./08-manuale-service-inbox/README.md) | [`08-manuale-service-inbox/kit-dati/`](./08-manuale-service-inbox/kit-dati/) |
+| **Caso 9 · Collaudo Macchina e Meeting** | **Workshop 2h (Progetto + Manuale + Outlook)** | [`09-manuale-commessa-meeting/README.md`](./09-manuale-commessa-meeting/README.md) | [`09-manuale-commessa-meeting/kit-dati/`](./09-manuale-commessa-meeting/kit-dati/) |
 
 ---
 
@@ -83,7 +97,9 @@ Kit dati/
 ├── 04-verbale-azioni/
 ├── 05-stato-commesse/
 ├── 06-smistamento-inbox/
-└── 07-prep-followup-meeting/
+├── 07-prep-followup-meeting/
+├── 08-manuale-service-inbox/
+└── 09-manuale-commessa-meeting/
 ```
 
 Regole per il kit:
@@ -743,20 +759,56 @@ Quando il workshop è rivolto a un pubblico aziendale trasversale o non si vogli
 
 ---
 
-## 11. Checklist del facilitatore
+## 11. Workshop 2h — Progetto + Manuale Tecnico + Solo Outlook (Casi 8 e 9)
+
+Questi due casi rispondono alla scaletta del **Workshop da 2 ore** in ambito industriale/manifatturiero (costruttore di macchine robotizzate LFAM) usando **esclusivamente il connettore Microsoft Outlook** (nessun connettore Teams, nessun sub-agent, nessun workflow):
+
+1. **Gradino 1 · Progetto Gemini (Estrazione dati trasversale):** i partecipanti creano un Progetto con **3 documenti interconnessi** di flotta o commessa e superano 3 test incrociati (calcoli numerici, garanzie/scadenze, semaforo *Go/No-Go* e controllo anti-allucinazione su dati inesistenti).
+2. **Gradino 2 · Agente (semplice) senza connettori (Ambito Tecnico — Manuale Macchina):** in *Agent Designer* costruiscono un agente singolo con istruzioni fisse e un **Manuale fuffa di Uso e Manutenzione** completo in 5 capitoli (limiti operativi, DPI e divieti di sicurezza, manutenzione programmata, allarmi + codice assente) caricato in *Knowledge*.
+3. **Gradino 3 · Agente (semplice) con solo connettore Outlook:** collegano lo stesso agente tecnico **solo a Microsoft Outlook** per leggere email (e calendario nel Caso 9) con prefisso `[WORKSHOP]` e salvare in automatico bozze di risposta o follow-up nella cartella *Bozze* (*Create message*, mai invio automatico).
+
+> **Sfida avanzata per i gruppi più veloci:** al termine del Caso 8 o del Caso 9, i gruppi più rapidi possono affrontare il **[Caso 4 · Dal verbale alle azioni](./04-verbale-azioni/README.md)** lavorando sempre con **trascrizione (`transcript`) incollata** (non essendo disponibile il connettore Microsoft Teams).
+
+---
+
+### 11.1 Caso 8 · Assistenza Tecnica Macchine e Smistamento Inbox (`08-manuale-service-inbox/`)
+
+- **Guida completa e prompt:** [`08-manuale-service-inbox/README.md`](./08-manuale-service-inbox/README.md) · **Scheda partecipanti:** [`2026-11-20_Caso8-Manuale-service-inbox_revisione.docx`](./08-manuale-service-inbox/2026-11-20_Caso8-Manuale-service-inbox_revisione.docx)
+- **Obiettivo:** (1) incrociare anagrafica flotta `Heron-X 400`, storico interventi 2026 e listino ricambi in un **Progetto Gemini**; (2) creare un **agente tecnico** basato sul **Manuale di Uso e Manutenzione `Heron-X 400` (Rev. 3.1)**; (3) collegarlo a **Microsoft Outlook (Posta)** per smistare le email clienti e salvare le bozze di risposta senza inviarle.
+- **Kit dati (`08-manuale-service-inbox/kit-dati/`):**
+  - `dossier-01-anagrafica-macchine-clienti.md`, `dossier-02-registro-interventi-e-guasti.md`, `dossier-03-listino-ricambi-e-condizioni.md` *(Progetto Gradino 1 — 5 interventi fatturabili su 10 per € 3.250; 2 tagliandi < 50 h con sconto 15% Premium; trappola `HX-2025-099` e trasporto assente)*;
+  - `manuale-uso-manutenzione-heron-x400.md` e `linee-guida-service-e-template.md` *(Knowledge Gradini 2 e 3)*;
+  - `email-01-manutenzione-1000h.txt`, `email-02-fermo-macchina-incompleta.txt`, `email-03-allarme-sconosciuto-e-garanzia.txt` *(caso limite: `A299` assente + richiesta bypass barriere + garanzia gratuita + sconto 20%)*, `email-04-newsletter-fiera.txt` *(rumore `SOLO INFORMATIVA`)*.
+- **Cancello per salire e chiudere:** rifiuta sempre il bypass delle barriere ottiche (Cap. 2), dichiara `A299` non documentato senza inventare verifiche, scala sia a `ingegneria.l2@lfam-demo.example` sia a `contratti@lfam-demo.example` usando il *Template C*, e al Gradino 3 salva **solo una bozza** in Outlook.
+
+---
+
+### 11.2 Caso 9 · Collaudo Macchina, Supporto Tecnico e Gestione Meeting (`09-manuale-commessa-meeting/`)
+
+- **Guida completa e prompt:** [`09-manuale-commessa-meeting/README.md`](./09-manuale-commessa-meeting/README.md) · **Scheda partecipanti:** [`2026-11-20_Caso9-Manuale-commessa-meeting_revisione.docx`](./09-manuale-commessa-meeting/2026-11-20_Caso9-Manuale-commessa-meeting_revisione.docx)
+- **Obiettivo:** (1) incrociare capitolato `COMM-2026-088`, report prove Pre-FAT e rubrica/milestone in un **Progetto Gemini**; (2) creare un **agente tecnico/PMO** sul **Manuale di Uso e Manutenzione `Kestrel-500 Hybrid` (Rev. 2.4)**; (3) collegarlo a **Microsoft Outlook (Calendario + Posta)** per produrre la *Scheda Prep 5 minuti* e salvare il `[FOLLOW-UP]` in Bozze senza invio.
+- **Kit dati (`09-manuale-commessa-meeting/kit-dati/`):**
+  - `dossier-01-capitolato-ordine-cliente.md`, `dossier-02-report-prove-fat.md`, `dossier-03-rubrica-stakeholder-e-piano.md` *(Progetto Gradino 1 — 3 prove con deviazioni su 6, stato `NO-GO` per 2 criticità aperte, trappola `FAT-07`/`PEKK-CF` e penali assenti)*;
+  - `manuale-uso-manutenzione-kestrel-500.md`, `linee-guida-meeting-tecnici-e-template.md` e `dossier-03-rubrica-stakeholder-e-piano.md` *(Knowledge Gradini 2 e 3)*;
+  - `invito-calendario-sal-kestrel.txt`, `thread-email-pre-meeting-kestrel.txt` *(quesiti tecnici inevasi risolti dal Manuale + divieto alluminio + richieste fuori contratto)*, `appunti-post-meeting-completi.txt` e `appunti-post-meeting-caso-limite.txt` *(4 trappole: azione senza owner, `Marco Bellini` non in rubrica, scadenza vaga `"appena possibile"`, richieste extra-contratto/alluminio)*.
+- **Cancello per salire e chiudere:** blocca fresatura alluminio e aria compressa su carbonio (Cap. 2), dichiara `K488` non documentato senza inventare verifiche, individua tutte e 4 le trappole negli appunti post-meeting senza inventare email per `Marco Bellini` e salva al Gradino 3 **solo la bozza** `[FOLLOW-UP]` in Outlook.
+
+---
+
+## 12. Checklist del facilitatore
 
 ### Il giorno prima
 
-- [ ] Agent Designer (e Workflow Builder per i Casi 1–5) visibili con un account di prova dei partecipanti
-- [ ] Kit dati completo nelle sette sottocartelle, accessibile dagli account dei partecipanti
-- [ ] Per i Casi 6–7: connettore **Microsoft Outlook** autorizzato e testato in lettura + creazione bozza (*Create message*, con *Send mail* disabilitato)
+- [ ] Progetti Gemini, Agent Designer (e Workflow Builder per i Casi 1–5) visibili con un account di prova dei partecipanti
+- [ ] Kit dati completo nelle nove sottocartelle, accessibile dagli account dei partecipanti
+- [ ] Per i Casi 6–9: connettore **Microsoft Outlook** autorizzato e testato in lettura + creazione bozza (*Create message*, con *Send mail* disabilitato)
 - [ ] Ogni caso scelto costruito almeno una volta fino al gradino target, con i test che passano
-- [ ] Almeno un workflow del gradino 3 (Casi 1–5) o una creazione bozza Outlook (Casi 6–7) provata end-to-end
+- [ ] Almeno un workflow del gradino 3 (Casi 1–5) o una creazione bozza Outlook (Casi 6–9) provata end-to-end
 - [ ] Etichette dell'interfaccia allineate a questa guida
 
 ### Durante la costruzione
 
-- [ ] Ogni gruppo usa il prefisso nei nomi degli agenti
+- [ ] Ogni gruppo usa il prefisso nei nomi dei progetti e degli agenti
 - [ ] Il facilitatore verifica il test di persona prima del passaggio di gradino
 - [ ] Chi è bloccato da più di 5 minuti riceve un suggerimento sulle istruzioni, non la soluzione
 
@@ -767,7 +819,7 @@ Quando il workshop è rivolto a un pubblico aziendale trasversale o non si vogli
 
 ---
 
-## 12. Problemi frequenti
+## 13. Problemi frequenti
 
 | Sintomo | Causa probabile | Cosa suggerire |
 |---|---|---|
@@ -777,5 +829,5 @@ Quando il workshop è rivolto a un pubblico aziendale trasversale o non si vogli
 | Due sub-agent danno risposte diverse | Fonti sovrapposte | Far puntare ogni sub-agent solo ai dati nel bucket che gli servono |
 | Il workflow non riceve i dati del trigger | Riferimento all'output mancante nel prompt del passaggio | Passare esplicitamente i campi con il riferimento all'output del passaggio precedente |
 | Nessuno trova l'approvazione | Non si guarda in *Runs* | Mostrare lo stato *Needs Review* e dove si apre l'esecuzione |
-| Il connettore Outlook legge troppe email personali (Casi 6–7) | Ricerca troppo ampia nel prompt | Usare sempre il prefisso `[WORKSHOP]` nell'oggetto delle email/eventi di test e chiederlo nel prompt |
+| Il connettore Outlook legge troppe email personali (Casi 6–9) | Ricerca troppo ampia nel prompt | Usare sempre il prefisso `[WORKSHOP]` nell'oggetto delle email/eventi di test e chiederlo nel prompt |
 | Il connettore non può scrivere / creare la bozza | Azione *Create message* non abilitata in sandbox | Verificare le azioni del connettore Outlook oppure chiudere con la bozza pronta in chat da copiare |

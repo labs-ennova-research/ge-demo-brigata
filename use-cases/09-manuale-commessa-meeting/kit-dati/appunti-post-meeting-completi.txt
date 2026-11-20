@@ -1,0 +1,13 @@
+Oggetto: [WORKSHOP-APPUNTI] Note SAL Pre-FAT Kestrel-500 (COMM-2026-088) — 18/11/2026 (Versione Regolare)
+
+APPUNTI SAL TECNICO PRE-FAT — 18/11/2026 (14:30-15:30)
+Presenti: Giulia Moretti, Luca Visconti, Sara Fontana, Ing. Roberto Bassi, Ing. Chiara Galli.
+
+Decisioni condivise:
+- Confermata la data di ripetizione FAT in officina per il 26/11/2026 sui provini CaraCarb-CF40 e PC-CF20.
+- Confermata la data contrattuale di spedizione (11/12/2026) e Go-Live SAT (22/12/2026), subordinata alla chiusura delle 2 deviazioni critiche entro il 04/12/2026.
+
+Azioni concordate:
+1. Luca Visconti completa il riallineamento laser del mandrino KM-18 e invia il nuovo report CMM entro ±0,20 mm entro il 24/11/2026.
+2. Sara Fontana esegue la taratura del pressostato PS-AIR1 a 6,8 bar e ripete i 5 cicli di cambio testa entro il 25/11/2026.
+3. Ing. Chiara Galli consegna il certificato aria compressa ISO 8573-1 Classe 4 e il progetto della piastra di ripartizione carico per arrivare a 3.500 kg/m² entro il 01/12/2026.
