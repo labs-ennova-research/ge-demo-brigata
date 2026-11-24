@@ -1,0 +1,12 @@
+Email / quick note subject: [WORKSHOP-NOTES] Raw Notes — Supplier Portal Project Status Review (PF-2026) — 17/11/2026
+Attendees present: Elena Gatti, Marco Sala, Paolo Bernardi, Chiara Neri, Andrea Longo.
+
+Rough notes jotted down right after the Status Review:
+- Agreed to use the 4096-bit SAML 2.0 certificate for staging Single Sign-On.
+- Decided to go ahead and start the UAT session on 24/11/2026 starting with the first batch of 800 already cleansed suppliers.
+- Before the upload, however, we need to send Gruppo Aurora's IT team the updated sample CSV layout with the new "SDI Code" column by Wednesday 18/11/2026 (we did not assign who sends it during the meeting).
+- Marco Sala enables the SSO connector on the staging environment by Friday 20/11/2026.
+- Chiara Neri will deliver the second batch with the remaining 400 supplier records as soon as possible, once tax ID cleansing is finished.
+- Just to be thorough on the customer infrastructure side, Chiara mentioned that Stefano Riva will run a permissions check on the SFTP server by Monday 23/11/2026.
+- Andrea Longo completes UAT testing on the first 20 qualification records by Wednesday 25/11/2026.
+- At the end of the call, Paolo Bernardi reiterated the request to pull Go-Live forward to 04/12/2026 and include the "Tender Management" module free of charge in the December release; Elena replied that she cannot confirm this in the meeting and will pass the request to Silvia De Luca for a separate evaluation.

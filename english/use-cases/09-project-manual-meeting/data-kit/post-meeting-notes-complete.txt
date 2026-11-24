@@ -1,0 +1,13 @@
+Subject: [WORKSHOP-NOTES] Pre-FAT Status Review Notes Kestrel-500 (COMM-2026-088) — 18/11/2026 (Standard Version)
+
+PRE-FAT TECHNICAL STATUS REVIEW NOTES — 18/11/2026 (14:30-15:30)
+Attendees: Giulia Moretti, Luca Visconti, Sara Fontana, Eng. Roberto Bassi, Eng. Chiara Galli.
+
+Agreed Decisions:
+- Confirmed workshop FAT retest date for 26/11/2026 on CaraCarb-CF40 and PC-CF20 specimens.
+- Confirmed contractual shipment date (11/12/2026) and SAT Go-Live date (22/12/2026), subject to closing the 2 critical deviations by 04/12/2026.
+
+Agreed Actions:
+1. Luca Visconti completes laser realignment of the KM-18 spindle and sends the new CMM report within ±0.20 mm by 24/11/2026.
+2. Sara Fontana calibrates pressure switch PS-AIR1 to 6.8 bar and repeats the 5 head-change cycles by 25/11/2026.
+3. Eng. Chiara Galli delivers the ISO 8573-1 Class 4 compressed air certificate and the load-distribution plate design to reach 3,500 kg/m² by 01/12/2026.

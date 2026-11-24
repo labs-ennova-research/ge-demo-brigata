@@ -1,0 +1,27 @@
+=== EMAIL 1 ===
+From: l.ferrari@tecnocarta-packaging.example
+Date: 16/11/2026 08:20
+Subject: [WORKSHOP] Quote for 15 new user licenses for sales department
+Body:
+Good morning, we are already a customer of yours (Contract NS-2210, TecnoCarta S.r.l.). Starting in January we would like to activate 15 new user licenses for our Italian sales network. Could you prepare a dedicated quote for us? Thank you, Laura Ferrari.
+
+=== EMAIL 2 ===
+From: newsletter@osservatorio-digitale-b2b.example
+Date: 16/11/2026 08:35
+Subject: [WORKSHOP] Weekly Cloud & AI Digest — Register for the free November 26 webinar
+Body:
+Discover the 2027 trends in enterprise process digitalization! Download the free report and book your spot for our online webinar. Message sent automatically from a no-reply address.
+
+=== EMAIL 3 ===
+From: tesoreria@officine-bassi.example
+Date: 16/11/2026 08:52
+Subject: [WORKSHOP] IBAN change for SEPA Direct Debit (Contract NS-1904)
+Body:
+Good morning, please be advised that starting next month Officine Bassi S.r.l. will be changing its bank account for SEPA Direct Debits. What is the procedure and how far in advance must we send you the new details before the November 30 invoice? Best regards, Treasury Department.
+
+=== EMAIL 4 ===
+From: direzione.acquisti@gruppomeridiana-retail.example
+Date: 16/11/2026 10:05
+Subject: [WORKSHOP] Analytics module delay dispute and credit note request (Contract NS-3190)
+Body:
+We demand written confirmation today of the issuance of a 25% credit note on our quarterly fee and a reduction of the cancellation notice period from 60 to 15 days due to last month's activation delay. Valerio Conti — Gruppo Retail Meridiana S.r.l.

@@ -1,0 +1,21 @@
+From: ufficio.tecnico@cantierinauticiblu.example
+Subject: RFQ - Quote request for 38-foot hull console mold
+
+Good morning,
+
+We are a boatyard currently launching production of a new day-cruiser. We would like a quotation from you for manufacturing a cold-lamination mold (room-temperature vacuum infusion) for the center deck console.
+
+Below are the technical specifications of the component:
+- Sector: Marine
+- Part type: Cold infusion mold
+- Overall dimensions: 3200 x 1600 x 900 mm
+- Requested material: Glass-fiber reinforced polypropylene (CaraComp-GF30)
+- Requested processing: 3D printing + CNC milling with ± 0.25 mm tolerance
+- Quantity: 1 piece
+- Desired delivery: within 8 weeks from order
+
+We look forward to your feedback on feasibility and the corresponding quotation.
+
+Best regards,
+Ing. Marco Ferri
+Cantieri Nautici Blu S.r.l.

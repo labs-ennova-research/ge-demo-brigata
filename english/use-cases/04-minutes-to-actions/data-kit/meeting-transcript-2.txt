@@ -1,0 +1,27 @@
+MILLING CELL & RETROFIT DEPARTMENT ALIGNMENT MEETING (PROJECT MILL-X)
+Date: 04 November 2026
+Attendees: Giulia Moretti (PM), Luca Visconti (Engineering), Sara Fontana (Robotics), Davide Villa (Production), Matteo Colombo (Procurement).
+
+---
+
+[00:00] Giulia Moretti: Hi everyone, let's kick off our discussion on the MILL-X cell retrofit. First item: we need to freeze the selection of the dust extraction booth.
+
+[00:02] Davide Villa: The antistatic cartridge filter model delivers the required airflow rate and takes up 80 cm less floor space.
+
+[00:03] Giulia Moretti: Agreed, then we decide to install the antistatic cartridge filter extraction unit. Matteo, will you proceed with the order confirmation for the extractor?
+
+[00:04] Matteo Colombo: Yes, I will issue the purchase order for the extraction unit by Tuesday 10/11/2026.
+
+[00:06] Luca Visconti: With the new extractor we need to shift the pneumatic cabinet by half a meter on the shop-floor layout. I can update the 2D cell layout drawing, I'll do it shortly.
+
+[00:08] Sara Fontana: Speaking of the milling electrospindle, yesterday we noticed a slight vibration above 14,000 rpm. We should check the lead times for the ceramic bearings: someone should contact the spindle supplier to have them send the updated spare parts price list.
+
+[00:10] Davide Villa: True, and in the meantime on the shop floor we decided to software-limit the maximum spindle speed to 12,000 rpm until the vibration check is done.
+
+[00:12] Giulia Moretti: Good, let's record this second decision: temporary spindle speed limit set to 12,000 rpm pending technical verification. Sara, will you set the limit in the machine PLC by tomorrow 05/11/2026?
+
+[00:13] Sara Fontana: Yes, I will set the 12,000 rpm limit in the PLC by 05/11/2026.
+
+[00:15] Luca Visconti: For the actual vibration analysis with the accelerometer, I spoke over coffee this morning with Roberto Galli from the external lab: let's have Roberto Galli run the vibration test on the spindle by Friday 13/11/2026.
+
+[00:17] Giulia Moretti: Okay, one open item remains: evaluating whether to shut down the system for unscheduled maintenance in week 48 or week 49, depending on the job order workload we review next Monday. Let's wrap up here, thanks!

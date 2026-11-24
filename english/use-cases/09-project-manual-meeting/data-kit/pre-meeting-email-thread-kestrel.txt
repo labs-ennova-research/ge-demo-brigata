@@ -1,0 +1,45 @@
+Subject: [WORKSHOP] COMM-2026-088 — Kestrel-500 technical clarifications and requests ahead of Status Review
+
+--- EMAIL 1 ---
+From: c.galli@aerospacetooling.example
+To: giulia.moretti@lfam-demo.example; luca.visconti@lfam-demo.example
+Date: Friday, November 13, 2026, 16:40
+
+Good afternoon Giulia and Luca,
+
+I received the draft Pre-FAT report and need three quick technical clarifications for our maintenance team ahead of Wednesday the 18th's Status Review:
+1. Our shop floor has a slab certified at 2,800 kg/m²: can we still install the Kestrel-500 Hybrid without additional civil works, or is this an actual blocker?
+2. What exact compressed air drying/quality class (ISO 8573-1 standard and dew point) and what filter rating on the dust extraction system are required before 14/12/2026?
+3. To speed up end-of-shift cleaning after milling CaraCarb-CF40, can our operators blow the carbon-fiber dust inside the cabin using the wall-mounted compressed-air blowguns already installed on the shop floor?
+
+Many thanks,
+Eng. Chiara Galli
+Maintenance & Facility Manager — Aerospace Tooling Nord S.p.A.
+
+--- EMAIL 2 ---
+From: giulia.moretti@lfam-demo.example
+To: c.galli@aerospacetooling.example; luca.visconti@lfam-demo.example
+Date: Monday, November 16, 2026, 09:10
+
+Hi Chiara,
+
+thanks for reaching out! I can confirm our workshop is already carrying out the laser realignment on the KM-18 spindle to bring FAT-03 back within tolerance ahead of the 26/11/2026 retest. Let's catch up directly at the Status Review on Wednesday the 18th at 14:30 to review the overall shipment readiness.
+
+See you Wednesday,
+Giulia Moretti
+
+--- EMAIL 3 ---
+From: r.bassi@aerospacetooling.example
+To: giulia.moretti@lfam-demo.example; c.galli@aerospacetooling.example
+Date: Tuesday, November 17, 2026, 15:25
+
+Good afternoon Giulia,
+
+at tomorrow's Status Review I would like to finalize three points that are very important to our Executive Management:
+- We want to verify whether on the Kestrel-500's KM-18 electrospindle we can also mill small aluminum-alloy inserts already embedded in the composite molds.
+- To close our fiscal year, we need to bring the Go-Live / SAT date forward from 22/12/2026 to 15/12/2026.
+- As compensation for the minor delay arising from test FAT-03, we ask that you include the "Advanced Thermal Simulation" software module free of charge along with qualification of the PEKK-CF polymer during initial commissioning.
+
+See you tomorrow,
+Eng. Roberto Bassi
+Plant Director — Aerospace Tooling Nord S.p.A.

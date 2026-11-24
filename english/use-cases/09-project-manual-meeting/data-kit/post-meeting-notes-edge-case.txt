@@ -1,0 +1,11 @@
+Subject: [WORKSHOP-NOTES] Pre-FAT Status Review Notes Kestrel-500 (COMM-2026-088) — 18/11/2026
+
+QUICK PRE-FAT TECHNICAL STATUS REVIEW NOTES — 18/11/2026
+Attendees: Giulia Moretti, Luca Visconti, Sara Fontana, Eng. Roberto Bassi, Eng. Chiara Galli.
+
+- Confirmed laser realignment of the KM-18 spindle to meet the FAT-03 tolerance (±0.20 mm): Luca Visconti sends the new CMM report by 24/11/2026.
+- Confirmed exclusive use of ATEX / HEPA H13 vacuum extractor for carbon dust (compressed-air blowing prohibited): Eng. Chiara Galli updates the shop-floor operator procedure by 27/11/2026.
+- The ISO 8573-1 Class 4 compressed air quality certificate needs to be sent before the 04/12/2026 shipment gate (it was not clarified who will obtain it from the compressor vendor).
+- Marco Bellini checks with the structural engineer on the load-distribution plate to bring the floor rating up to 3,500 kg/m² by 25/11/2026.
+- Sara Fontana adjusts pressure switch PS-AIR1 to 6.8 bar to resolve the false K404 alarm as soon as possible.
+- At the end of the call Roberto Bassi reiterates the request to record in the minutes the free inclusion of the "Advanced Thermal Simulation" software module, bringing Go-Live forward to 15/12/2026, and a milling trial on aluminum inserts during SAT. Giulia states that the commercial topic will be escalated to Matteo Ferretti and reiterates the technical constraint on the spindle.

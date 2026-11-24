@@ -1,0 +1,18 @@
+OUTLOOK CALENDAR EVENT
+Title: [WORKSHOP] Supplier Portal Project Monthly Status Review (PF-2026) — Gruppo Aurora
+Date: Tuesday, November 17, 2026
+Time: 10:30 – 11:30
+Location: Manzoni Meeting Room (Milan Office) / Audio-Video Call
+Organizer: Elena Gatti (elena.gatti@novaservizi-demo.example)
+Attendees:
+- Marco Sala (marco.sala@novaservizi-demo.example)
+- Paolo Bernardi (p.bernardi@gruppoaurora.example)
+- Chiara Neri (c.neri@gruppoaurora.example)
+- Andrea Longo (a.longo@gruppoaurora.example)
+
+Description / Agenda in the invite:
+Good morning everyone,
+We are convening the monthly Status Review for the Supplier Portal project (PF-2026) with the following agenda:
+1. Supplier master data upload and ERP integration status;
+2. Planning for the late-November User Acceptance Testing (UAT) session;
+3. Timeline review toward the December release and AOB.

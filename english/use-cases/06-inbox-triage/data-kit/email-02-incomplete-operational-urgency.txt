@@ -1,0 +1,15 @@
+From: r.marchesi@logistica-alpina.example
+To: info@novaservizi-demo.example
+Date: Monday, November 16, 2026, 09:32
+Subject: [WORKSHOP] URGENT - Total outage on central warehouse order portal
+
+Good morning,
+
+Since 08:45 this morning, none of the 18 operators at our Bergamo hub have been able to log in to the order portal: as soon as we try to authenticate, the page kicks us out and we have trucks stuck at the loading bays!
+
+Have your dedicated 24/7 on-call team step in immediately and confirm that you are working on this in Premium mode past 18:00 tonight if needed.
+
+Waiting for an immediate reply!
+
+Roberto Marchesi
+Hub Operations Manager — Logistica Alpina S.p.A.

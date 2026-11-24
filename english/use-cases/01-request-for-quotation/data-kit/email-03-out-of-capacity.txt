@@ -1,0 +1,15 @@
+From: engineering@aerostructures-nord.example
+Subject: RFQ - Secondary spar layup tool
+
+Dear Technical Team,
+
+We are reaching out from the tooling department at AeroStructures Nord (aerospace sector). We are looking for a supplier for 3D printing and subsequent CNC milling (± 0.25 mm tolerance) of a layup tool intended for oven curing cycles up to 110 °C.
+
+The part to be manufactured is a monolithic cradle with a width of 1400 mm and a height of 850 mm; since the component must accommodate the entire half-wing without intermediate joints, the overall longitudinal span of the tool is 4.6 meters.
+For the material, we have identified your CaraCarb-CF40 (carbon-filled PA6).
+
+We would need just 1 unit delivered within 8 weeks. Could you confirm feasibility and send us your best quote?
+
+Kind regards,
+Ing. Davide Sartori
+Manufacturing Engineering

@@ -1,0 +1,33 @@
+PROGRESS REVIEW MEETING – JOB ORDER C-2026-014 (MARINE ROBOTIC LFAM CELL)
+Date: 04 November 2026
+Attendees: Giulia Moretti (PM), Luca Visconti (Engineering), Sara Fontana (Robotics), Matteo Colombo (Procurement), Elena Rinaldi (Quality).
+
+---
+
+[00:00] Giulia Moretti: Good morning everyone. Let's review the status of job order C-2026-014. The customer asked for confirmation of the Factory Acceptance Test (FAT) date.
+
+[00:02] Luca Visconti: On the mechanical side, the rotary table base frame is complete. However, we evaluated the two options for cable routing on the robot wrist: we propose adopting the high-flexibility corrugated conduit instead of the rigid cable drag chain, because it reduces clearance issues during milling.
+
+[00:04] Sara Fontana: I agree with Luca—in offline simulations, the corrugated conduit avoids any collision when machining undercuts.
+
+[00:05] Giulia Moretti: Great, then first decision made: we officially adopt the high-flexibility corrugated conduit for the robot wrist on C-2026-014. Luca, can you update the mechanical bill of materials?
+
+[00:06] Luca Visconti: Yes, I will update the mechanical bill of materials for the robot wrist by Friday 06/11/2026.
+
+[00:08] Matteo Colombo: As soon as Luca releases the BOM, I will issue the order for the conduit kit. I commit to sending the purchase order to the supplier by Monday 09/11/2026.
+
+[00:10] Giulia Moretti: Excellent. Second item: material parameter for acceptance testing. The customer would like to run the print test using black CaraComp-GF30 instead of natural gray.
+
+[00:12] Elena Rinaldi: There are no technical issues—we already have 1,000 kg of certified black CaraComp-GF30 in stock. So we can confirm the use of black CaraComp-GF30 for the FAT.
+
+[00:14] Giulia Moretti: Good, second decision recorded: the FAT will be performed using black CaraComp-GF30 compound. Elena, will you prepare the FAT test protocol to send to the customer for review?
+
+[00:15] Elena Rinaldi: Certainly, I will prepare and send the draft FAT test protocol by Wednesday 11/11/2026.
+
+[00:17] Sara Fontana: Regarding the toolpath post-processor, I completed the tests yesterday. We just need to set the official FAT date with the customer: I propose 24/11/2026.
+
+[00:19] Giulia Moretti: Everyone agreed on 24/11/2026? Yes, perfect: third decision, we set the FAT date to 24/11/2026. Sara, will you upload the final post-processor parameters to the cell controller by 13/11/2026?
+
+[00:20] Sara Fontana: Confirmed, I will upload the parameters to the controller by Friday 13/11/2026.
+
+[00:21] Giulia Moretti: Only one open item remains: we still don't know whether 2 or 4 customer technicians will attend the FAT so we can arrange visitor badges and lunch; we are waiting to hear back from their technical coordinator. Thanks everyone!

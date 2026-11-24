@@ -1,0 +1,17 @@
+From: produzione@vetroresinapadana.example
+To: service@lfam-demo.example
+Date: Monday, November 16, 2026, 10:05
+Subject: [WORKSHOP] URGENT — Heron-X 400 cell down in production, 24/7 technician requested tonight
+
+Good morning,
+
+We have a serious emergency on the shop floor at Vetroresina Padana S.r.l.: our Heron-X 400 cell suddenly stopped halfway through printing an urgent CaraCarb-CF40 mold, and production is at a complete standstill.
+
+We have to deliver the part tomorrow morning: please confirm immediately that one of your 24/7 on-call technicians will be on site tonight at 21:00 so we can restart overnight.
+
+Right now I am not in front of the HMI panel so I do not have the exact alarm code on hand, nor the nameplate with the serial number or machine hours, but we still need the technician to head out this afternoon.
+
+Awaiting immediate confirmation!
+
+Luca Ferretti
+Shop Floor Supervisor — Vetroresina Padana S.r.l.

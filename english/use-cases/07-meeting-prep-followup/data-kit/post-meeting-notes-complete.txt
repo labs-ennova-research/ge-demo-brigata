@@ -1,0 +1,9 @@
+Email / quick note subject: [WORKSHOP-NOTES] Supplier Portal Project Monthly Status Review Outcomes (PF-2026) — 17/11/2026
+Attendees present: Elena Gatti, Marco Sala, Paolo Bernardi, Chiara Neri, Andrea Longo.
+
+Quick notes taken at the end of the meeting:
+- Decision 1: confirmed that the staging environment accepts both 2048-bit and 4096-bit SAML 2.0 certificates, so we will proceed with a 4096-bit certificate.
+- Decision 2: confirmed the start of User Acceptance Testing (UAT) on Tuesday 24/11/2026 on a first batch of 800 already cleansed suppliers, keeping the contractual Go-Live date of 18/12/2026 unchanged.
+- Action 1: Chiara Neri uploads the CSV file for the first batch of 800 cleansed suppliers to the SFTP area by Thursday 19/11/2026.
+- Action 2: Marco Sala completes Single Sign-On configuration in the staging environment and sends the login link by Friday 20/11/2026.
+- Action 3: Andrea Longo runs the pilot test on the first 20 document qualification forms and sends the test report by Wednesday 25/11/2026.

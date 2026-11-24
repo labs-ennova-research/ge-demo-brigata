@@ -1,0 +1,19 @@
+From: e.costa@compositeaerotech.example
+To: service@lfam-demo.example
+Date: Monday, November 16, 2026, 09:20
+Subject: [WORKSHOP] Information on 1,000-hour scheduled maintenance and nozzle torquing Heron-X 400 (HX-2025-029)
+
+Good morning Service team,
+
+We are Composite Aerotech S.p.A.: our Heron-X 400 cell (serial number HX-2025-029) has reached 985 operating hours and we would like to schedule the 1,000-hour maintenance next week.
+
+Could you kindly let us know:
+1. What tasks and what official spare parts kit code are specified in the manual for the 1,000-hour maintenance?
+2. Since we need to replace the nozzle gaskets, at what temperature and to what torque value must the nozzle be tightened, and what PPE is mandatory for the operator?
+3. To quickly clean CaraCarb-CF40 residue off the outside of the nozzle, can we use a standard steel wire brush?
+
+Many thanks in advance for your support!
+
+Kind regards,
+Eng. Elena Costa
+Composites Production Manager — Composite Aerotech S.p.A.

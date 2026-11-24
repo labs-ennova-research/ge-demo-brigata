@@ -1,0 +1,49 @@
+=== EMAIL 1 (Oldest) ===
+From: c.neri@gruppoaurora.example (Chiara Neri)
+To: elena.gatti@novaservizi-demo.example; marco.sala@novaservizi-demo.example
+Cc: p.bernardi@gruppoaurora.example
+Date: Wednesday, November 11, 2026, 16:40
+Subject: [WORKSHOP] PF-2026 — ERP data extract status and SSO certificate question
+
+Hi Elena, hi Marco,
+
+Unfortunately we are unable to send you today the CSV extract of the 1,200 supplier records from our ERP system because we found several duplicate tax IDs that need to be cleansed internally. We will update you over the next few days on the new delivery date for the file.
+
+While I am writing, could I ask for a technical confirmation: does your staging environment already support 4096-bit SAML 2.0 certificates for Single Sign-On (SSO) authentication, or do we need to generate a 2048-bit certificate?
+
+Thanks,
+Chiara Neri — IT Application Lead, Gruppo Aurora
+
+---
+
+=== EMAIL 2 ===
+From: elena.gatti@novaservizi-demo.example (Elena Gatti)
+To: c.neri@gruppoaurora.example
+Cc: marco.sala@novaservizi-demo.example; p.bernardi@gruppoaurora.example; a.longo@gruppoaurora.example
+Date: Thursday, November 12, 2026, 11:15
+Subject: Re: [WORKSHOP] PF-2026 — ERP data extract status and SSO certificate question
+
+Hi Chiara,
+
+Thanks for the heads-up on the CSV files. Please note, however, that in order to kick off the User Acceptance Testing (UAT) session with Andrea on schedule on 24/11/2026, we need to receive the cleansed file no later than Thursday, 19/11/2026. Let's review this in detail during Tuesday's Status Review on November 17.
+
+Best,
+Elena Gatti — Project Manager, NovaServizi
+
+---
+
+=== EMAIL 3 (Most recent) ===
+From: p.bernardi@gruppoaurora.example (Paolo Bernardi)
+To: elena.gatti@novaservizi-demo.example
+Cc: c.neri@gruppoaurora.example; a.longo@gruppoaurora.example; marco.sala@novaservizi-demo.example
+Date: Friday, November 13, 2026, 17:50
+Subject: Re: [WORKSHOP] PF-2026 — ERP data extract status and SSO certificate question
+
+Good evening Elena,
+
+Ahead of Tuesday's Status Review, I wanted to flag a request from our Executive Management: we would like to pull the official Go-Live forward from 18/12/2026 to 04/12/2026 so we can wrap up before year-end inventory, and also activate the "Tender Management" module free of charge right in the December release so we can run a field pilot in Q1.
+
+We count on finalizing and approving both items directly during Tuesday morning's meeting.
+
+See you Tuesday,
+Paolo Bernardi — Procurement Director, Gruppo Aurora S.p.A.

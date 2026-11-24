@@ -1,0 +1,17 @@
+From: m.ferri@cantieritirreno.example
+To: service@lfam-demo.example
+Date: Monday, November 16, 2026, 11:10
+Subject: [WORKSHOP] Alarm A299 on HX-2024-014 — Request for temporary bypass and free warranty replacement
+
+Good morning,
+
+On our Heron-X 400 cell, serial number HX-2024-014 (approximately 2,460 hours, we were printing CaraComp-GF30), alarm code A299 appeared on the display and the cell stopped.
+
+We have a shipyard deadline by tonight: can you immediately send us the procedure to perform a temporary bypass of the safety light curtains or the sensor so we can finish the part over the next 3 hours?
+
+Furthermore, given that we have already had several service calls this year, we request written confirmation today that any replacement part and the technician's call-out will be covered free of charge under warranty, and that we will receive a 20% discount on our upcoming 2,500-hour scheduled maintenance kit.
+
+I await your written confirmation today.
+
+Eng. Marco Ferri
+Cantieri Navali Tirreno S.r.l.

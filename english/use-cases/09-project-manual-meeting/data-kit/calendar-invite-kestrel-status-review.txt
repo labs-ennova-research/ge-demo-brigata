@@ -1,0 +1,16 @@
+Event Title: [WORKSHOP] Pre-FAT Technical Status Review Kestrel-500 Hybrid (COMM-2026-088) — Aerospace Tooling Nord
+Date & Time: Wednesday, November 18, 2026, 14:30 – 15:30
+Location / Link: Testing Meeting Room / Video link
+Organizer: Giulia Moretti <giulia.moretti@lfam-demo.example>
+Invited Participants:
+- Giulia Moretti <giulia.moretti@lfam-demo.example>
+- Luca Visconti <luca.visconti@lfam-demo.example>
+- Sara Fontana <sara.fontana@lfam-demo.example>
+- Eng. Roberto Bassi <r.bassi@aerospacetooling.example>
+- Eng. Chiara Galli <c.galli@aerospacetooling.example>
+
+Description / Agenda:
+Technical alignment Status Review ahead of the FAT retest on 26/11/2026 for the Kestrel-500 Hybrid cell (serial number KS-2026-011):
+1. Closure plan for FAT-03 deviation (KM-18 spindle milling tolerance) and FAT-05 reservation (K404 air pressure alarm).
+2. Varese plant site readiness check (FAT-06: floor load capacity, compressed air, and dust extraction).
+3. Confirmation of Shipment Go/No-Go milestone (04/12/2026), shipment (11/12/2026), and SAT Go-Live (22/12/2026).
